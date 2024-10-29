@@ -1,0 +1,26 @@
+{
+  "name": "qairline",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --inspect index.js",
+    "test-watch": "nodemon --exec \"npm test\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.6.0",
+    "aos": "^2.3.4",
+    "body-parse": "^0.1.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "pug": "^3.0.3",
+    "remixicon": "^4.4.0",
+    "swiper": "^11.1.14"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
