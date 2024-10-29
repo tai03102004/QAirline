@@ -5,29 +5,43 @@ section.places
             .places__relative 
                 .places__popular    
                     .places__popular-item
-                        img(src='/client/images/home/SGN.jpg' alt='SGN' loading='lazy')
+                        img#dynamicImage(src='/client/images/home/SGN.jpg', alt='SGN', loading='lazy')
                     .places__slick-slider-item-content
-                            h4.places__slick-slider-item-title Sài Gòn
+                            h4#placeTitle.places__slick-slider-item-title Sài Gòn
                             span.add-weather.d-inline-flex.mb-3
-                                span.add.pr-3(style='border-right: 1px solid #fff;')
+                                span#placeNational.add.pr-3(style='border-right: 1px solid #fff;')
                                     svg(width='20' height='20' viewbox='3 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg')
                                         path(d='M9.99935 1.6665C6.77435 1.6665 4.16602 4.27484 4.16602 7.49984C4.16602 11.8748 9.99935 18.3332 9.99935 18.3332C9.99935 18.3332 15.8327 11.8748 15.8327 7.49984C15.8327 4.27484 13.2243 1.6665 9.99935 1.6665ZM9.99935 9.58317C8.84935 9.58317 7.91602 8.64984 7.91602 7.49984C7.91602 6.34984 8.84935 5.4165 9.99935 5.4165C11.1493 5.4165 12.0827 6.34984 12.0827 7.49984C12.0827 8.64984 11.1493 9.58317 9.99935 9.58317Z' fill='#FCFCFD')
-                                    | Thái Lan
-                                span.weather.pl-3
+                                    | Việt Nam
+                                span#placeTemperature.weather.pl-3
                                     svg(width='20' height='20' viewbox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg')
                                         path(d='M9.16667 10V5C9.16667 3.61667 8.05 2.5 6.66667 2.5C5.28333 2.5 4.16667 3.61667 4.16667 5V10C3.15833 10.7583 2.5 11.975 2.5 13.3333C2.5 14.2667 2.81667 15.1167 3.33333 15.8083V15.8333H3.35C4.10833 16.8417 5.30833 17.5 6.66667 17.5C8.025 17.5 9.21667 16.8417 9.98333 15.8333H10V15.8083C10.5167 15.1167 10.8333 14.2667 10.8333 13.3333C10.8333 11.975 10.175 10.7583 9.16667 10ZM4.16667 13.3333C4.16667 12.55 4.54167 11.8 5.16667 11.3333L5.83333 10.8333V5C5.83333 4.54167 6.20833 4.16667 6.66667 4.16667C7.125 4.16667 7.5 4.54167 7.5 5V10.8333L8.16667 11.3333C8.79167 11.8083 9.16667 12.55 9.16667 13.3333H4.16667ZM15.5167 3.33333H14.175L11.3583 10.8333H12.6583L13.3333 8.91667H16.3583L17.025 10.8333H18.3333L15.5167 3.33333ZM13.725 7.825L14.8167 4.725H14.8833L15.975 7.825H13.725Z' fill='#FCFCFD')
                                     | Nhiệt độ 28 &deg;C
-                            p.places__slick-slider-item-description "Sawadee", mời bạn bước vào hành trình khám phá xứ chùa Vàng
+                            p#placeDescription.places__slick-slider-item-description Hòn ngọc Viễn Đông của Đông Nam Á để lại ấn tượng sâu sắc ngay từ lần đầu tiên với bất kỳ ai đã từng một lần đặt chân tới.
                             a.places__slick-slider-item-link Xem chi tiết 
                                 <i class="ri-arrow-right-line"></i>
                 .places__slider 
                     .places__slider-item
                         .places__slick-slider             
                             .places__image         
-                                img(src='/client/images/home/SGN.jpg' alt='SGN' loading='lazy')
+                                img#dynamicNextImage(src='/client/images/home/DAD.jpg' alt='SGN' loading='lazy')
                             
                         .places__content
                             .places__title
                                 span.places__title-text Bạn cũng có thể thích
                             .places__description
-                                p.places__description-text Sài gòn
+                                p#placeNextTitle.places__description-text Đà Nẵng
+                            .places__toggle 
+                                button.pausePlay 
+                                    <i class="ri-pause-circle-line"></i>
+                                ul.slick-dots
+                                    li.slicky-li
+                                        button(type="button" role="tab" class="slick-slide-button")
+                                    li.slicky-li
+                                        button(type="button" role="tab" class="slick-slide-button")
+                                    li.slicky-li
+                                        button(type="button" role="tab" class="slick-slide-button")
+                                    li.slicky-li 
+                                        button(type="button" role="tab" class="slick-slide-button")
+                                
+script(src="/client/js/swiperPlace.js")
