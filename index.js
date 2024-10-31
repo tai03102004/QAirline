@@ -17,8 +17,8 @@ const routeClient = require("./routes/client/index.route.js");
 routeClient(app);
 
 // Routes Admin
-// const routeAdmin = require("./routes/admin/index.route");
-// routeAdmin(app);
+const routeAdmin = require("./routes/admin/index.route");
+routeAdmin(app);
 
 
 // /admin
