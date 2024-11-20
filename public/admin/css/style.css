@@ -46,6 +46,10 @@
     margin-bottom: 1.5rem;
 }
 
+.sort {
+    display: flex;
+}
+
 /* Định dạng cho biểu đồ */
 canvas#myChart {
     width: 100%;

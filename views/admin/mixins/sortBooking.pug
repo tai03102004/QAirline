@@ -1,0 +1,15 @@
+mixin sort()
+    div(class="sort")
+        select(
+            class="form-control"
+            name="sort"
+            sort-select
+        )
+            option(value="" selected) -- Chọn kiểu sắp xếp --
+            option(value="departureTime-asc") Thời gian khởi hành (Tăng dần)
+            option(value="departureTime-desc") Thời gian khởi hành (Giảm dần)
+
+        button(
+            class="btn btn-danger"
+            sort-clear
+        ) Clear

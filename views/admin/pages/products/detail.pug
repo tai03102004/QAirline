@@ -1,0 +1,73 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main
+    +alert-success(5000)
+    +alert-error(5000)
+    .main-detail
+        .container
+            .grid.second-nav
+                .column-xs-12
+                    nav
+                        ol.breadcrumb-list
+                            li.breadcrumb-item.active 
+                                if (plane.title)
+                                    h1 #{plane.title}
+
+    .product
+        .inner-status 
+            if (plane.status)
+                div(class="inner-product-status")
+                    span Trạng thái :
+                    if (plane.status === "Hoạt động")
+                        span(
+                            class="badge badge-success"
+                            button-change-status
+                            data-status=plane.status
+                            data-id=plane._id.$oid
+                            id="plane-active"
+                        ) Hoạt động
+                    else
+                        span(
+                            class="badge badge-danger"
+                            button-change-status
+                            data-status=plane.status
+                            data-id=plane._id.$oid
+                            id="plane-inactive"
+                        ) Dừng hoạt động
+
+        .product-detail 
+            .product-info
+                //- if(role.permissions.includes("products_view"))
+                if (plane.price)
+                    div(class="desc") Giá
+                        span.dots :   
+                        b #{plane.price}$
+                if (plane.discountPercentage)
+                    div(class="desc", id="product-discountPercentage") Giảm giá 
+                        span.dots :   
+                        b #{plane.discountPercentage}%
+                if (plane.stock)
+                    div(class="desc", id="product-stock") Còn lại 
+                        span.dots :   
+                        b #{plane.stock}
+                if (plane.position)
+                    div(class="desc", id="product-position") Vị trí 
+                        span.dots :   
+                        b #{plane.position}
+                if (plane.description)
+                    div(class="description")
+                        p(style="color:grey") !{plane.descrpition}
+            .product-image
+                if (plane.thumbnail)
+                    img(src=plane.thumbnail, alt=plane.title)
+                else
+                    img(src="/admin/image/boing_737.jpg", alt="No Image" width="100px")
+
+        form(
+            id="form-change-status"
+            method="POST"
+            action=`/${prefixAdmin}/products/detail/${plane._id.$oid}`
+            data-path=`/${prefixAdmin}/products/detail`
+        )
+    script(src="/admin/js/statusDetail.js")
