@@ -1,0 +1,134 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+include ../../mixins/pagination.pug
+include ../../mixins/filter-status.pug  
+include ../../mixins/searchBooking.pug
+include ../../mixins/sortBooking.pug
+include ../../mixins/moment.pug
+
+
+block main
+  +alert-success(5000)
+  h1(class="mb-4 mt-4") Danh sách đặt vé
+  .card.mb-3
+    .card-header Bộ lọc và Tìm kiếm
+    .card-body
+      .row
+        .col-5
+          +filter-status(filterStatus)
+
+        .col-7
+          +search(keyword)
+  .card.mb-3
+    .card-header Sắp xếp
+    .card-body
+      .row
+        .col-5
+          +sort()
+
+
+  .card.mb-3
+    .card-header Danh sách
+    table.table.table-hover.table-sm
+    table(
+      class="table table-hover table-sm"
+      checkbox-multi
+    )
+      style
+        | th.action-header {
+        |   text-align: left;
+        |   padding-left: 60px;
+        | }
+      thead
+        tr
+          th
+            input(type="checkbox" name="checkall")
+          th STT
+          th Tên hành khách
+          //- th Email
+          th Số điện thoại
+          th Chuyến bay
+          th Thời gian khởi hành
+          th Số ghế
+          th Giá vé
+          th Trạng thái
+          th.action-header Hành động
+
+      tbody
+        if(bookings.length > 0)
+          each booking, index in bookings
+            tr
+              td
+                input(
+                  type="checkbox"
+                  name="id"
+                  value=booking._id.$oid
+                )
+              td #{(index + 1) + (pagination.limitItems * (pagination.currentPage - 1))}
+              td #{booking.passengerName}
+              //- td #{booking.passengerEmail}
+              td #{booking.passengerPhone}
+              td #{booking.flightNumber}
+              td 
+                +formatDateTime(booking.departureTime) 
+              td #{booking.seatNumber}
+              td #{booking.totalAmount - booking.discount}$
+              td
+                if(booking.status == "Confirmed")
+                  button(
+                    class="badge badge-success"
+                    button-change-status
+                    data-status=booking.status
+                    data-id=booking._id
+                  ) Đã xác nhận
+                else if(booking.status == "Pending")
+                  button(
+                    class="badge badge-warning"
+                    button-change-status
+                    data-status=booking.status
+                    data-id=booking._id
+                  ) Chờ xử lý
+                else
+                  button(
+                    class="badge badge-danger"
+                    button-change-status
+                    data-status=booking.status
+                    data-id=booking._id
+                  ) Đã huỷ
+              td(class="inner-action")
+                a(
+                  href=`/${prefixAdmin}/bookings/detail/${booking._id}`
+                  class="btn btn-secondary btn-sm"
+                  style="margin-right: 5px"
+                ) Xem chi tiết
+                a(
+                  href=`/${prefixAdmin}/bookings/edit/${booking._id}`
+                  class="btn btn-warning btn-sm"
+                ) Sửa
+                button(
+                  class="btn btn-danger btn-sm ml-1"
+                  button-delete
+                  data-id=booking._id
+                ) Xóa
+        else
+          tr
+            td(
+              colspan="10"
+              class="text-center"
+            ) Không tìm thấy đặt vé nào
+  form(
+    id="form-change-status"
+    method="POST"
+    action=""
+    data-path=`/${prefixAdmin}/bookings/change-status`
+  )
+  form(
+    id="form-delete-item"
+    method="POST"
+    action=""
+    data-path=`/${prefixAdmin}/bookings/delete`
+  )
+  if(bookings.length > 0)
+    +initPagination(pagination)
+
+  script(src="/admin/script/scriptPlane.js")

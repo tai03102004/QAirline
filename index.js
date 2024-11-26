@@ -13,6 +13,42 @@ app.use(express.urlencoded({ extended: true }));
 app.set("views", `${__dirname}/views`);
 app.set('view engine', 'pug');
 
+// Connected Databsae
+const database = require("./config/database");
+database.connect();
+
+// Flash
+const flash = require("express-flash");
+app.use(flash());
+
+// Cookie-parser
+const cookieParser = require("cookie-parser");
+app.use(cookieParser("LHNASDASDAD"));
+
+// Session
+const session = require("express-session");
+app.use(session({
+    cookie: {
+        maxAge: 60000
+    }
+}));
+
+const bodyParser = require('body-parser');
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+
+//method-override:  use patch , delete ,.. 
+const methodOverride = require('method-override');
+// override with POST having ?_method=DELETE
+app.use(methodOverride('_method'));
+
+// moment
+const moment = require('moment');
+// local moment
+app.locals.moment = moment;
+
 // Routes Client
 const routeClient = require("./routes/client/index.route.js");
 routeClient(app);

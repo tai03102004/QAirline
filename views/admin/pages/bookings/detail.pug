@@ -1,0 +1,100 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main
+    +alert-success(5000)
+    +alert-error(5000)
+    .main-detail
+        .container
+            .grid.second-nav
+                .column-xs-12
+                    nav
+                        ol.breadcrumb-list
+                            li.breadcrumb-item.active 
+                                if (booking.passengerName)
+                                    h1 #{booking.passengerName}
+
+    .product
+        .inner-status 
+            if (booking.status)
+                div(class="inner-product-status")
+                    span Trạng thái :
+                    if (booking.status === "Confirmed")
+                        span(
+                            class="badge badge-success"
+                            button-change-status
+                            data-status=booking.status
+                            data-id=booking._id.$oid
+                            id="booking-active"
+                        ) Đã xác nhận
+                    else if (booking.status === "Pending")
+                        span(
+                            class="badge badge-warning"
+                            button-change-status
+                            data-status=booking.status
+                            data-id=booking._id.$oid
+                            id="booking-pending"
+                        ) Đang chờ
+                    else
+                        span(
+                            class="badge badge-danger"
+                            button-change-status
+                            data-status=booking.status
+                            data-id=booking._id.$oid
+                            id="booking-canceled"
+                        ) Đã hủy
+
+        .product-detail 
+            .product-info
+                if (booking.totalAmount)
+                    div(class="desc") Tổng tiền
+                        span.dots :   
+                        b #{booking.totalAmount}$
+                if (booking.discount)
+                    div(class="desc", id="booking-discount") Giảm giá 
+                        span.dots :   
+                        b #{booking.discount}$
+                if (booking.flightNumber)
+                    div(class="desc", id="booking-flightNumber") Số chuyến bay 
+                        span.dots :   
+                        b #{booking.flightNumber}
+                if (booking.seatNumber)
+                    div(class="desc", id="booking-seatNumber") Số ghế 
+                        span.dots :   
+                        b #{booking.seatNumber}
+                if (booking.passengerEmail)
+                    div(class="desc", id="booking-email") Email hành khách 
+                        span.dots :   
+                        b #{booking.passengerEmail}
+                if (booking.passengerPhone)
+                    div(class="desc", id="booking-phone") Điện thoại hành khách 
+                        span.dots :   
+                        b #{booking.passengerPhone}
+                if (booking.departureTime)
+                    div(class="desc", id="booking-departureTime") Thời gian khởi hành 
+                        span.dots :   
+                        b #{new Date(booking.departureTime).toLocaleString()}
+                if (booking.arrivalTime)
+                    div(class="desc", id="booking-arrivalTime") Thời gian đến 
+                        span.dots :   
+                        b #{new Date(booking.arrivalTime).toLocaleString()}
+                if (booking.departureLocation)
+                    div(class="desc", id="booking-departureLocation") Nơi đi 
+                        span.dots :   
+                        b #{booking.departureLocation}
+                if (booking.arrivalLocation)
+                    div(class="desc", id="booking-arrivalLocation") Nơi đến 
+                        span.dots :   
+                        b #{booking.arrivalLocation}
+                if (booking.paymentStatus)
+                    div(class="desc", id="booking-paymentStatus") Trạng thái thanh toán 
+                        span.dots :   
+                        b #{booking.paymentStatus == "Paid" ? "Thanh toán" : "Chưa thanh toán"}
+
+        form(
+            id="form-change-status"
+            method="POST"
+            action=`/${prefixAdmin}/bookings/detail/${booking._id.$oid}`
+            data-path=`/${prefixAdmin}/bookings/detail`
+        )
+    script(src="/admin/js/statusDetail.js")

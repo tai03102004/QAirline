@@ -1,0 +1,171 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+include ../../mixins/moment.pug
+
+
+block main
+    +alert-success(5000)
+    +alert-error(5000)
+
+    h1(class="mb-4 mt-4") Chỉnh sửa đặt chỗ
+    form(
+        action=`/${prefixAdmin}/bookings/edit/${booking.id}?_method=PATCH`
+        method="POST"
+    )
+        div(class="form-group")
+            label(for="passengerName") Tên hành khách
+            input(
+                type="text"
+                class="form-control"
+                id="passengerName"
+                name="passengerName"
+                value=booking.passengerName
+                required
+            )
+        
+        div(class="form-group")
+            label(for="flightNumber") Số chuyến bay
+            input(
+                type="text"
+                class="form-control"
+                id="flightNumber"
+                name="flightNumber"
+                value=booking.flightNumber
+                required
+            )
+        
+        div(class="form-group")
+            label(for="seatNumber") Số ghế
+            input(
+                type="text"
+                class="form-control"
+                id="seatNumber"
+                name="seatNumber"
+                value=booking.seatNumber
+                required
+            )
+
+        div(class="form-group")
+            label(for="passengerEmail") Email
+            input(
+                type="email"
+                class="form-control"
+                id="passengerEmail"
+                name="passengerEmail"
+                value=booking.passengerEmail
+                required
+            )
+
+        div(class="form-group")
+            label(for="passengerPhone") Điện thoại
+            input(
+                type="tel"
+                class="form-control"
+                id="passengerPhone"
+                name="passengerPhone"
+                value=booking.passengerPhone
+            )
+
+        div(class="form-group")
+            label(for="departureTime") Thời gian khởi hành
+            input(
+                type="datetime-local"
+                class="form-control"
+                id="departureTime"
+                name="departureTime"
+                value=moment(booking.departureTime).format("YYYY-MM-DDTHH:mm")
+            )
+
+        div(class="form-group")
+            label(for="arrivalTime") Thời gian đến
+            input(
+                type="datetime-local"
+                class="form-control"
+                id="arrivalTime"
+                name="arrivalTime"
+                value=moment(booking.arrivalTime).format("YYYY-MM-DDTHH:mm")
+            )
+
+        div(class="form-group")
+            label(for="departureLocation") Nơi đi
+            input(
+                type="text"
+                class="form-control"
+                id="departureLocation"
+                name="departureLocation"
+                value=booking.departureLocation
+            )
+
+        div(class="form-group")
+            label(for="arrivalLocation") Nơi đến
+            input(
+                type="text"
+                class="form-control"
+                id="arrivalLocation"
+                name="arrivalLocation"
+                value=booking.arrivalLocation
+            )
+
+        div(class="form-group")
+            label(for="totalAmount") Tổng tiền
+            input(
+                type="number"
+                class="form-control"
+                id="totalAmount"
+                name="totalAmount"
+                value=booking.totalAmount
+                min="0"
+            )
+        
+        div(class="form-group")
+            label(for="discount") Giảm giá (%)
+            input(
+                type="number"
+                class="form-control"
+                id="discount"
+                name="discount"
+                value=booking.discount
+                min="0"
+            )
+
+        div(class="form-group form-check form-check-inline")
+            input(
+                type="radio"
+                class="form-check-input"
+                id="statusConfirmed"
+                name="status"
+                value="Confirmed"
+                checked=(booking.status == "Confirmed" ? true : false)
+            )
+            label(for="statusConfirmed" class="form-check-label") Đã xác nhận
+
+        div(class="form-group form-check form-check-inline")
+            input(
+                type="radio"
+                class="form-check-input"
+                id="statusPending"
+                name="status"
+                value="Pending"
+                checked=(booking.status == "Pending" ? true : false)
+            )
+            label(for="statusPending" class="form-check-label") Đang chờ
+
+        div(class="form-group form-check form-check-inline")
+            input(
+                type="radio"
+                class="form-check-input"
+                id="statusCanceled"
+                name="status"
+                value="Canceled"
+                checked=(booking.status == "Canceled" ? true : false)
+            )
+            label(for="statusCanceled" class="form-check-label") Đã hủy
+
+        div(class="form-group")
+            button(
+                type="submit"
+                class="btn btn-primary"
+            ) Cập nhật
+            span.button-space(style="margin-left: 10px")
+                a(href=`/${prefixAdmin}/bookings`, class="btn btn-secondary") Quay lại
+

@@ -1,0 +1,19 @@
+mixin search(keyword)
+  form(id="form-search")
+    .column
+      .col-md-12
+        .input-group.mb-3
+          input(
+            type="text"
+            placeholder="Nhập từ khóa (Tên, SĐT, chuyến bay...)"
+            name="keyword"
+            class="form-control"
+            value=keyword
+          )
+          .input-group-append
+            button(
+              class="btn btn-success"
+              type="submit"
+            ) Tìm kiếm
+      .col-md-10.text-right
+        small.text-muted Hỗ trợ tìm kiếm theo tên hành khách, SĐT hoặc chuyến bay
