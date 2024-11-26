@@ -4,10 +4,9 @@ const slug = require("mongoose-slug-updater");
 mongoose.plugin(slug);
 
 const bookingSchema = new mongoose.Schema({
-    // ID của vé liên kết đến collection 'Ticket'
-    ticketId: {
+    flightId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Ticket',
+        ref: 'ListFlight', // Liên kết đến ListFlight
         required: true
     },
     // Tên của hành khách
@@ -62,6 +61,7 @@ const bookingSchema = new mongoose.Schema({
     // Hạng ghế đã đặt (Economy, Business, etc.)
     seatClass: {
         type: String,
+        enum: ['Economy', 'Business'], // Ghế thường hoặc thương gia
         required: true
     },
     // Trạng thái đặt vé: Pending, Confirmed, Canceled

@@ -18,7 +18,7 @@ aside
         //- if(role.permissions.includes("products-category_view"))
     
         a(href=`/${prefixAdmin}/bookings`) 
-            span.material-symbols-sharp inventory_2
+            span.material-symbols-sharp check_box
             h3  Danh sách đặt vé
         //- if(role.permissions.includes("roles_view"))
         
@@ -27,7 +27,10 @@ aside
     
         //- a(href=`/${prefixAdmin}/roles/permissions`) Phân quyền
         //- if(role.permissions.includes("accounts_view"))
-    
+        a(href=`/${prefixAdmin}/scheduals`) 
+            span.material-symbols-sharp calendar_today
+            h3 Lịch trình
+
         a(href=`/${prefixAdmin}/accounts`) 
             span.material-symbols-sharp person_outline 
             h3 Tài khoản

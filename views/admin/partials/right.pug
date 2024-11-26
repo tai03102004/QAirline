@@ -7,7 +7,7 @@
             span.material-symbols-sharp dark_mode
         .profile
             .info
-                <p><b>#{user.name}</b></p>
+                <p><b>#{user.name}</b></p> 
                 <p>Admin</p>
                 small.text-muted
             .profile-photo
@@ -30,4 +30,58 @@
                     img(src="/client/images/logo.png")
                 .message
                     <p><b>Babar</b> Recived his order of USB</p>
+    .dashboard
+        .popular-airlines
+            h3 Popular Airlines
+            .chart
+                <div class="chart-container">
+                    <canvas id="airlinesChart"></canvas>
+                </div>
+                .legend
+                    .item
+                        span.color.gold
+                        |  SkyHigh Airlines - 35%
+                    .item
+                        span.color.black
+                        |  FlyFast Airways - 30%
+                    .item
+                        span.color.grey
+                        |  AeroJet - 20%
+                    .item
+                        span.color.light-grey
+                        |  Nimbus Airlines - 15%
+        .top-flight-routes
+            h3 Top Flight Routes
+            .routes
+                .route
+                    p Paris (CDG) - New York (JFK)
+                    span.distance 5,834 km
+                    .bar
+                        .filled.black(style='width: 70%;')
+                    span.passengers 140,000 Passengers
+                .route
+                    p Hong Kong (HKG) - Los Angeles (LAX)
+                    span.distance 11,062 km
+                    .bar
+                        .filled.gold(style='width: 65%;')
+                    span.passengers 130,000 Passengers
+                .route
+                    p Frankfurt (FRA) - Bangkok (BKK)
+                    span.distance 8,927 km
+                    .bar
+                        .filled.black(style='width: 60%;')
+                    span.passengers 120,000 Passengers
+                .route
+                    p Los Angeles (LAX) - Tokyo (HND)
+                    span.distance 8,236 km
+                    .bar
+                        .filled.black(style='width: 55%;')
+                    span.passengers 110,000 Passengers
+                .route
+                    p Singapore (SIN) - London (LHR)
+                    span.distance 10,885 km
+                    .bar
+                        .filled.black(style='width: 50%;')
+                    span.passengers 100,000 Passengers
+
 

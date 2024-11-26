@@ -6,33 +6,32 @@ block main
             .custom-col-12
                 .custom-card.custom-mb-4
                     .custom-card-header Thông tin tài khoản
-                    //- .custom-card-body
-                    //-     if (user.avatar)
-                    //-         img(src=user.avatar style="height: 100px;margin-bottom: 15px;")
-                    //-     if (user.fullName)
-                    //-         p Họ tên: <b>#{user.fullName}</b>
-                    //-     if (user.email)
-                    //-         p Email: <b>#{user.email}</b>
-                    //-     if (user.phone)
-                    //-         p Số điện thoại: <b>#{user.phone}</b>
-                    //-     if (role.title)
-                    //-         p Phân quyền: <b>#{role.title}</b>
+                    .custom-card-body
+                        if (user.avatar)
+                            img(src=user.avatar style="height: 100px;margin-bottom: 15px;")
+                        if (user.fullName)
+                            p Họ tên: <b>#{user.fullName}</b>
+                        if (user.email)
+                            p Email: <b>#{user.email}</b>
+                        //- if (role.title)
+                        //-     p Phân quyền: <b>#{role.title}</b>
 
             .custom-col-12.custom-col-lg-6
                 .custom-card.custom-mb-4
-                    .custom-card-header Danh mục sản phẩm
+                    .custom-card-header Danh mục tàu bay
                     .custom-card-body
-                        p Số lượng: <b>#{statistic.categoryProduct.total}</b>
-                        p Hoạt động: <b>#{statistic.categoryProduct.active}</b>
-                        p Dừng hoạt động: <b>#{statistic.categoryProduct.inactive}</b>
+                        p Số lượng: <b>#{statistic.dataPlane.total}</b>
+                        p Hoạt động: <b>#{statistic.dataPlane.active}</b>
+                        p Dừng hoạt động: <b>#{statistic.dataPlane.inactive}</b>
 
             .custom-col-12.custom-col-lg-6
                 .custom-card.custom-mb-4
-                    .custom-card-header Sản phẩm
+                    .custom-card-header Danh sách đặt vé
                     .custom-card-body
-                        p Số lượng: <b>#{statistic.petProduct.total}</b>
-                        p Hoạt động: <b>#{statistic.petProduct.active}</b>
-                        p Dừng hoạt động: <b>#{statistic.petProduct.inactive}</b>
+                        p Số lượng: <b>#{statistic.bookings.total}</b>
+                        p Vé đã xác nhận: <b>#{statistic.bookings.confirmed}</b>
+                        p Vé chờ xác nhận: <b>#{statistic.bookings.pending}</b>
+                        p Vé đã huỷ: <b>#{statistic.bookings.canceled}</b>
 
             .custom-col-12.custom-col-lg-6
                 .custom-card.custom-mb-4
@@ -49,9 +48,4 @@ block main
                         p Số lượng: <b>#{statistic.user.total}</b>
                         p Hoạt động: <b>#{statistic.user.active}</b>
                         p Dừng hoạt động: <b>#{statistic.user.inactive}</b>
-
-            .custom-col-12
-                .custom-card.custom-mt-4
-                    .custom-card-header Charts
-                    .custom-card-body
-                        canvas#myChart
+            include destination_booking.pug

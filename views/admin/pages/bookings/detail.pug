@@ -62,6 +62,10 @@ block main
                     div(class="desc", id="booking-seatNumber") Số ghế 
                         span.dots :   
                         b #{booking.seatNumber}
+                if (booking.seatClass)
+                    div(class="desc", id="booking-seatClass") Hạng chuyến bay
+                        span.dots :   
+                        b #{booking.seatClass}
                 if (booking.passengerEmail)
                     div(class="desc", id="booking-email") Email hành khách 
                         span.dots :   

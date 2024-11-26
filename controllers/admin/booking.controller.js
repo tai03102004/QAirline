@@ -1,6 +1,7 @@
 const Booking = require("../../models/booking.model");
 const paginationHelper = require("../../helper/pagination");
 const filterStatusHelper = require("../../helper/filterBookingStatus");
+const filterSeatClassHelper = require("../../helper/filterSeatClass");
 const searchHelper = require("../../helper/search");
 
 const systemConfig = require("../../config/system");
@@ -21,6 +22,15 @@ module.exports.index = async (req, res) => {
         }
 
         // End FilterStatus
+
+        // Filter Seat Class
+
+        const filterSeatClass = filterSeatClassHelper(req.query);
+        if (req.query.seatClass) {
+            find.seatClass = req.query.seatClass;
+        }
+
+        // End Filter Seat Class
 
         // Pagination
 
@@ -73,6 +83,7 @@ module.exports.index = async (req, res) => {
             bookings: bookings,
             pagination: objectPagination,
             filterStatus: filterStatus,
+            filterSeatClass: filterSeatClass,
             keyword: objectSearch.keyword,
         })
         // } else {

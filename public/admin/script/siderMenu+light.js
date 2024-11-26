@@ -24,7 +24,6 @@ sidebarItems.forEach((item, index) => {
 });
 
 const loginForm = document.querySelector("form.login");
-cosole.log(loginForm);
 if (loginForm) {
     loginForm.addEventListener("submit", () => {
         // Reset active sidebar index to 0

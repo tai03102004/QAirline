@@ -1,40 +1,31 @@
-const ctx = document.getElementById('myChart').getContext('2d');
-const myChart = new Chart(ctx, {
-    type: 'bar', // Chọn kiểu biểu đồ
+// Lấy phần tử canvas
+const ctx = document.getElementById('airlinesChart').getContext('2d');
+
+// Tạo biểu đồ
+const airlinesChart = new Chart(ctx, {
+    type: 'doughnut', // Biểu đồ doughnut
     data: {
-        labels: ["Not Departed", "In Flight", "Arrived"],
+        labels: ['SkyHigh Airlines', 'FlyFast Airways', 'AeroJet', 'Nimbus Airlines'],
         datasets: [{
-            label: 'Tỉ lệ chuyến bay',
-            data: [
-                0.3,
-                0.1,
-                0.82,
-            ],
-            backgroundColor: ['#4CAF50', '#FF9800', '#E91E63'],
-            borderColor: '#333',
-            borderWidth: 1
+            data: [35, 30, 20, 15], // Phần trăm các hãng
+            backgroundColor: ['#f6d788', '#333', '#777', '#bbb'], // Màu sắc
+            hoverOffset: 1
         }]
     },
     options: {
         responsive: true,
         plugins: {
-            title: {
-                display: true,
-                text: 'Trạng thái chuyến bay',
-                font: {
-                    size: 20 // Điều chỉnh kích thước font nếu cần
-                },
-                color: '#F0F0F0', // Màu tiêu đề
-                padding: {
-                    top: 10,
-                    bottom: 30
+            legend: {
+                display: false // Ẩn legend mặc định
+            },
+            tooltip: {
+                callbacks: {
+                    label: function (context) {
+                        return `${context.label}: ${context.raw}%`;
+                    }
                 }
             }
         },
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
+        cutout: '80%' // Kích thước phần giữa trống
     }
 });

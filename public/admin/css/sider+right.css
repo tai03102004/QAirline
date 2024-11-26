@@ -29,7 +29,7 @@
 
 }
 
-/* dark theme */
+/* dark theme */ 
 .dark-theme-variables {
     --clr-color-background: #181a1e;
     --clr-white: #202528;
@@ -292,6 +292,122 @@ Right Side
     margin-bottom: 1rem;
 }
 
+/* dashboard */
+
+.dashboard {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    margin-left: -20px;
+}
+
+.popular-airlines,
+.top-flight-routes {
+    background: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 350px;
+}
+
+.chart {
+    text-align: center;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.chart-container {
+    position: relative;
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+}
+
+.chart-container::before {
+    content: '\2708'; /* Unicode của icon máy bay (✈) */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 60px; /* Kích thước icon */
+    color: #f6d788; /* Màu sắc của icon */
+    z-index: 10;
+}
+
+.icon-airplane {
+    font-size: 24px;
+    color: #555;
+    border: 2px solid #000;
+    padding: 10px;
+}
+
+.legend .item {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.legend .color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.gold {
+    background-color: #f6d788;
+}
+
+.black {
+    background-color: #333;
+}
+
+.grey {
+    background-color: #777;
+}
+
+.light-grey {
+    background-color: #bbb;
+}
+
+.routes {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.route p {
+    font-size: 14px;
+    margin: 0;
+    color: #444;
+}
+
+.distance {
+    font-size: 12px;
+    color: #888;
+}
+
+.bar {
+    height: 8px;
+    background: #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 5px 0;
+}
+
+.bar .filled {
+    height: 100%;
+    border-radius: 4px;
+}
+
+.passengers {
+    font-size: 12px;
+    color: #888;
+}
+
 
 
 /* ****************
@@ -314,6 +430,8 @@ MEDIA QUERY PHONE
         margin-top: 1.8rem;
     }
 }
+
+
 
 /* ****************
 MEDIA QUERY PHONE
@@ -405,5 +523,16 @@ MEDIA QUERY PHONE
     }
     .right .recent_updates{
         padding: 0 40px;
+    }
+mo 
+    .right .dashboard {
+        padding: 0 40px;
+        display: block;
+        width: 100%;
+    }
+
+    .right .popular-airlines, .top-flight-routes{
+        margin-bottom: 20px;
+        width: auto;
     }
 }

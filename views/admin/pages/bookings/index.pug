@@ -13,12 +13,16 @@ block main
   .card.mb-3
     .card-header Bộ lọc và Tìm kiếm
     .card-body
-      .row
-        .col-5
-          +filter-status(filterStatus)
+      .column
+        .row
+          .col-5
+            +filter-status(filterStatus)
 
-        .col-7
-          +search(keyword)
+          .col-7
+            +search(keyword)
+        .row
+          .col-7
+            +filter-status(filterSeatClass)
   .card.mb-3
     .card-header Sắp xếp
     .card-body

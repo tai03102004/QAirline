@@ -1,0 +1,72 @@
+section.container_db
+    .popular-destination
+        .popular-destination-title
+            h2 Popular Destination
+            button.dropdown 
+                <i class="fa-solid fa-calendar-days"></i> This Week
+        .map-container
+            .map
+                img(src="/admin/image/popular_destination.jpg" width="200%")
+            .stats
+                .stat
+                    .stat_body
+                        span.country Mexico
+                        span.percentage 24%
+                    <div class="progress-bar" data-percentage="24"></div>
+                .stat
+                    .stat_body
+                        span.country Canada
+                        span.percentage 18%
+                    <div class="progress-bar" data-percentage="18"></div>
+                .stat
+                    .stat_body
+                        span.country United Kingdom
+                        span.percentage 16%
+                    <div class="progress-bar" data-percentage="16"></div>
+                .stat
+                    .stat_body
+                        span.country India
+                        span.percentage 12%
+                    <div class="progress-bar" data-percentage="12"></div>
+                .stat
+                    .stat_body
+                        span.country France
+                        span.percentage 9%
+                    <div class="progress-bar" data-percentage="9"></div>
+                .stat
+                    .stat_body
+                        span.country Australia
+                        span.percentage 7%
+                    <div class="progress-bar" data-percentage="7"></div>
+    .all-bookings
+        .header
+            h2 All Bookings
+            a.see-all(href='/admin/bookings') See All
+        if bookings.length > 0
+            each booking, i in bookings.slice(0, 3) 
+                .flight-card
+                    .flight-card__genaral
+                        .flight-info
+                            .airline
+                                strong #{booking._doc.flightNumber} Airlines
+                        .flight-details
+                            span.date
+                                i.fa-solid.fa-calendar-days
+                                | #{booking.departureFormattedDate || 'Unknown Time'} 
+                            span.passengers
+                                i.fa-solid.fa-user-group
+                                | 190 
+                    .flight-time
+                        .departure
+                            strong #{booking.departureFormattedTime || 'Unknown Time'} 
+                            span #{booking._doc.departureLocation || 'Unknown Location'}
+                        .timeline
+                            .line
+                            span.duration-text Duration: #{booking.duration} 
+                        .arrival
+                            strong #{booking.arrivalFormattedTime}
+                            span #{booking._doc.arrivalLocation || 'Unknown Location'}
+        else
+            p No bookings available
+
+script(src="/admin/script/destination_booking.js")
