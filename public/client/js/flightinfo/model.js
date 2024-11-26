@@ -34,4 +34,4 @@ class Flight {
   }
 }
 
-export { Flight };
+module.exports = Flight

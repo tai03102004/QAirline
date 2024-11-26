@@ -10,6 +10,8 @@ block main
                 #popupText
                 br
                 button#closePopup &Dstrok;&oacute;ng
-    script(type='module' src='/client/js/flightinfo/flight.js')
-
     
+    script.
+        const flightsData = !{JSON.stringify(flights)};
+        console.log(flightsData);
+    script(type='module' src='/client/js/flightinfo/flight.js')

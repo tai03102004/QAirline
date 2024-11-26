@@ -1,4 +1,4 @@
-const homeRoutes = require("./home.route");
+const homeRoutes = require("./search.route");
 
 module.exports = (app) => {
     app.use("/", homeRoutes);

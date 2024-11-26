@@ -1,0 +1,103 @@
+extends ../../layouts/default.pug
+
+block styles
+    link(rel="stylesheet", href="/client/css/flightsearch/style.css")
+
+block main 
+    //- div.search-container
+    //-     form(action='/search-flights' method='POST')
+    //-         input#departport(list='ports' type='search' name='departport' required)
+    //-         datalist#ports
+    //-             option(value='HN') Ha Noi
+    //-             option(value='LS') Lang Son
+    //-             option(value='NA') Nghe An
+    //-             option(value='HN') Ha Nam
+    //-         input#arriveport(list='ports' type='search' name='arriveport' required)
+    //-         input#departdate(type='date' name='departdate')
+    //-         input#searchbutton(type='submit' value='Tìm chuyến bay')
+    //- script(type='module' src='/client/js/flightsearch.js')
+    .search-container
+      form(action='')
+        .trip-options
+          label
+            input(type='radio', name='trip')
+            |  One way
+          label
+            input(type='radio', name='trip', checked='')
+            |  Round-trip
+          label
+            input(type='radio', name='trip')
+            |  Multi-City
+        .form
+          .inputs
+            .depart
+              input.dropdown-input(type='text', placeholder='Tìm kiếm điểm đến...')
+              .dropdown-content
+                .region
+                  h3 VI&#x1EC6;T NAM
+                  ul
+                    li Tp. H&#x1ED3; Ch&iacute; Minh (SGN), Vi&#x1EC7;t Nam
+                    li &Dstrok;&agrave; N&#x1EB5;ng (DAD), Vi&#x1EC7;t Nam
+                    li Ph&uacute; Qu&#x1ED1;c (PQC), Vi&#x1EC7;t Nam
+                    li Nha Trang (CXR), Vi&#x1EC7;t Nam
+                    li H&#x1EA3;i Ph&ograve;ng (HPH), Vi&#x1EC7;t Nam
+                    li Bu&ocirc;n Ma Thu&#x1ED9;t (BMV), Vi&#x1EC7;t Nam
+                    li C&agrave; Mau (CAH), Vi&#x1EC7;t Nam
+                    li C&#x1EA7;n Th&#x1A1; (VCA), Vi&#x1EC7;t Nam
+                    li Chu Lai (VCL), Vi&#x1EC7;t Nam
+                    li C&ocirc;n &Dstrok;&#x1EA3;o (VCS), Vi&#x1EC7;t Nam
+                    li &Dstrok;&agrave; L&#x1EA1;t (DLI), Vi&#x1EC7;t Nam
+                .region
+                  h3 &Dstrok;&Ocirc;NG B&#x1EAE;C &Aacute;
+                  // Thêm nội dung tại đây
+                // Thêm các khu vực khác tương tự
+            .input-group
+              label Departing
+              input(type='date')
+            .input-group
+              label Returning
+              input(type='date')
+          .passenger-container
+            h2 Passenger
+            .passenger-type
+              .passenger-row
+                .details
+                  p Adult
+                  span Above 12 years.
+                .counter
+                  button.btn-decrement(type='button') -
+                  span.count 0
+                  button.btn-increment(type='button') +
+              .passenger-row
+                .details
+                  p Child
+                  span 2-11 years on travel date.
+                .counter
+                  button.btn-decrement(type='button') -
+                  span.count 0
+                  button.btn-increment(type='button') +
+              .passenger-row
+                .details
+                  p Infant
+                  span Below 2 years.
+                .counter
+                  button.btn-decrement(type='button') -
+                  span.count 0
+                  button.btn-increment(type='button') +
+            p.note
+              | Please note: You can book for a maximum of nine passengers.
+          .promo
+            h2 Travel Class
+            p.note Optional
+            .travel-class
+              button.class-button(type='button') Economy
+              button.class-button(type='button') Business
+              button.class-button(type='button') First Class
+              button.class-button(type='button')
+                | Premium Economy
+            br
+            div
+              input(type='text', placeholder='Enter Promo Code')
+            br
+            input.submit-button(type='button', value='Show Flight')
+    script(type='module' src='/client/js/flightsearch.js')

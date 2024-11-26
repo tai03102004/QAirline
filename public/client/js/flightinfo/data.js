@@ -1,4 +1,4 @@
-import { Flight } from "./model.js";
+const Flight = require("./model.js");
 var data = [
   new Flight(
     "HN",
@@ -42,4 +42,4 @@ var data = [
   ),
 ];
 
-export { data as Data };
+module.exports = data

@@ -1,13 +1,16 @@
-import { CreateFlightCard, CreatePopupContent } from "./cardgenerator.js";
-import { Data } from "./data.js";
+import { CreateFlightCard as _CreateFlightCard, CreatePopupContent as _CreatePopupContent } from './cardgenerator.js';
+const CreateFlightCard = _CreateFlightCard;
+const CreatePopupContent = _CreatePopupContent;
+
 
 var container = document.getElementsByClassName("container")[0];
 var content = document.getElementsByClassName("content")[0];
-console.log(Data);
 
 var flightList = [];
 
-Data.forEach((element) => {
+const flights = flightsData
+
+flights.forEach((element) => {
   var flight = CreateFlightCard(element);
 
   flightList.push(flight);
@@ -16,7 +19,7 @@ Data.forEach((element) => {
     popup.classList.add("showPopup");
     for (var i = 0; i < flightList.length; i++) {
       if (flightList[i] == this) {
-        popupText.appendChild(CreatePopupContent(Data[i]));
+        popupText.appendChild(CreatePopupContent(flights[i]));
         break;
       }
     }
