@@ -17,7 +17,7 @@ block main
     //-         input#searchbutton(type='submit' value='Tìm chuyến bay')
     //- script(type='module' src='/client/js/flightsearch.js')
     .search-container
-      form(action='')
+      form(action='/search-flights' method='GET')
         .trip-options
           label
             input(type='radio', name='trip')
@@ -30,27 +30,28 @@ block main
             |  Multi-City
         .form
           .inputs
-            .depart
-              input.dropdown-input(type='text', placeholder='Tìm kiếm điểm đến...')
+            .dropdown.depart-dropdown
+              label depart
+              input.dropdown-input(type='text', placeholder='Tìm kiếm điểm đến...', name='departureLocation')
               .dropdown-content
                 .region
                   h3 VI&#x1EC6;T NAM
                   ul
-                    li Tp. H&#x1ED3; Ch&iacute; Minh (SGN), Vi&#x1EC7;t Nam
-                    li &Dstrok;&agrave; N&#x1EB5;ng (DAD), Vi&#x1EC7;t Nam
-                    li Ph&uacute; Qu&#x1ED1;c (PQC), Vi&#x1EC7;t Nam
-                    li Nha Trang (CXR), Vi&#x1EC7;t Nam
-                    li H&#x1EA3;i Ph&ograve;ng (HPH), Vi&#x1EC7;t Nam
-                    li Bu&ocirc;n Ma Thu&#x1ED9;t (BMV), Vi&#x1EC7;t Nam
-                    li C&agrave; Mau (CAH), Vi&#x1EC7;t Nam
-                    li C&#x1EA7;n Th&#x1A1; (VCA), Vi&#x1EC7;t Nam
-                    li Chu Lai (VCL), Vi&#x1EC7;t Nam
-                    li C&ocirc;n &Dstrok;&#x1EA3;o (VCS), Vi&#x1EC7;t Nam
-                    li &Dstrok;&agrave; L&#x1EA1;t (DLI), Vi&#x1EC7;t Nam
+                    li Hanoi
+                    li Ho Chi Minh
+                    li Da Nang
+                    li Nha Trang
+            .dropdown.arrive-dropdown
+              label arrive
+              input.dropdown-input(type='text', placeholder='Tìm kiếm điểm đến...', name='arrivalLocation')
+              .dropdown-content
                 .region
-                  h3 &Dstrok;&Ocirc;NG B&#x1EAE;C &Aacute;
-                  // Thêm nội dung tại đây
-                // Thêm các khu vực khác tương tự
+                  h3 VI&#x1EC6;T NAM
+                  ul
+                    li Hanoi
+                    li Ho Chi Minh
+                    li Da Nang
+                    li Nha Trang
             .input-group
               label Departing
               input(type='date')
@@ -99,5 +100,5 @@ block main
             div
               input(type='text', placeholder='Enter Promo Code')
             br
-            input.submit-button(type='button', value='Show Flight')
+            input.submit-button.search-button(type='submit', value='Show Flight')
     script(type='module' src='/client/js/flightsearch.js')

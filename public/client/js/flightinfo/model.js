@@ -35,3 +35,4 @@ class Flight {
 }
 
 module.exports = Flight
+module.exports = calculateTimeDifference
