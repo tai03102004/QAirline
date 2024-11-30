@@ -41,7 +41,11 @@ const listFlightSchema = new mongoose.Schema({
         type: String,
         enum: ['Scheduled', 'Canceled', 'Completed'], // Trạng thái chuyến bay
         default: 'Scheduled'
-    }
+    },
+    deleted: {
+        type: Boolean,
+        default: false,
+    },
 }, {
     timestamps: true
 });

@@ -1,0 +1,6 @@
+mixin filter-seatClass(filterSeatClass)
+    each item in filterSeatClass
+        button(
+            class=`btn btn-sm ml-1 btn-outline-primary ${item.class}`
+            button-seatClass=item.seatClass
+        ) #{item.name}

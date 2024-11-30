@@ -1,4 +1,4 @@
-extends ../../layouts/default.pug
+extends ../../layouts/defaultNotRight.pug
 include ../../mixins/alert.pug
 include ../../mixins/pagination.pug
 include ../../mixins/filter-status.pug  
@@ -10,35 +10,41 @@ include ../../mixins/moment.pug
 block main
     +alert-success(5000)
     h1(class="mb-4 mt-4") Lịch bay
-    .filter-section
-        h3 Filter
-        button.reset-button Reset
+    .fliter-schedual
+        .filter-section
+            h3 Filter
+            button.reset-button Reset
+            .filter-group
+                h4 Transit 
+                label(for="direct")
+                    input#direct(type="checkbox" name="transit" value="direct" disabled) 
+                    | Direct
+                label(for="transit1")
+                    input#transit1(type="checkbox" name="transit" value="1") 
+                    | 1 Transit
+                label
+                    input(type="checkbox" value="true") 
+                    | 2+ Transits
 
-        //- .filter-group
-        //-     h4 Transit
-        //-     label
-        //-         input(type="checkbox") Direct
-        //-     label
-        //-         input(type="checkbox") 1 Transit
-        //-     label
-        //-         input(type="checkbox") 2+ Transits
 
-        .filter-group
-            h4 Price Range
-            div.range-inputs
-                input(type="number" placeholder="Start" min="0")
-                input(type="number" placeholder="Up to" min="0")
+            .filter-group
+                h4 Price Range
+                div.range-inputs
+                    input(type="number" placeholder="Start" min="0")
+                    input(type="number" placeholder="Up to" min="0")
 
-        .filter-group
-            h4 Departure Times
-            input(type="range" min="0" max="24" step="1")
+            .filter-group
+                h4 Departure Times
+                input(type="range" min="0" max="24" step="1")
 
-        .filter-group
-            h4 Airline
-            //- label
-            //-     input(type="checkbox") CloudNine Airlines
-            //- label
-            //-     input(type="checkbox") SkyHigh Airlines
+            .filter-group
+                h4 Airline
+                label
+                    input(type="checkbox") 
+                    | CloudNine Airlines
+                label
+                    input(type="checkbox") 
+                    | SkyHigh Airlines
 
         .flight-list
             h2 Flight List (#{schedual.length} result#{schedual.length > 1 ? 's' : ''})
@@ -48,8 +54,9 @@ block main
                         .airline #{flight.flightNumber}
                         .time
                             | #{new Date(flight.departureTime).toLocaleString()} → #{new Date(flight.arrivalTime).toLocaleString()}
-                            .duration #{flight.duration || 'Duration Not Available'}
+                            .duration #{flight.duration}
                         span #{flight.departureLocation} → #{flight.arrivalLocation}
-                    .price
-                        b #{flight.economySeats.price} VND
-                    a.btn(href=`/admin/flight/${flight._id}`) View Detail
+                    .schedual-pvd
+                        .price
+                            b #{flight.economySeats.price} VND
+                        a.btn_flight(href=`/admin/flight/${flight._id}`) View Detail

@@ -1,7 +1,8 @@
 const Booking = require("../../models/booking.model");
 const paginationHelper = require("../../helper/pagination");
 const filterStatusHelper = require("../../helper/filterBookingStatus");
-const filterSeatClassHelper = require("../../helper/filterSeatClass");
+const filterSeatClassHelper = require("../../helper/filterBookingSeatClass");
+
 const searchHelper = require("../../helper/search");
 
 const systemConfig = require("../../config/system");
@@ -10,98 +11,88 @@ const moment = require('moment');
 // [GET] / admin/products
 module.exports.index = async (req, res) => {
 
-    try {
-        let find = {
-            deleted: false,
-        };
-        // FilterStatus
+    // try {
+    let find = {
+        deleted: false,
+    };
+    // FilterStatus
 
-        const filterStatus = filterStatusHelper(req.query);
-        if (req.query.status) {
-            find.status = req.query.status;
-        }
-
-        // End FilterStatus
-
-        // Filter Seat Class
-
-        const filterSeatClass = filterSeatClassHelper(req.query);
-        if (req.query.seatClass) {
-            find.seatClass = req.query.seatClass;
-        }
-
-        // End Filter Seat Class
-
-        // Pagination
-
-        let initPagination = {
-            currentPage: 1, // Trang bắt đầu
-            limitItems: 5 // Giới hạn 1 trang 
-        }
-
-        const countBookings = await Booking.countDocuments(find); // Tổng sản phẩm
-        const objectPagination = paginationHelper(initPagination, req.query, countBookings);
-
-        // End Pagination
-
-        // Search(Find) Product
-
-        let objectSearch = searchHelper(req.query);
-        if (req.query.keyword) {
-            const regex = objectSearch.regex; // Lấy regex từ helper
-            find.$or = [{
-                    passengerName: regex
-                },
-                {
-                    passengerPhone: regex
-                },
-                {
-                    flightNumber: regex
-                }
-            ];
-        }
-
-        // End Search(Find) Product
-
-        // Sort
-
-        let sort = {};
-        if (req.query.sortKey && req.query.sortValue) { // position - desc
-            sort[req.query.sortKey] = req.query.sortValue;
-        } else {
-            sort.position = "desc";
-        }
-
-        // End Sort
-
-        const bookings = await Booking.find(find).sort(sort)
-            .limit(objectPagination.limitItems) // Giới hạn 1 trang số sản phẩm hiển thị
-            .skip(objectPagination.skip);
-        // if (bookings.length > 0 || countBookings == 0) {
-        res.render("admin/pages/bookings/index", {
-            pageTitle: "Danh sách đặt vé",
-            bookings: bookings,
-            pagination: objectPagination,
-            filterStatus: filterStatus,
-            filterSeatClass: filterSeatClass,
-            keyword: objectSearch.keyword,
-        })
-        // } else {
-        //     // redirect về trang 1 & stringQuery : Truy vấn tiếp theo (Tìm kiếm sẽ trả về trang 1 ...)
-        //     let stringQuery = "";
-        //     for (const key in req.query) {
-        //         if (key != "page") {
-        //             stringQuery += `&${key}=${req.query[key]}`;
-        //         }
-        //     }
-        //     const href = `${req.baseUrl}?page=1${stringQuery}`;
-        //     res.redirect(href);
-        // }
-
-    } catch (err) {
-        req.flash("error", "Lỗi đặt vé");
-        res.redirect("back");
+    const filters = filterStatusHelper(req.query); // Gọi helper để lấy cả 2 bộ lọc
+    const filterStatus = filters.filterStatus; // Bộ lọc trạng thái
+    // Áp dụng lọc trạng thái
+    if (req.query.status) {
+        find.status = req.query.status;
     }
+
+    // End FilterStatus
+
+    // Filter Set Class
+    const filters2 = filterSeatClassHelper(req.query);
+    const filterSeatClass = filters2.filterSeatClass;
+    // Áp dụng lọc trạng thái
+    if (req.query.seatClass) {
+        find.seatClass = req.query.seatClass;
+    }
+
+    // Pagination
+
+    let initPagination = {
+        currentPage: 1, // Trang bắt đầu
+        limitItems: 5 // Giới hạn 1 trang 
+    }
+
+    const countBookings = await Booking.countDocuments(find); // Tổng sản phẩm
+    const objectPagination = paginationHelper(initPagination, req.query, countBookings);
+
+    // End Pagination
+
+    // Search(Find) Product
+
+    let objectSearch = searchHelper(req.query);
+    if (req.query.keyword) {
+        const regex = objectSearch.regex; // Lấy regex từ helper
+        find.$or = [{
+                passengerName: regex
+            },
+            {
+                passengerPhone: regex
+            },
+            {
+                flightNumber: regex
+            }
+        ];
+    }
+
+    // End Search(Find) Product
+
+    // Sort
+
+    let sort = {};
+    if (req.query.sortKey && req.query.sortValue) { // position - desc
+        sort[req.query.sortKey] = req.query.sortValue;
+    } else {
+        sort.position = "desc";
+    }
+
+    // End Sort
+
+    const bookings = await Booking.find(find).sort(sort)
+        .limit(objectPagination.limitItems) // Giới hạn 1 trang số sản phẩm hiển thị
+        .skip(objectPagination.skip);
+    // if (bookings.length > 0 || countBookings == 0) {
+    res.render("admin/pages/bookings/index", {
+        pageTitle: "Danh sách đặt vé",
+        bookings: bookings,
+        pagination: objectPagination,
+        filterStatus: filterStatus,
+        filterSeatClass: filterSeatClass,
+        keyword: objectSearch.keyword,
+    })
+
+    // } catch (err) {
+    //     req.flash("error", "Lỗi đặt vé");
+    //     res.redirect("back");
+    // }
 }
 
 // [DELETE] /admin/products/delete/:id
