@@ -7,6 +7,7 @@ const port = process.env.PORT || 3000;
 require("dotenv").config();
 
 app.use(express.static(`${__dirname}/public`));
+app.use(express.urlencoded({ extended: true }));
 
 // file pug
 app.set("views", `${__dirname}/views`);
