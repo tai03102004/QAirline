@@ -192,6 +192,7 @@ h2 {
   border-radius: 5px;
   cursor: pointer;
   text-align: center;
+  min-width: 93px;
 }
 
 .class-button:hover {
@@ -275,7 +276,7 @@ h2 {
   display: block;
 } */
 
-@media screen and (min-width: 50em) {
+@media screen and (min-width: 1200px) {
   .search-container {
     width: 50%;
   }
@@ -297,6 +298,7 @@ h2 {
 
   .input-group {
     min-width: auto;
+    max-height: 80px;
   }
 
   .travel-class {
