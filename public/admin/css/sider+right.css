@@ -269,9 +269,19 @@ Right Side
     gap: 2rem;
     text-align: right;
 }
+
+.right .info {
+    text-align: center;
+}
+
+.right .info  a {
+    font-size: 10px;
+}
+
 .right  .info h3{
     color: var(--clr-dark);
 }
+
 .right  .item h3{
     color: var(--clr-dark);
 }

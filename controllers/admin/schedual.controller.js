@@ -36,3 +36,10 @@ module.exports.index = async (req, res) => {
         schedual: updatedScheduals, // Truyền mảng đã thêm duration vào view
     });
 }
+
+// [GET] /admin/detail/:id
+module.exports.detail = async (req, res) => {
+    res.render("admin/pages/scheduals/detail", {
+        pageTitle: "Xem chi tiết chuyến bay",
+    });
+}

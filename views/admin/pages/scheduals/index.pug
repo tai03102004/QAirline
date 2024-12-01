@@ -45,18 +45,72 @@ block main
                 label
                     input(type="checkbox") 
                     | SkyHigh Airlines
+        .schedual-list
+            .flight-search-bar
+                .location
+                    label.shcedual_label From
+                    p.shcedual_p Los Angeles (LAX)
+                .switch
+                    span.icon &lrarr;
+                .location
+                    label.shcedual_label To
+                    p.shcedual_p New York (JFK)
+                .detail
+                    label.shcedual_label Departure Date
+                    p.shcedual_p Sat, 1 Jul 2029
+                .detail
+                    label.shcedual_label Seat Class
+                    p.shcedual_p Economy
+                .search-btn
+                    span.icon &#x1F50D;
 
-        .flight-list
-            h2 Flight List (#{schedual.length} result#{schedual.length > 1 ? 's' : ''})
-            each flight in schedual
-                .flight-card
-                    .flight-info
-                        .airline #{flight.flightNumber}
-                        .time
-                            | #{new Date(flight.departureTime).toLocaleString()} → #{new Date(flight.arrivalTime).toLocaleString()}
-                            .duration #{flight.duration}
-                        span #{flight.departureLocation} → #{flight.arrivalLocation}
-                    .schedual-pvd
-                        .price
-                            b #{flight.economySeats.price} VND
-                        a.btn_flight(href=`/admin/flight/${flight._id}`) View Detail
+
+            .flight-list
+                .flight-list_inner-head
+                    .flight__sum
+                        .flight__sum_title Danh sách chuyến bay
+                        .flight__sum_subTitle (#{schedual.length} result#{schedual.length > 1 ? 's' : ''})
+                    .flight-list__sort
+                        .flight-list__sort
+                            <span class="flight-list__sort_title">Sắp xếp theo:</span>
+                            <select class="flight-list__sort_dropdown">
+                                <option value="default"> Mặc định </option>
+                                <option value="price-highest">Giá cao nhất</option>
+                                <option value="price-lowest">Giá thấp nhất</option>
+                            </select>
+
+                        <button class="flight-list__add">
+                            <i class="fa-solid fa-plus"></i>
+                            .flight-list__add_text Thêm mới
+                        </button>
+
+
+                each flight in schedual
+                    .flight-card
+                        .flight-info
+                            .airline-section
+                                //- img.logo(src="path/to/logo.png" alt="Airline Logo")
+                                .airline-details
+                                    span.flight-number #{flight.flightNumber}
+                            .flight-details
+                                .schedual_time-section
+                                    span.departure-time  #{new Date(flight.departureTime).toLocaleString()} 
+                                    span.location #{flight.departureLocation}
+                                .schedual_route
+                                    span.duration #{flight.duration} 
+                                    .route_hihi
+                                        span.airport-code #{flight.departureLocation}
+                                        span.separator ←
+                                        span.icon ✈️
+                                        span.separator →
+                                        span.airport-code #{flight.arrivalLocation} 
+                                    
+                                .schedual_arrival-section
+                                    span.arrival-time #{new Date(flight.arrivalTime).toLocaleString()}
+                                    span.location #{flight.arrivalLocation} 
+
+
+                        .schedual-pvd
+                            .price
+                                b #{flight.economySeats.price} VND
+                            a.btn_flight(href=`/admin/scheduals/detail/${flight._id}`) View Detail

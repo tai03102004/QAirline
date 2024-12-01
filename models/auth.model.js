@@ -14,6 +14,7 @@ const authSchema = new mongoose.Schema({
         type: String,
         default: "active",
     },
+    avatar: String,
     deleted: {
         type: Boolean,
         default: false,

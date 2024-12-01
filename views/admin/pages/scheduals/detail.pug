@@ -1,0 +1,83 @@
+extends ../../layouts/defaultNotRight.pug
+include ../../mixins/alert.pug
+
+block main
+    +alert-success(5000)
+    h1(class="mb-4 mt-4") Danh sách chuyến bay
+    .flight-detail
+        .flight-detail__header
+            .flight-detail__airline
+                //- img.flight-detail__logo(src='airline-logo.png', alt='Airline Logo')
+                div
+                    h2 SkyHigh Airlines
+                    p.flight-detail__code
+                    | SH-ZY6789 
+                    span.flight-detail__status On Time
+            .flight-detail__info
+                p
+                    | Date: 
+                    span July 1, 2028
+                p
+                    | Passenger: 
+                    span +207
+                p.flight-detail__price
+                    | $350 
+                    span /pax
+                button.flight-detail__edit-btn Edit
+        .flight-detail__one
+            .flight-detail__timeline
+                .flight-detail__timeline-item
+                    p.flight-detail__time 6:00 AM
+                .flight-detail__line
+                    span.material-symbols-sharp(style="color:#EAC452; font-size: 40px") flight_land
+                .flight-detail__timeline-item
+                    p.flight-detail__time 9:00 PM
+            .flight-detail__very_body
+                .flight-detail__location_before 
+                    div(style="font-weight: 600; font-size:15px") Los Angeles
+                    p(style="margin-top: 10px")
+                        | Los Angeles International Airport (LAX)
+                        br
+                        | Terminal B
+                .flight-detail__body
+                    h3 SkyHigh Airlines
+                    .flight-detail__description
+                        .model
+                            | Model: 
+                            span Boeing 787 Dreamliner
+                        .class
+                            | Class: 
+                            span Economy
+                        .seat
+                            | Seat Layout: 
+                            span 3-3-3 configuration
+                    .flight-detail__genry
+                        .flight-detail__services
+                            h3 What&apos;s Included
+                            .flight-detail__services_hi
+                                .flight-detail__services_one
+                                    .flight-detail__services_genaral
+                                        span.material-symbols-sharp(style="font-size: 20px") enterprise
+                                        .flight-detail__services_baggage_two
+                                            p Baggage: 23 Kg
+                                            p Cabin baggage: 7 Kg
+                                .flight-detail__services_genaral
+                                    span.material-symbols-sharp(style="font-size: 20px") restaurant
+                                    p Free meal
+                        .flight-detail__inner-final
+                            .flight-detail__inner-final__one
+                                .flight-detail__services_genaral
+                                    span.material-symbols-sharp(style="margin-right: 10px; font-size: 20px") update
+                                    p Reschedule: 
+                                p.flight-detail__reschedule_sub Free rescheduling within 24 hours of booking
+                            .flight-detail__inner-final__two
+                                .flight-detail__services_genaral
+                                    span.material-symbols-sharp(style="margin-right: 10px; font-size: 20px") payments
+                                    p Refund: 
+                                p.flight-detail__refund_sub 10% cancellation fee if cancelled 48 hours before departure
+                .flight-detail__location_after
+                    div(style="font-weight: 600; font-size:15px") New York
+                    p(style="margin-top: 10px")
+                        | John F. Kennedy International Airport (JFK)
+                        br
+                        | Terminal 4
