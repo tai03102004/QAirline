@@ -20,6 +20,29 @@ if (buttonStatus.length > 0) {
 
 // End Filter Status 
 
+// Filter setClass
+
+const buttonSeatClass = document.querySelectorAll('[button-seatClass]');
+if (buttonSeatClass.length > 0) {
+    let url = new URL(window.location.href);
+    buttonSeatClass.forEach(button => {
+        button.addEventListener('click', () => {
+            const seatClass = button.getAttribute('button-seatClass');
+            // status : "" , active , inactive
+            if (seatClass != "") {
+                url.searchParams.set("seatClass", seatClass);
+                // ...!status = "active" ...
+            } else {
+                url.searchParams.delete("seatClass");
+            }
+            window.location.href = url.href;
+        })
+    })
+}
+
+// End filter setClass
+
+
 // Form Search : Tìm kiếm sản phẩm
 
 const formSearch = document.querySelector("#form-search");

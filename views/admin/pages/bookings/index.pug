@@ -1,7 +1,9 @@
-extends ../../layouts/default.pug
+extends ../../layouts/defaultNotRight.pug
 include ../../mixins/alert.pug
 include ../../mixins/pagination.pug
 include ../../mixins/filter-status.pug  
+include ../../mixins/filter-seatClass.pug  
+
 include ../../mixins/searchBooking.pug
 include ../../mixins/sortBooking.pug
 include ../../mixins/moment.pug
@@ -13,7 +15,7 @@ block main
   .card.mb-3
     .card-header Bộ lọc và Tìm kiếm
     .card-body
-      .column
+      .columnz
         .row
           .col-5
             +filter-status(filterStatus)
@@ -21,8 +23,9 @@ block main
           .col-7
             +search(keyword)
         .row
-          .col-7
-            +filter-status(filterSeatClass)
+          .col-5
+            +filter-seatClass(filterSeatClass)
+
   .card.mb-3
     .card-header Sắp xếp
     .card-body
@@ -49,11 +52,11 @@ block main
             input(type="checkbox" name="checkall")
           th STT
           th Tên hành khách
-          //- th Email
           th Số điện thoại
           th Chuyến bay
           th Thời gian khởi hành
           th Số ghế
+          th Hạng xe
           th Giá vé
           th Trạng thái
           th.action-header Hành động
@@ -70,12 +73,12 @@ block main
                 )
               td #{(index + 1) + (pagination.limitItems * (pagination.currentPage - 1))}
               td #{booking.passengerName}
-              //- td #{booking.passengerEmail}
               td #{booking.passengerPhone}
               td #{booking.flightNumber}
               td 
                 +formatDateTime(booking.departureTime) 
               td #{booking.seatNumber}
+              td #{booking.seatClass}
               td #{booking.totalAmount - booking.discount}$
               td
                 if(booking.status == "Confirmed")

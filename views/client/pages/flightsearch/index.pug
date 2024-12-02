@@ -4,34 +4,22 @@ block styles
     link(rel="stylesheet", href="/client/css/flightsearch/style.css")
 
 block main 
-    //- div.search-container
-    //-     form(action='/search-flights' method='POST')
-    //-         input#departport(list='ports' type='search' name='departport' required)
-    //-         datalist#ports
-    //-             option(value='HN') Ha Noi
-    //-             option(value='LS') Lang Son
-    //-             option(value='NA') Nghe An
-    //-             option(value='HN') Ha Nam
-    //-         input#arriveport(list='ports' type='search' name='arriveport' required)
-    //-         input#departdate(type='date' name='departdate')
-    //-         input#searchbutton(type='submit' value='Tìm chuyến bay')
-    //- script(type='module' src='/client/js/flightsearch.js')
     .search-container
       form(action='/search-flights' method='GET')
         .trip-options
           label
-            input(type='radio', name='trip')
-            |  One way
+            input(type='radio', name='trip', id='oneway', value='oneway', checked='')
+            |  Một chiều
           label
-            input(type='radio', name='trip', checked='')
-            |  Round-trip
-          label
-            input(type='radio', name='trip')
-            |  Multi-City
+            input(type='radio', name='trip', id='roundtrip', value='roundtrip')
+            |  Khứ hồi
+          //- label
+          //-   input(type='radio', name='trip', id='multicity', value='multicity')
+          //-   |  Multi-City
         .form
           .inputs
             .dropdown.depart-dropdown
-              label depart
+              label Điểm khởi hành
               input.dropdown-input(type='text', placeholder='Tìm kiếm điểm đến...', name='departureLocation')
               .dropdown-content
                 .region
@@ -42,7 +30,7 @@ block main
                     li Da Nang
                     li Nha Trang
             .dropdown.arrive-dropdown
-              label arrive
+              label Điểm đến
               input.dropdown-input(type='text', placeholder='Tìm kiếm điểm đến...', name='arrivalLocation')
               .dropdown-content
                 .region
@@ -53,52 +41,55 @@ block main
                     li Da Nang
                     li Nha Trang
             .input-group
-              label Departing
-              input(type='date')
-            .input-group
-              label Returning
-              input(type='date')
+              label Thời điểm khởi hành
+              input(type='date', name='departDate')
+            .input-group(id='returning-group')
+              label Thời điểm trở về
+              input(type='date', name='returnDate')
           .passenger-container
-            h2 Passenger
+            h2 Hành khách
             .passenger-type
               .passenger-row
                 .details
-                  p Adult
-                  span Above 12 years.
+                  p Người lớn
+                  span Từ 12 tuổi trở lên.
                 .counter
                   button.btn-decrement(type='button') -
                   span.count 0
                   button.btn-increment(type='button') +
               .passenger-row
                 .details
-                  p Child
-                  span 2-11 years on travel date.
+                  p Trẻ nhỏ
+                  span 2-11 tuổi.
                 .counter
                   button.btn-decrement(type='button') -
                   span.count 0
                   button.btn-increment(type='button') +
               .passenger-row
                 .details
-                  p Infant
-                  span Below 2 years.
+                  p Trẻ cực nhỏ
+                  span Dưới 2 tuổi.
                 .counter
                   button.btn-decrement(type='button') -
                   span.count 0
                   button.btn-increment(type='button') +
+            .total-passengers
+              h2 Tổng số hành khách:
+              p.total-count 0
             p.note
-              | Please note: You can book for a maximum of nine passengers.
+              | Bạn chỉ có thể đặt tối đa 9 hành khách.
           .promo
-            h2 Travel Class
-            p.note Optional
+            h2 Hạng bay
+            p.note Có thể chọn hoặc không
             .travel-class
-              button.class-button(type='button') Economy
-              button.class-button(type='button') Business
-              button.class-button(type='button') First Class
+              button.class-button(type='button') Phổ thông
+              button.class-button(type='button') Thương gia
+              button.class-button(type='button') Hạng nhất
               button.class-button(type='button')
-                | Premium Economy
+                | Thương gia đỉnh cao
             br
             div
-              input(type='text', placeholder='Enter Promo Code')
+              input(type='text', placeholder='Điền mã giảm giá')
             br
-            input.submit-button.search-button(type='submit', value='Show Flight')
+            input.submit-button.search-button(type='submit', value='Tìm chuyến bay')
     script(type='module' src='/client/js/flightsearch.js')

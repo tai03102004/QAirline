@@ -126,6 +126,14 @@ aside{
     margin: 0 auto;
 }
 
+.container_admin_notRight {
+    display: grid;
+    width: 96%;
+    gap: 1.8rem;
+    grid-template-columns: 14rem auto;
+    margin: 0 auto;
+}
+
 aside .top {
     background: var(--clr-white);
     display: flex;
@@ -261,9 +269,19 @@ Right Side
     gap: 2rem;
     text-align: right;
 }
+
+.right .info {
+    text-align: center;
+}
+
+.right .info  a {
+    font-size: 10px;
+}
+
 .right  .info h3{
     color: var(--clr-dark);
 }
+
 .right  .item h3{
     color: var(--clr-dark);
 }
@@ -419,6 +437,11 @@ MEDIA QUERY PHONE
         width: 94%;
         grid-template-columns: 7rem auto 14rem;
     }
+
+    .container_admin_notRight{
+        width: 94%;
+        grid-template-columns: 7rem auto;
+    }
     aside .sidebar h3{
         display: none;
     }
@@ -524,7 +547,7 @@ MEDIA QUERY PHONE
     .right .recent_updates{
         padding: 0 40px;
     }
-mo 
+
     .right .dashboard {
         padding: 0 40px;
         display: block;

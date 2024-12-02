@@ -62,12 +62,12 @@ function CreateFlightCard(info) {
 
   var economy = document.createElement("div");
   economy.className = "economy";
-  economy.innerHTML = `<b>Hạng phổ thông</b><br>từ<br><b style="font-size: x-large">${info.economySeats.price}</b><br>VND`;
+  economy.innerHTML = `Còn ${info.economySeats.available} chỗ<br><b>Hạng phổ thông</b><br>từ<br><b style="font-size: x-large">${info.economySeats.price}</b><br>VND`;
   price.appendChild(economy);
 
   var business = document.createElement("div");
   business.className = "business";
-  business.innerHTML = `<b>Hạng thương gia</b><br>từ<br><b style="font-size: x-large">${info.businessSeats.price}</b><br>VND`;
+  business.innerHTML = `Còn ${info.businessSeats.available} chỗ<br><b>Hạng thương gia</b><br>từ<br><b style="font-size: x-large">${info.businessSeats.price}</b><br>VND`;
   price.appendChild(business);
 
   flight.appendChild(price);

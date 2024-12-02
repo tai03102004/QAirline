@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
 const generate = require("../helper/generate");
-// Admin
-const authSchema = new mongoose.Schema({
+// Client
+const accountSchema = new mongoose.Schema({
     name: String,
     name_id: String,
     email: String,
+    phone: String,
     password: String,
+
     tokenUser: {
         type: String,
         default: generate.generateRandomString(31),
@@ -14,7 +16,6 @@ const authSchema = new mongoose.Schema({
         type: String,
         default: "active",
     },
-    avatar: String,
     deleted: {
         type: Boolean,
         default: false,
@@ -24,6 +25,6 @@ const authSchema = new mongoose.Schema({
     timestamps: true
 });
 
-const Auth = mongoose.model('Auth', authSchema, "auth");
+const Account = mongoose.model('Account', accountSchema, "account");
 
-module.exports = Auth;
+module.exports = Account;
