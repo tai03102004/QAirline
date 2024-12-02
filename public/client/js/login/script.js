@@ -6,4 +6,4 @@ function showRegister() {
     document.getElementById("register").classList.remove("active");
     document.getElementById("login").classList.add("active");
   }
-  
+  showLogin()

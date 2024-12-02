@@ -1,7 +1,7 @@
 // [GET] /
 
 module.exports.index = async (req, res) => {
-    res.render('client/pages/flightinfo/index.pug', {
+    res.render('client/pages/home/index.pug', {
         pageTitle: "Home",
     })
 }

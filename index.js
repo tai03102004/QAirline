@@ -57,6 +57,11 @@ routeClient(app);
 const routeAdmin = require("./routes/admin/index.route");
 routeAdmin(app);
 
+// Import router
+const loginRouter = require('./routes/client/login.route.js');
+
+// Đăng ký router
+app.use('/login', loginRouter);
 
 // /admin
 const systemConfig = require("./config/system");

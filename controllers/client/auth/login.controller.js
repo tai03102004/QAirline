@@ -1,5 +1,5 @@
 const getLoginPage = (req, res) => {
-    res.render('login'); // Render tệp login.pug
+    res.render('client/pages/auth/login.pug'); // Render tệp login.pug
   };
   
   const handleLogin = (req, res) => {
