@@ -5,7 +5,7 @@ const port = process.env.PORT || 3000;
 
 // Hide important things
 require("dotenv").config();
-
+app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
 app.use(express.urlencoded({ extended: true }));
 
@@ -52,7 +52,6 @@ app.locals.moment = moment;
 // Routes Client
 const routeClient = require("./routes/client/index.route.js");
 routeClient(app);
-
 // Routes Admin
 const routeAdmin = require("./routes/admin/index.route");
 routeAdmin(app);
