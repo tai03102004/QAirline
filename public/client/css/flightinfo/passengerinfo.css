@@ -1,0 +1,48 @@
+
+  .info-container {
+    width: 50%;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  .info-container h1 {
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .info-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  .info-container label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  .info-container input,
+  select {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+  }
+  .info-container .btn {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  .info-container .btn:hover {
+    background-color: #45a049;
+  }
+  .info-container .passenger {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 15px;
+  }

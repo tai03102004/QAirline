@@ -1,17 +1,39 @@
 extends ../../layouts/default.pug
 
 block main 
-    .flight-container
-        .content
-        #popup.popup
-            .popup-content
-                h2 Th&ocirc;ng tin chi ti&#x1EBF;t
-                br
-                #popupText
-                br
-                button#closePopup &Dstrok;&oacute;ng
+    form(action="/passengerinfo", method="GET") 
+        input#passengers(type="number", name="passengerNumber", readonly='') 
+        div#hidden-info(style='display: none')
+            input#flightNumber(type="text", name="flightNumber")
+        .flight-container
+            .content
+            #popup.popup
+                .popup-container
+                    .popup-content
+                        h2 Th&ocirc;ng tin chi ti&#x1EBF;t
+                        br
+                        #popupText
+                        br
+                        button#closePopup &Dstrok;&oacute;ng
+                    .class-container
+                        .popup-content
+                            .economy
+                                h3 Hạng phổ thông
+                                h4
+                                #economyinfo
+                                    h4 Còn 50 chỗ
+                                    h4 2.000.000 VND
+                                button Đặt chỗ
+                        .popup-content
+                            .business
+                                h3 Hạng thương gia
+                                #businessinfo
+                                    h4 Còn 5 chỗ
+                                    h4 5.000.000 VND
+                                button Đặt chỗ
     
     script.
         const flightsData = !{JSON.stringify(flights)};
+        const passengersTotal = !{JSON.stringify(totalpassengers)};
         console.log(flightsData);
     script(type='module' src='/client/js/flightinfo/flight.js')
