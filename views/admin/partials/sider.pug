@@ -22,10 +22,16 @@ aside
             h3  Danh sách đặt vé
         //- if(role.permissions.includes("roles_view"))
         
-        //- a(href=`/${prefixAdmin}/roles`) Nhóm quyền
+        a(href=`/${prefixAdmin}/roles`) 
+            span.material-symbols-sharp diversity_3
+            h3 Nhóm quyền
+
         //- if(role.permissions.includes("permission_view"))
     
-        //- a(href=`/${prefixAdmin}/roles/permissions`) Phân quyền
+        a(href=`/${prefixAdmin}/roles/permissions`) 
+            span.material-symbols-sharp group_add
+            h3 Phân quyền
+
         //- if(role.permissions.includes("accounts_view"))
         a(href=`/${prefixAdmin}/scheduals`) 
             span.material-symbols-sharp calendar_today
