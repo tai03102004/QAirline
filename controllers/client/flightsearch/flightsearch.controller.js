@@ -12,8 +12,6 @@ module.exports.index = (req, res) => {
 module.exports.searchFlights = async (req, res) => {
     const { departureLocation, arrivalLocation, departDate, totalpassengers } = req.query;
     try {
-      console.log(departDate);
-
       const flights = await Flight.find({
         departureLocation: departureLocation,
         arrivalLocation: arrivalLocation,
@@ -37,7 +35,6 @@ module.exports.provideinfo = async (req, res) => {
       const flight = await Flight.findOne({
         flightNumber: flightNumber
       });
-      console.log(flight);
       
       if (flight) {
         res.render('client/pages/flightinfo/passengerinfo.pug', {
@@ -72,6 +69,7 @@ module.exports.savebooking = async (req, res) => {
         element.seatNumber = allSeats[index];
         element.ticketId = flight._id.substring(flight._id.length - 3) + flight.flightNumber + allSeats[index];
         index++;
+        console.log(element.departureTime);
       });
       await Booking.insertMany(passengers);
       res.status(200).send('Passengers saved successfully');

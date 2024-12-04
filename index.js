@@ -62,6 +62,12 @@ const loginRouter = require('./routes/client/login.route.js');
 // Đăng ký router
 app.use('/login', loginRouter);
 
+// Import router
+const checkRouter = require('./routes/client/ticketcheck.route.js');
+
+// Đăng ký router
+app.use('/ticketcheck', checkRouter);
+
 // /admin
 const systemConfig = require("./config/system");
 app.locals.prefixAdmin = systemConfig.prefixAdmin;

@@ -42,8 +42,11 @@ document.getElementById('submitForm').addEventListener('click', async () => {
     const phone = document.querySelector('.contact-phone').value
     
     passengerForms.forEach(form => {
-        console.log(flight._id);
+        
         const fullname = form.querySelector('.first-name').value + " " + form.querySelector('.last-name').value;
+        console.log(new Date("2024-12-01T08:00:00Z"));
+        var departureTime = new Date(`${flight.departureTime}Z`);
+        var arrivalTime = new Date(`${flight.arrivalTime}Z`);
         const passenger = {
             flightId: flight._id,
             ticketId: flight._id.substring(flight._id.length - 3) + flight.flightNumber + "111",
@@ -51,8 +54,8 @@ document.getElementById('submitForm').addEventListener('click', async () => {
             passengerEmail: email,
             passengerPhone: phone,
             flightNumber: flight.flightNumber,
-            departureTime: flight.departureTime,
-            arrivalTime: flight.arrivalTime,
+            departureTime: departureTime,
+            arrivalTime: arrivalTime,
             departureLocation: flight.departureLocation,
             arrivalLocation: flight.arrivalLocation,
             seatNumber: "111",
@@ -61,8 +64,6 @@ document.getElementById('submitForm').addEventListener('click', async () => {
         };
         passengers.push(passenger);
     });
-
-    console.log(passengers)
 
     try {
         const response = await fetch('/save-passenger', {
