@@ -7,6 +7,7 @@ const port = process.env.PORT || 3000;
 require("dotenv").config();
 
 app.use(express.static(`${__dirname}/public`));
+app.use(express.urlencoded({ extended: true }));
 
 // file pug
 app.set("views", `${__dirname}/views`);
@@ -56,6 +57,11 @@ routeClient(app);
 const routeAdmin = require("./routes/admin/index.route");
 routeAdmin(app);
 
+// Import router
+const loginRouter = require('./routes/client/login.route.js');
+
+// Đăng ký router
+app.use('/login', loginRouter);
 
 // /admin
 const systemConfig = require("./config/system");

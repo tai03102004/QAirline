@@ -1,0 +1,95 @@
+extends ../../layouts/default.pug
+
+block styles
+    link(rel="stylesheet", href="/client/css/flightsearch/style.css")
+
+block main 
+    .search-container
+      form(action='/search-flights' method='GET')
+        .trip-options
+          label
+            input(type='radio', name='trip', id='oneway', value='oneway', checked='')
+            |  Một chiều
+          label
+            input(type='radio', name='trip', id='roundtrip', value='roundtrip')
+            |  Khứ hồi
+          //- label
+          //-   input(type='radio', name='trip', id='multicity', value='multicity')
+          //-   |  Multi-City
+        .form
+          .inputs
+            .dropdown.depart-dropdown
+              label Điểm khởi hành
+              input.dropdown-input(type='text', placeholder='Tìm kiếm điểm đến...', name='departureLocation')
+              .dropdown-content
+                .region
+                  h3 VI&#x1EC6;T NAM
+                  ul
+                    li Hanoi
+                    li Ho Chi Minh
+                    li Da Nang
+                    li Nha Trang
+            .dropdown.arrive-dropdown
+              label Điểm đến
+              input.dropdown-input(type='text', placeholder='Tìm kiếm điểm đến...', name='arrivalLocation')
+              .dropdown-content
+                .region
+                  h3 VI&#x1EC6;T NAM
+                  ul
+                    li Hanoi
+                    li Ho Chi Minh
+                    li Da Nang
+                    li Nha Trang
+            .input-group
+              label Thời điểm khởi hành
+              input(type='date', name='departDate')
+            .input-group(id='returning-group')
+              label Thời điểm trở về
+              input(type='date', name='returnDate')
+          .passenger-container
+            h2 Hành khách
+            .passenger-type
+              .passenger-row
+                .details
+                  p Người lớn
+                  span Từ 12 tuổi trở lên.
+                .counter
+                  button.btn-decrement(type='button') -
+                  span.count 0
+                  button.btn-increment(type='button') +
+              .passenger-row
+                .details
+                  p Trẻ nhỏ
+                  span 2-11 tuổi.
+                .counter
+                  button.btn-decrement(type='button') -
+                  span.count 0
+                  button.btn-increment(type='button') +
+              .passenger-row
+                .details
+                  p Trẻ cực nhỏ
+                  span Dưới 2 tuổi.
+                .counter
+                  button.btn-decrement(type='button') -
+                  span.count 0
+                  button.btn-increment(type='button') +
+            .total-passengers
+              h2 Tổng số hành khách:
+              p.total-count 0
+            p.note
+              | Bạn chỉ có thể đặt tối đa 9 hành khách.
+          .promo
+            h2 Hạng bay
+            p.note Có thể chọn hoặc không
+            .travel-class
+              button.class-button(type='button') Phổ thông
+              button.class-button(type='button') Thương gia
+              button.class-button(type='button') Hạng nhất
+              button.class-button(type='button')
+                | Thương gia đỉnh cao
+            br
+            div
+              input(type='text', placeholder='Điền mã giảm giá')
+            br
+            input.submit-button.search-button(type='submit', value='Tìm chuyến bay')
+    script(type='module' src='/client/js/flightsearch.js')

@@ -1,0 +1,81 @@
+
+.flight-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flight-container .content {
+  width: 60%;
+  font-size: large;
+}
+
+.flight {
+  display: flex;
+  flex-direction: row;
+  border: solid;
+  border-width: 2px;
+  border-radius: 10px;
+  border-color: white;
+  background-color: rgb(255, 235, 235);
+  color: rgb(34, 74, 128);
+  height: 150px;
+  cursor: pointer;
+}
+
+.flight div {
+  padding: 5px;
+}
+
+.flight .journey {
+  display: flex;
+  flex-direction: row;
+  width: 60%;
+  align-content: center;
+}
+
+.flight .journey div {
+  align-content: center;
+}
+
+.flight .journey .start {
+  width: 35%;
+  text-align: right;
+}
+
+.flight .journey .road {
+  width: 30%;
+  text-align: center;
+  align-content: center;
+}
+
+.flight .journey .end {
+  width: 35%;
+}
+
+.flight .price {
+  width: 40%;
+  display: flex;
+  flex-direction: row;
+  padding: 0px;
+}
+
+.flight .price div {
+  border-left: solid;
+  border-left-width: 2px;
+  width: 50%;
+  border-color: white;
+  text-align: center;
+  align-content: center;
+}
+
+.flight .price .economy {
+  background-color: rgb(34, 74, 128);
+  color: white;
+}
+
+.flight .price .business {
+  background-color: rgb(247, 199, 26);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
