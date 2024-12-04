@@ -1,5 +1,50 @@
-console.log("ok")
+
 checkbtn.onclick = checkTicket;
+
+deletebtn.onclick = async function() {
+    const ticketId = document.getElementById('ticketIdInput').value;
+
+    // Kiểm tra xem người dùng đã nhập mã vé chưa
+    if (!ticketId) {
+        alert('Vui lòng nhập mã số vé để xóa!');
+        return;
+    }
+
+    // Xác nhận trước khi xóa
+    const confirmDelete = confirm(`Bạn có chắc chắn muốn xóa vé với mã số: ${ticketId}?`);
+    if (!confirmDelete) {
+        return;
+    }
+
+    try {
+        // Gửi yêu cầu DELETE đến server
+        const response = await fetch(`/ticketcheck/delete-ticket/${ticketId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Không thể xóa vé. Vui lòng kiểm tra lại!');
+        }
+
+        const result = await response.json();
+
+        // Thông báo thành công
+        if (result.success) {
+            alert('Vé đã được xóa thành công!');
+            document.getElementById('ticketIdInput').value = '';
+            HideInfo();
+        } else {
+            alert('Không tìm thấy vé hoặc không thể xóa vé!');
+        }
+    } catch (error) {
+        console.error('Lỗi khi xóa vé:', error);
+        alert('Có lỗi xảy ra, vui lòng thử lại!');
+    }
+}
+
 async function checkTicket() {
     const ticketId = document.getElementById('ticketIdInput').value;
     if (!ticketId) {
@@ -13,6 +58,8 @@ async function checkTicket() {
             document.getElementById('ticketInfo').innerHTML = '<p>Không tìm thấy vé!</p>';
         } else if (response.status === 200) {
             ticketboard.style.display = 'unset';
+            deletebtn.style.display = 'unset';
+
             const booking = await response.json();
             const departdate = new Date(booking.departureTime);
             const arrivedate = new Date(booking.arrivalTime);
@@ -52,4 +99,11 @@ function calculateTimeDifference(startTime, endTime) {
       (minutes != 0 ? `${minutes} phút` : "");
   
     return time;
+  }
+
+  document.getElementById('ticketIdInput').onchange = HideInfo;
+
+  function HideInfo() {
+    ticketboard.style.display = 'none';
+    deletebtn.style.display = 'none';
   }

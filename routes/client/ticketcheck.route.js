@@ -4,5 +4,6 @@ const checkController = require('../../controllers/client/ticketcheck/ticketchec
 
 router.get('/', checkController.index);
 router.get('/:ticketId', checkController.find);
+router.delete('/delete-ticket/:ticketId', checkController.deleteticket);
 
 module.exports = router;
