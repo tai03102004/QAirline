@@ -39,46 +39,63 @@ block main
           td
             td(class="text-center")
               input(type="text" value=records.id)
-      //- Danh mục sản phẩm
+      //- Danh mục tàu bay
       tr
         td(colspan="4")
-          b Danh mục sản phẩm
-      tr(data-name="products-category_view")
+          b Danh mục tàu bay
+      tr(data-name="flight_view")
         td Xem
           td(class="text-center")
             input(type="checkbox")
-      tr(data-name="products-category_create")
+      tr(data-name="flight_create")
         td Thêm mới
           td(class="text-center")
             input(type="checkbox")
-      tr(data-name="products-category_edit")
+      tr(data-name="flight_edit")
         td Chỉnh sửa
           td(class="text-center")
             input(type="checkbox")
-      tr(data-name="products-category_delete")
+      tr(data-name="flight_delete")
         td Xóa
           td(class="text-center")
             input(type="checkbox")
-        //- Sản phẩm
+        //- Danh sách đặt vé 
       tr
         td(colspan="4")
-          b Sản phẩm
-      tr(data-name="products_view")
+          b Danh sách đặt vé
+      tr(data-name="bookings_view")
         td Xem
           td(class="text-center")
             input(type="checkbox")
-      tr(data-name="products_create")
-        td Thêm mới
-          td(class="text-center")
-            input(type="checkbox")
-      tr(data-name="products_edit")
+      tr(data-name="bookings_edit")
         td Chỉnh sửa
           td(class="text-center")
             input(type="checkbox")
-      tr(data-name="products_delete")
+      tr(data-name="bookings_delete")
         td Xóa
           td(class="text-center")
             input(type="checkbox")
+            //- Lịch trình
+      tr
+        td(colspan="4")
+          b Lịch trình
+      tr(data-name="schedual_view")
+        td Xem
+          td(class="text-center")
+            input(type="checkbox")
+      tr(data-name="schedual_create")
+        td Thêm mới
+          td(class="text-center")
+            input(type="checkbox")
+      tr(data-name="schedual_edit")
+        td Chỉnh sửa
+          td(class="text-center")
+            input(type="checkbox")
+      tr(data-name="schedual_delete")
+        td Xóa
+          td(class="text-center")
+            input(type="checkbox")
+
             //- Nhóm quyền
       tr
         td(colspan="4")
