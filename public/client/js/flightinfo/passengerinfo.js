@@ -43,9 +43,10 @@ document.getElementById('submitForm').addEventListener('click', async () => {
     
     passengerForms.forEach(form => {
         console.log(flight._id);
-        const fullname = form.querySelector('.first-name').value + form.querySelector('.last-name').value;
+        const fullname = form.querySelector('.first-name').value + " " + form.querySelector('.last-name').value;
         const passenger = {
             flightId: flight._id,
+            ticketId: flight._id.substring(flight._id.length - 3) + flight.flightNumber + "111",
             passengerName: fullname,
             passengerEmail: email,
             passengerPhone: phone,
@@ -67,7 +68,7 @@ document.getElementById('submitForm').addEventListener('click', async () => {
         const response = await fetch('/save-passenger', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ passengers })
+            body: JSON.stringify({ passengers, flight })
         });
 
         if (response.status === 200) {

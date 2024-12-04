@@ -54,10 +54,43 @@ module.exports.provideinfo = async (req, res) => {
 
 module.exports.savebooking = async (req, res) => {
   try {
-      const passengers = req.body.passengers; // Dữ liệu từ frontend
-      await Booking.insertMany(passengers); // Lưu vào MongoDB
+      const flight = req.body.flight;
+      console.log(flight);
+      const flightId = flight._id;
+      const totalSeats = flight.economySeats.total;
+      const allSeats = generateSeatNumbers(totalSeats);
+      const bookedSeats = await Booking.find({ flightId }, 'seatNumber').lean();
+      const bookedSeatNumbers = bookedSeats.map(booking => booking.seatNumber);
+      const availableSeat = allSeats.findIndex(seat => !bookedSeatNumbers.includes(seat));
+      console.log(availableSeat);
+      if (availableSeat < 0) {
+          throw new Error('No available seats for this flight');
+      }
+      var index = availableSeat;
+      const passengers = req.body.passengers;
+      passengers.forEach(element => {
+        element.seatNumber = allSeats[index];
+        element.ticketId = flight._id.substring(flight._id.length - 3) + flight.flightNumber + allSeats[index];
+        index++;
+      });
+      await Booking.insertMany(passengers);
       res.status(200).send('Passengers saved successfully');
   } catch (error) {
+      console.log(error.message);
       res.status(500).send('Error saving passengers: ' + error.message);
   }
+}
+
+function generateSeatNumbers(totalSeats) {
+  const rows = Math.ceil(totalSeats / 6); // Số hàng (mỗi hàng có 6 ghế)
+  const seatLetters = ['A', 'B', 'C', 'D', 'E', 'G'];
+  const seats = [];
+
+  for (let i = 1; i <= rows; i++) {
+      for (let letter of seatLetters) {
+          seats.push(`${i}${letter}`);
+      }
+  }
+
+  return seats;
 }

@@ -9,6 +9,10 @@ const bookingSchema = new mongoose.Schema({
         ref: 'ListFlight', // Liên kết đến ListFlight
         required: true
     },
+    ticketId: {
+        type: String,
+        required: true
+    },
     // Tên của hành khách
     passengerName: {
         type: String,

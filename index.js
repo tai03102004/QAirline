@@ -62,19 +62,6 @@ const loginRouter = require('./routes/client/login.route.js');
 // Đăng ký router
 app.use('/login', loginRouter);
 
-const Booking = require('../QAirline/models/booking.model.js')
-app.post('/save-passenger', async (req, res) => {
-    try {
-        const passengers = req.body.passengers;
-        console.log(passengers)
-        await Booking.insertMany(passengers);
-        res.status(200).send('Passengers saved successfully');
-    } catch (error) {
-        console.log(error.message);
-        res.status(500).send('Error saving passengers: ' + error.message);
-    }
-});
-
 // /admin
 const systemConfig = require("./config/system");
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
