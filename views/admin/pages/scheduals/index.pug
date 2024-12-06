@@ -4,7 +4,10 @@ include ../../mixins/pagination.pug
 include ../../mixins/filter-status.pug  
 include ../../mixins/searchBooking.pug
 include ../../mixins/sortBooking.pug
-include ../../mixins/moment.pug
+include ../../mixins/moment.pug 
+
+include ../../mixins/sortSchedual.pug
+
 
 
 block main
@@ -73,11 +76,7 @@ block main
                     .flight-list__sort
                         .flight-list__sort
                             <span class="flight-list__sort_title">Sắp xếp theo:</span>
-                            <select class="flight-list__sort_dropdown">
-                                <option value="default"> Mặc định </option>
-                                <option value="price-highest">Giá cao nhất</option>
-                                <option value="price-lowest">Giá thấp nhất</option>
-                            </select>
+                            +sort()
 
                         <button class="flight-list__add">
                             <i class="fa-solid fa-plus"></i>
@@ -114,3 +113,6 @@ block main
                             .price
                                 b #{flight.economySeats.price} VND
                             a.btn_flight(href=`/admin/scheduals/detail/${flight._id}`) View Detail
+            if(schedual.length > 0)
+                +initPagination(pagination)
+    script(src="/admin/script/schedual.js")

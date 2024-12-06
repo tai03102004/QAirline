@@ -30,10 +30,12 @@ block main
       td #{records.title}
       td #{records.description}
   div(data-records=records)
+
   table(
     class="table table-hover table-sm"
     table-permissions
   )
+    
     tbody
       tr(data-name="id" class="d-none")
           td
@@ -43,19 +45,19 @@ block main
       tr
         td(colspan="4")
           b Danh mục tàu bay
-      tr(data-name="flight_view")
+      tr(data-name="flight-category_view")
         td Xem
           td(class="text-center")
             input(type="checkbox")
-      tr(data-name="flight_create")
+      tr(data-name="flight-category_create")
         td Thêm mới
           td(class="text-center")
             input(type="checkbox")
-      tr(data-name="flight_edit")
+      tr(data-name="flight-category_edit")
         td Chỉnh sửa
           td(class="text-center")
             input(type="checkbox")
-      tr(data-name="flight_delete")
+      tr(data-name="flight-category_delete")
         td Xóa
           td(class="text-center")
             input(type="checkbox")
@@ -79,7 +81,7 @@ block main
       tr
         td(colspan="4")
           b Lịch trình
-      tr(data-name="schedual_view")
+      tr(data-name="schedual_view") 
         td Xem
           td(class="text-center")
             input(type="checkbox")

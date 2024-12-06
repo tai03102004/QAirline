@@ -321,7 +321,6 @@
 /* Filter Section */
 .fliter-schedual {
     display: flex;
-    align-items: center;
 }
 .filter-section {
     background: #fdfdfd;
@@ -330,6 +329,7 @@
     border-radius: 12px;
     margin-right: 20px;
     max-width: 300px;
+    margin-bottom: 25px;
 }
 
 .filter-section h3,
