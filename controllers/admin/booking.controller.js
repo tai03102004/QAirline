@@ -34,18 +34,6 @@ module.exports.index = async (req, res) => {
         find.seatClass = req.query.seatClass;
     }
 
-    // Pagination
-
-    let initPagination = {
-        currentPage: 1, // Trang bắt đầu
-        limitItems: 5 // Giới hạn 1 trang 
-    }
-
-    const countBookings = await Booking.countDocuments(find); // Tổng sản phẩm
-    const objectPagination = paginationHelper(initPagination, req.query, countBookings);
-
-    // End Pagination
-
     // Search(Find) Product
 
     let objectSearch = searchHelper(req.query);
@@ -75,6 +63,18 @@ module.exports.index = async (req, res) => {
     }
 
     // End Sort
+
+    // Pagination
+
+    let initPagination = {
+        currentPage: 1, // Trang bắt đầu
+        limitItems: 5 // Giới hạn 1 trang 
+    }
+
+    const countBookings = await Booking.countDocuments(find); // Tổng sản phẩm
+    const objectPagination = paginationHelper(initPagination, req.query, countBookings);
+
+    // End Pagination
 
     const bookings = await Booking.find(find).sort(sort)
         .limit(objectPagination.limitItems) // Giới hạn 1 trang số sản phẩm hiển thị

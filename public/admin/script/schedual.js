@@ -52,3 +52,55 @@ if (sort) {
 }
 
 // End Sort
+
+// Form Search : Tìm kiếm sản phẩm
+
+const formSearch = document.querySelector("#form-search");
+
+if (formSearch) {
+    let url = new URL(window.location.href);
+    formSearch.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const fromRaw = e.target.elements.from.value;
+        const toRaw = e.target.elements.to.value;
+        const departureDateRaw = e.target.elements.departureDate.value;
+
+        const fromValue = fromRaw.toLowerCase().replace(/\s+/g, ' ').trim();
+        const toValue = toRaw.toLowerCase().replace(/\s+/g, ' ').trim();
+        const departureDateValue = departureDateRaw.toLowerCase().replace(/\s+/g, ' ').trim();
+
+        if (fromValue !== "") {
+            url.searchParams.set("from", fromValue);
+        } else {
+            url.searchParams.delete("from");
+        }
+
+        if (toValue !== "") {
+            url.searchParams.set("to", toValue);
+        } else {
+            url.searchParams.delete("to");
+        }
+
+        if (departureDateValue !== "") {
+            url.searchParams.set("departureDate", departureDateValue);
+        } else {
+            url.searchParams.delete("departureDate");
+        }
+
+        window.location.href = url.href;
+    })
+}
+
+
+// End Form Search
+
+document.addEventListener('DOMContentLoaded', () => {
+    const seatClassSelect = document.getElementById('seatClass');
+
+    if (seatClassSelect) {
+        seatClassSelect.addEventListener('change', () => {
+            // Gửi form filterSeat để áp dụng thay đổi
+            document.getElementById('filterSeat').submit();
+        });
+    }
+});

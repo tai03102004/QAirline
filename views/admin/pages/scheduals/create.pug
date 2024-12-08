@@ -1,0 +1,41 @@
+extends ../../layouts/defaultNotRight.pug
+include ../../mixins/alert.pug
+
+block main
+    +alert-error(5000)
+    h1.my Thêm mới lịch bay
+
+    form(
+        action=`/${prefixAdmin}/scheduals/create`
+        method="POST"
+        enctype="multipart/form-data"
+    )
+        .container_create
+            #createForm.form-container_create_schedual
+                h2 Create New Flight
+                .input-group_create_schedual
+                    label(for='flightNumber') Flight Number
+                    input#flightNumber(type='text' name='flightNumber' placeholder='Enter flight number' required)
+                .input-group_create_schedual
+                    label(for='departure') Departure Location
+                    input#departure(type='text' name='departureLocation' placeholder='Enter departure location' required)
+                .input-group_create_schedual
+                    label(for='arrival') Arrival Location
+                    input#arrival(type='text' name='arrivalLocation' placeholder='Enter arrival location' required)
+                .input-group_create_schedual
+                    label(for='departureTime') Departure Time
+                    input#departureTime(type='datetime-local' name='departureTime' required)
+                .input-group_create_schedual
+                    label(for='arrivalTime') Arrival Time
+                    input#arrivalTime(type='datetime-local' name='arrivalTime' required)
+                .input-group_create_schedual
+                    label(for='economySeats') Economy Seats (Total / Price)
+                    input#economySeats(type='number' name='economyTotal' placeholder='Total seats' required)
+                    input#economyPrice(type='number' name='economyPrice' placeholder='Price per seat' required)
+                .input-group_create_schedual
+                    label(for='businessSeats') Business Seats (Total / Price)
+                    input#businessSeats(type='number' name='businessTotal' placeholder='Total seats' required)
+                    input#businessPrice(type='number' name='businessPrice' placeholder='Price per seat' required)
+                .form-button-group_create_schedual
+                    button.btn-submit(type='submit') Submit
+                    button.btn-cancel(type='reset') Cancel

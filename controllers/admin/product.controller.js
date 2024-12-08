@@ -21,18 +21,6 @@ module.exports.index = async (req, res) => {
 
         // End FilterStatus
 
-        // Pagination
-
-        let initPagination = {
-            currentPage: 1, // Trang bắt đầu
-            limitItems: 2 // Giới hạn 1 trang 
-        }
-
-        const countProducts = await Plane.countDocuments(find); // Tổng sản phẩm
-        const objectPagination = paginationHelper(initPagination, req.query, countProducts);
-
-        // End Pagination
-
         // Sort
 
         let sort = {};
@@ -53,29 +41,41 @@ module.exports.index = async (req, res) => {
 
         // End Search(Find) Product
 
+        // Pagination
+
+        let initPagination = {
+            currentPage: 1, // Trang bắt đầu
+            limitItems: 2 // Giới hạn 1 trang 
+        }
+
+        const countProducts = await Plane.countDocuments(find); // Tổng sản phẩm
+        const objectPagination = paginationHelper(initPagination, req.query, countProducts);
+
+        // End Pagination
+
         const plane = await Plane.find(find)
             .sort(sort)
             .limit(objectPagination.limitItems) // Giới hạn 1 trang số sản phẩm hiển thị
             .skip(objectPagination.skip); // Bỏ qua sản phẩm sau
-        // if (plane.length > 0 || countProducts == 0) {
-        res.render("admin/pages/products/index", {
-            pageTitle: "Danh sách sản phẩm",
-            plane: plane,
-            pagination: objectPagination,
-            filterStatus: filterStatus,
-            keyword: objectSearch.keyword,
-        })
-        // } else {
-        //     // redirect về trang 1 & stringQuery : Truy vấn tiếp theo (Tìm kiếm sẽ trả về trang 1 ...)
-        //     let stringQuery = "";
-        //     for (const key in req.query) {
-        //         if (key != "page") {
-        //             stringQuery += `&${key}=${req.query[key]}`;
-        //         }
-        //     }
-        //     const href = `${req.baseUrl}?page=1${stringQuery}`;
-        //     res.redirect(href);
-        // }
+        if (plane.length > 0 || countProducts == 0) {
+            res.render("admin/pages/products/index", {
+                pageTitle: "Danh sách sản phẩm",
+                plane: plane,
+                pagination: objectPagination,
+                filterStatus: filterStatus,
+                keyword: objectSearch.keyword,
+            })
+        } else {
+            // redirect về trang 1 & stringQuery : Truy vấn tiếp theo (Tìm kiếm sẽ trả về trang 1 ...)
+            let stringQuery = "";
+            for (const key in req.query) {
+                if (key != "page") {
+                    stringQuery += `&${key}=${req.query[key]}`;
+                }
+            }
+            const href = `${req.baseUrl}?page=1${stringQuery}`;
+            res.redirect(href);
+        }
 
     } catch (err) {
         req.flash("error", "Lỗi sản phẩm");
