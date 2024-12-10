@@ -25,35 +25,6 @@ module.exports.index = async (req, res) => {
         return `${hours}h ${minutes}m`;
     };
 
-    // Sort
-
-    let sort = {};
-    if (req.query.sortKey && req.query.sortValue) {
-        if (req.query.sortKey === 'price') {
-            // 1: Tăng dần ; -1: Giảm dần
-            // Sắp xếp theo trường lồng nhau economySeats.price
-            sort['economySeats.price'] = req.query.sortValue === 'asc' ? 1 : -1;
-        } else {
-            // Sắp xếp theo các trường khác
-            sort[req.query.sortKey] = req.query.sortValue === 'asc' ? 1 : -1;
-        }
-    } else {
-        // Giá trị mặc định (sắp xếp giảm dần theo position)
-        sort.position = -1;
-    }
-
-    // End Sort
-
-    // Lọc theo status
-    if (req.query.status && req.query.status !== '') {
-        find.status = req.query.status;
-    }
-
-    // Lọc theo flightNumber (tìm kiếm theo regex, không phân biệt chữ hoa/thường)
-    if (req.query.flightNumber && req.query.flightNumber.trim() !== '') {
-        find.flightNumber = new RegExp(req.query.flightNumber.trim(), 'i');
-    }
-
     // Search(Find) Product
 
     if (req.query.from) {
@@ -95,25 +66,28 @@ module.exports.index = async (req, res) => {
         }; // Chỉ tìm những chuyến có ghế business còn trống
     }
 
-    // Lọc theo giá
+    // Sort
 
-    if (req.query.priceStart && req.query.priceEnd) {
-        let startPrice = parseInt(req.query.priceStart, 10);
-        let endPrice = parseInt(req.query.priceEnd, 10);
-        if (!isNaN(startPrice) && !isNaN(endPrice)) {
-            if (seatClass === "economy") {
-                find["economySeats.price"] = {
-                    $gte: startPrice,
-                    $lte: endPrice
-                };
+    let sort = {};
+
+    if (req.query.sortKey && req.query.sortValue) {
+        if (req.query.sortKey === 'price') {
+            // 1: Tăng dần ; -1: Giảm dần
+            if (seatClass === 'economy') {
+                sort['economySeats.price'] = req.query.sortValue === 'asc' ? 1 : -1;
             } else {
-                find["businessSeats.price"] = {
-                    $gte: startPrice,
-                    $lte: endPrice
-                };
+                sort['businessSeats.price'] = req.query.sortValue === 'asc' ? 1 : -1;
             }
+        } else {
+            sort[req.query.sortKey] = req.query.sortValue === 'asc' ? 1 : -1;
         }
+    } else {
+        sort = {
+            _id: 1
+        }; // Sắp xếp ổn định theo _id tăng dần
     }
+
+    // End Sort
 
 
     // Pagination
@@ -130,7 +104,8 @@ module.exports.index = async (req, res) => {
 
 
     // Lấy dữ liệu từ cơ sở dữ liệu
-    const schedual = await Scheduals.find(find).sort(sort)
+    const schedual = await Scheduals.find(find)
+        .sort(sort)
         .limit(objectPagination.limitItems) // Giới hạn 1 trang số sản phẩm hiển thị
         .skip(objectPagination.skip);
 
@@ -151,10 +126,6 @@ module.exports.index = async (req, res) => {
         from: req.query.from,
         to: req.query.to,
         departureDate: req.query.departureDate,
-        status: req.query.status,
-        priceStart: req.query.priceStart,
-        priceEnd: req.query.priceEnd,
-        flightNumber: req.query.flightNumber,
         selectedClass: seatClass,
     });
 }

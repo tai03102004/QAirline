@@ -1,0 +1,18 @@
+.right 
+    .top 
+        button#menu_bar 
+            span.material-symbols-sharp menu 
+        .theme-toggler
+            span.material-symbols-sharp.active light_mode 
+            span.material-symbols-sharp dark_mode
+        .profile
+            .info
+                a(
+                    href=`/${prefixAdmin}/my-account`
+                    class="btn btn-primary btn-sm mr-2"
+                ) #{user.name}
+                    
+                <p>Admin</p>
+                small.text-muted
+            .profile-photo
+                img(src="/client/images/logo.png" alt="")

@@ -8,14 +8,13 @@ include ../../mixins/searchBooking.pug
 include ../../mixins/sortBooking.pug
 include ../../mixins/moment.pug
 
-
 block main
   +alert-success(5000)
   h1(class="mb-4 mt-4") Danh sách đặt vé
   .card.mb-3 
     .card-header Bộ lọc và Tìm kiếm
     .card-body
-      .columnz
+      .column
         .row
           .col-5
             +filter-status(filterStatus)

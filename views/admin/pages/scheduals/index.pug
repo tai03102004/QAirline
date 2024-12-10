@@ -13,32 +13,6 @@ block main
     +alert-success(5000)
     h1(class="mb-4 mt-4") Lịch bay
     .fliter-schedual
-        .filter-section
-            .filter-section__header
-                .filter__shedual Filter
-                button.reset-button(type="button" onclick="window.location='?';") Reset
-            form#filterForm(action='' method='GET')
-                .filter-group
-                    h4 Status
-                    select(name="status")
-                        option(value="") All
-                        option(value="Scheduled") Scheduled
-                        option(value="Delayed") Delayed
-                        option(value="Cancelled") Cancelled
-
-                .filter-group
-                    h4 Price Range
-                    .range-inputs
-                        input(type="number" name="priceStart" placeholder="Start" min="0")
-                        input(type="number" name="priceEnd" placeholder="Up to" min="0")
-
-                .filter-group
-                    h4 Flight Number
-                    input(type="text" name="flightNumber" placeholder="e.g. VN456")
-
-                button(type="submit") Apply Filters
-
-
         .schedual-list
             form.flight-search-bar(id="form-search") 
                 .location
@@ -105,9 +79,9 @@ block main
                         .schedual-pvd
                             .price
                                 if selectedClass == 'business'
-                                    b #{flight.businessSeats.price} VND
+                                    b #{flight.businessSeats.price.toLocaleString('vi-VN')} VND
                                 else
-                                    b #{flight.economySeats.price} VND
+                                    b #{flight.economySeats.price.toLocaleString('vi-VN')} VND
 
                             .shedual_status 
                                 | #{flight.status}

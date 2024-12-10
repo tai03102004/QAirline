@@ -133,6 +133,10 @@ aside{
     margin: 0 auto;
 }
 
+.container_admin_notRight .right {
+    display : none;
+}
+
 aside .top {
     background: var(--clr-white);
     display: flex;
@@ -465,6 +469,11 @@ MEDIA QUERY PHONE
         width: 100%;
         grid-template-columns: repeat(1,1fr);
     }
+
+    .container_admin_notRight{
+        width: 100%;
+        grid-template-columns: repeat(1,1fr);
+    }
     
     aside{
         position: fixed;
@@ -556,5 +565,9 @@ MEDIA QUERY PHONE
     .right .popular-airlines, .top-flight-routes{
         margin-bottom: 20px;
         width: auto;
+    }
+
+    .container_admin_notRight .right {
+        display: inline-block;
     }
 }
