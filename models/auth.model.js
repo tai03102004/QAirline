@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const generate = require("../helper/generate");
-
+// Admin
 const authSchema = new mongoose.Schema({
     name: String,
     name_id: String,
@@ -14,6 +14,7 @@ const authSchema = new mongoose.Schema({
         type: String,
         default: "active",
     },
+    avatar: String,
     deleted: {
         type: Boolean,
         default: false,

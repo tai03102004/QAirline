@@ -4,8 +4,7 @@ const flightController = require('../../controllers/client/flightsearch/flightse
 
 router.get('/', flightController.index);
 router.get('/search-flights', flightController.searchFlights);
-
-// API: Lấy danh sách chuyến bay dựa trên điểm khởi hành và điểm đến
-// router.post('/flights', flightController.flights);
+router.get('/passengerinfo', flightController.provideinfo)
+router.post('/save-passenger', flightController.savebooking)
 
 module.exports = router;

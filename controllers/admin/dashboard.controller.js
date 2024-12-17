@@ -3,6 +3,7 @@
 const accountAdmin = require("../../models/auth.model");
 const planeData = require("../../models/plane-data.model");
 const bookings = require("../../models/booking.model");
+const listFlight = require("../../models/list-flight.model");
 
 module.exports.dashboard = async (req, res) => {
     // Thống kế 
@@ -151,11 +152,17 @@ module.exports.dashboard = async (req, res) => {
     // Gọi hàm xử lý
     const formattedBookings = formatBookingDetails(allBookings);
 
+    // List-flight
+    const scheduals = await listFlight.find({
+        deleted: false
+    });
+
     // Render ra view
     res.render("admin/pages/dashboard/index", {
         pageTitle: "Tổng quan",
         statistic: statistic,
         bookings: formattedBookings,
         planeData: planeData,
+        scheduals: scheduals,
     });
 }

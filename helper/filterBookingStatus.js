@@ -1,6 +1,5 @@
-// Lọc trang thái hoạt động
-
-module.exports = (query) => { // Không truyền query -> class của Tất cả sẽ active
+module.exports = (query) => {
+    // Lọc theo trạng thái vé
     let filterStatus = [{
         name: "Tất cả",
         status: "",
@@ -18,17 +17,22 @@ module.exports = (query) => { // Không truyền query -> class của Tất cả
         status: "Canceled",
         class: ""
     }];
+
     if (query.status) {
         const index = filterStatus.findIndex(item => {
             return item.status === query.status;
         });
 
-        filterStatus[index].class = "active" // Bôi đậm vào cái mk trỏ
+        filterStatus[index].class = "active";
     } else {
         const index = filterStatus.findIndex(item => {
             return item.status == "";
         });
-        filterStatus[index].class = "active"
+        filterStatus[index].class = "active";
     }
-    return filterStatus;
-}
+
+
+    return {
+        filterStatus
+    };
+};

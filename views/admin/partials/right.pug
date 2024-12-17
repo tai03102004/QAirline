@@ -7,7 +7,11 @@
             span.material-symbols-sharp dark_mode
         .profile
             .info
-                <p><b>#{user.name}</b></p> 
+                a(
+                    href=`/${prefixAdmin}/my-account`
+                    class="btn btn-primary btn-sm mr-2"
+                ) #{user.name}
+                    
                 <p>Admin</p>
                 small.text-muted
             .profile-photo
@@ -34,22 +38,24 @@
         .popular-airlines
             h3 Popular Airlines
             .chart
-                <div class="chart-container">
+                <div class="chart-container"> 
                     <canvas id="airlinesChart"></canvas>
                 </div>
                 .legend
-                    .item
-                        span.color.gold
-                        |  SkyHigh Airlines - 35%
-                    .item
-                        span.color.black
-                        |  FlyFast Airways - 30%
-                    .item
-                        span.color.grey
-                        |  AeroJet - 20%
-                    .item
-                        span.color.light-grey
-                        |  Nimbus Airlines - 15%
+                    if(scheduals.length > 0)
+                        each item,index in scheduals
+                            .item
+                                span.color.gold
+                                |  #{item.flightNumber} - #{(1 * 100 / scheduals.length).toFixed(2)}%
+                            //- .item
+                            //-     span.color.black
+                            //-     |  FlyFast Airways - 30%
+                            //- .item
+                            //-     span.color.grey
+                            //-     |  AeroJet - 20%
+                            //- .item
+                            //-     span.color.light-grey
+                            //-     |  Nimbus Airlines - 15%
         .top-flight-routes
             h3 Top Flight Routes
             .routes

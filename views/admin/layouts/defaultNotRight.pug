@@ -1,0 +1,35 @@
+doctype html
+html
+    head
+        title #{pageTitle}
+
+        link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css")
+        link(rel="stylesheet", href="/admin/css/sider+right.css")
+        link(rel="stylesheet", href="/admin/css/style.css")
+        link(rel="stylesheet", href="/css/style.css")
+        link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer")
+        link(rel="website icon" ,type = "png" ,href ="https://inkythuatso.com/uploads/thumbnails/800/2021/11/logo-bmw-inkythuatso-4-01-11-10-00-03.jpg")
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0")
+    body
+            
+        //- if (role.permissions.length > 0)
+
+        //- .body   
+        .container_admin_notRight
+            include ../partials/sider.pug
+            .main
+                block main
+            include ../partials/right_two.pug
+
+        script(src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js") 
+        script(src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js")
+        script(src="https://cdn.jsdelivr.net/npm/chart.js")
+
+        script(src= "/tinymce/tinymce.min.js")
+        script(src="/admin/js/my-tinymce-config.js")
+        script(src="/admin/script/alert.js") 
+        script(src="/admin/script/siderMenu+light.js")
+        script(src="/admin/script/chart.js")
+
+        
+

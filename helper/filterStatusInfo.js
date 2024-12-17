@@ -3,26 +3,34 @@
 module.exports = (query) => { // Không truyền query -> class của Tất cả sẽ active
     let filterStatus = [{
         name: "Tất cả",
-        status: "",
+        type: "",
         class: ""
     }, {
-        name: "Hạng thường",
-        status: "Business",
+        name: "Khuyến mãi",
+        type: "promotion",
         class: ""
     }, {
-        name: "Hạng thương gia",
-        status: "Economy",
+        name: "Thông báo",
+        type: "announcement",
+        class: ""
+    }, {
+        name: "Giới thiệu",
+        type: "introduction",
+        class: ""
+    }, {
+        name: "Tin tức",
+        type: "news",
         class: ""
     }];
-    if (query.status) {
+    if (query.type) {
         const index = filterStatus.findIndex(item => {
-            return item.status === query.status;
+            return item.type === query.type;
         });
 
         filterStatus[index].class = "active" // Bôi đậm vào cái mk trỏ
     } else {
         const index = filterStatus.findIndex(item => {
-            return item.status == "";
+            return item.type == "";
         });
         filterStatus[index].class = "active"
     }

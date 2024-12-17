@@ -12,10 +12,10 @@
 
 .popup-content {
   background-color: rgb(252, 245, 245);
-  margin: 10% auto;
+  margin: 0px;
   padding: 20px;
   border: 1px solid #888888;
-  width: 40%;
+  width: auto;
   border-radius: 10px;
   font-size: large;
 }
@@ -32,11 +32,28 @@
   cursor: pointer;
 }
 
-.popup-content h2 {
+.popup-content h2, h3 {
   margin: 0;
   color: rgb(34, 74, 128);
 }
 
+.popup-content h4 {
+  text-align: center;
+  font-size: larger;
+}
+
 .showPopup {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-container {
+  display: flex;
+  width: fit-content;
+}
+
+.class-container {
+  display: flex;
+  flex-direction: column;
 }

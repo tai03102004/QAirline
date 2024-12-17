@@ -62,12 +62,12 @@ function CreateFlightCard(info) {
 
   var economy = document.createElement("div");
   economy.className = "economy";
-  economy.innerHTML = `<b>Hạng phổ thông</b><br>từ<br><b style="font-size: x-large">${info.economySeats.price}</b><br>VND`;
+  economy.innerHTML = `Còn ${info.economySeats.available} chỗ<br><b>Hạng phổ thông</b><br>từ<br><b style="font-size: x-large">${info.economySeats.price}</b><br>VND`;
   price.appendChild(economy);
 
   var business = document.createElement("div");
   business.className = "business";
-  business.innerHTML = `<b>Hạng thương gia</b><br>từ<br><b style="font-size: x-large">${info.businessSeats.price}</b><br>VND`;
+  business.innerHTML = `Còn ${info.businessSeats.available} chỗ<br><b>Hạng thương gia</b><br>từ<br><b style="font-size: x-large">${info.businessSeats.price}</b><br>VND`;
   price.appendChild(business);
 
   flight.appendChild(price);
@@ -84,11 +84,28 @@ function CreatePopupContent(info) {
     10
   )}`;
 
-  content.innerHTML = `Chuyến bay xuất phát từ ${startTime} <br>
-  Số hiệu: ${info.flightNumber}<br>
-  Bắt đầu từ ${info.departureLocation} đến ${info.arrivalLocation}<br>
-  Tổng thời gian: ${duration}`;
+  content.innerHTML = `
+  <p>Chuyến bay xuất phát từ ${startTime}</p>
+  <p>Số hiệu: ${info.flightNumber}</p>
+  <p>Bắt đầu từ ${info.departureLocation} đến ${info.arrivalLocation}</p>
+  <p>Tổng thời gian: ${duration}</p>`;
   return content;
 }
 
-export { CreateFlightCard, CreatePopupContent };
+function CreateSeat(info, type) {
+  var content = document.createElement(type);
+  content.innerHTML = `
+    Còn ${info.available} chỗ
+  `;
+  return content;
+}
+
+function CreatePrice(info, type) {
+  var content = document.createElement(type);
+  content.innerHTML = `
+    ${info.price} VND
+  `;
+  return content;
+}
+
+export { CreateFlightCard, CreatePopupContent , CreatePrice, CreateSeat};

@@ -5,13 +5,9 @@ const port = process.env.PORT || 3000;
 
 // Hide important things
 require("dotenv").config();
-
+app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
-app.use(express.urlencoded({ extended: true }));
 
-// file pug
-app.set("views", `${__dirname}/views`);
-app.set('view engine', 'pug');
 
 // Connected Databsae
 const database = require("./config/database");
@@ -39,6 +35,10 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
+// file pug
+app.set("views", `${__dirname}/views`);
+app.set('view engine', 'pug');
+
 //method-override:  use patch , delete ,.. 
 const methodOverride = require('method-override');
 // override with POST having ?_method=DELETE
@@ -52,18 +52,21 @@ app.locals.moment = moment;
 // Routes Client
 const routeClient = require("./routes/client/index.route.js");
 routeClient(app);
-
 // Routes Admin
 const routeAdmin = require("./routes/admin/index.route");
 routeAdmin(app);
 
-// Routes Login
-const routeLogin = require("./routes/client/login.route");
-app.use("/", routeLogin);
+// Import router
+const loginRouter = require('./routes/client/login.route.js');
 
-//Routes Flight Information
-const routeFlightInfo = require("./routes/client/flight_list.route");
-app.use("/", routeFlightInfo);
+// Đăng ký router
+app.use('/login', loginRouter);
+
+// Import router
+const checkRouter = require('./routes/client/ticketcheck.route.js');
+
+// Đăng ký router
+app.use('/ticketcheck', checkRouter);
 
 // /admin
 const systemConfig = require("./config/system");
