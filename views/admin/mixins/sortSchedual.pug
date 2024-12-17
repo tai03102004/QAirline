@@ -1,0 +1,11 @@
+mixin sort()
+    div(class="sort")
+        select(
+            class="flight-list__sort_dropdown"
+            name="sort"
+            sort-select
+        )
+            option(value="" selected) -- Chọn kiểu sắp xếp --
+            option(value="price-desc") Giá cao nhất
+            option(value="price-asc") Giá thấp nhất
+

@@ -2,69 +2,40 @@ extends ../../layouts/defaultNotRight.pug
 include ../../mixins/alert.pug
 include ../../mixins/pagination.pug
 include ../../mixins/filter-status.pug  
-include ../../mixins/searchBooking.pug
 include ../../mixins/sortBooking.pug
-include ../../mixins/moment.pug
+include ../../mixins/moment.pug 
+
+include ../../mixins/sortSchedual.pug
+
 
 
 block main
     +alert-success(5000)
     h1(class="mb-4 mt-4") Lịch bay
     .fliter-schedual
-        .filter-section
-            h3 Filter
-            button.reset-button Reset
-            .filter-group
-                h4 Transit 
-                label(for="direct")
-                    input#direct(type="checkbox" name="transit" value="direct" disabled) 
-                    | Direct
-                label(for="transit1")
-                    input#transit1(type="checkbox" name="transit" value="1") 
-                    | 1 Transit
-                label
-                    input(type="checkbox" value="true") 
-                    | 2+ Transits
-
-
-            .filter-group
-                h4 Price Range
-                div.range-inputs
-                    input(type="number" placeholder="Start" min="0")
-                    input(type="number" placeholder="Up to" min="0")
-
-            .filter-group
-                h4 Departure Times
-                input(type="range" min="0" max="24" step="1")
-
-            .filter-group
-                h4 Airline
-                label
-                    input(type="checkbox") 
-                    | CloudNine Airlines
-                label
-                    input(type="checkbox") 
-                    | SkyHigh Airlines
         .schedual-list
-            .flight-search-bar
+            form.flight-search-bar(id="form-search") 
                 .location
                     label.shcedual_label From
-                    p.shcedual_p Los Angeles (LAX)
+                    input.shcedual_input#from(type='text' name="from" placeholder='e.g. HaNoi' value=from)
                 .switch
                     span.icon &lrarr;
                 .location
                     label.shcedual_label To
-                    p.shcedual_p New York (JFK)
+                    input.shcedual_input#to(type='text' name='to' placeholder='e.g. SaiGon' value=to)
                 .detail
                     label.shcedual_label Departure Date
-                    p.shcedual_p Sat, 1 Jul 2029
+                    input.shcedual_input#departureDate(type='date' name='departureDate' value=departureDate)
+                .search-btn
+                    button(type='submit' class="schedual_submit")
+                        <i class="fa-solid fa-magnifying-glass"></i>
+            form#filterSeat(action='' method='GET')
                 .detail
                     label.shcedual_label Seat Class
-                    p.shcedual_p Economy
-                .search-btn
-                    span.icon &#x1F50D;
-
-
+                    select.shcedual_select(name='seatClass' id='seatClass')
+                        option(value='economy' selected=selectedClass=='economy') Economy
+                        option(value='business' selected=selectedClass=='business') Business
+            
             .flight-list
                 .flight-list_inner-head
                     .flight__sum
@@ -73,16 +44,11 @@ block main
                     .flight-list__sort
                         .flight-list__sort
                             <span class="flight-list__sort_title">Sắp xếp theo:</span>
-                            <select class="flight-list__sort_dropdown">
-                                <option value="default"> Mặc định </option>
-                                <option value="price-highest">Giá cao nhất</option>
-                                <option value="price-lowest">Giá thấp nhất</option>
-                            </select>
+                            +sort()
 
-                        <button class="flight-list__add">
+                        a(href=`/${prefixAdmin}/scheduals/create` class="flight-list__add")
                             <i class="fa-solid fa-plus"></i>
                             .flight-list__add_text Thêm mới
-                        </button>
 
 
                 each flight in schedual
@@ -112,5 +78,14 @@ block main
 
                         .schedual-pvd
                             .price
-                                b #{flight.economySeats.price} VND
+                                if selectedClass == 'business'
+                                    b #{flight.businessSeats.price.toLocaleString('vi-VN')} VND
+                                else
+                                    b #{flight.economySeats.price.toLocaleString('vi-VN')} VND
+
+                            .shedual_status 
+                                | #{flight.status}
                             a.btn_flight(href=`/admin/scheduals/detail/${flight._id}`) View Detail
+            if(schedual.length > 0)
+                +initPagination(pagination)
+    script(src="/admin/script/schedual.js") 

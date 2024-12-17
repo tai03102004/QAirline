@@ -7,11 +7,7 @@ const port = process.env.PORT || 3000;
 require("dotenv").config();
 app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
-app.use(express.urlencoded({ extended: true }));
 
-// file pug
-app.set("views", `${__dirname}/views`);
-app.set('view engine', 'pug');
 
 // Connected Databsae
 const database = require("./config/database");
@@ -38,6 +34,10 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+
+// file pug
+app.set("views", `${__dirname}/views`);
+app.set('view engine', 'pug');
 
 //method-override:  use patch , delete ,.. 
 const methodOverride = require('method-override');

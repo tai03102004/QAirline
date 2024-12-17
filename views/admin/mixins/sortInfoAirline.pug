@@ -1,0 +1,10 @@
+mixin sort()
+    div(class="sort")
+        select(
+            class="form-control"
+            name="sort"
+            sort-select
+        )       
+            option(value="" selected) -- Chọn kiểu sắp xếp --
+            option(value="priority-asc") Sắp xếp theo độ ưu tiên tăng dần
+            option(value="priority-desc") Sắp xếp theo độ ưu tiên giảm dần

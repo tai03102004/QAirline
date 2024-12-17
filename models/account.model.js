@@ -4,8 +4,11 @@ const generate = require("../helper/generate");
 const accountSchema = new mongoose.Schema({
     name: String,
     name_id: String,
+    avatar: String,
     email: String,
     phone: String,
+    address: String,
+    gender: String,
     password: String,
 
     tokenUser: {

@@ -317,81 +317,29 @@
 
 /* Schedual */
 
-/* Sidebar Filters */
-/* Filter Section */
-.fliter-schedual {
-    display: flex;
-    align-items: center;
-}
-.filter-section {
-    background: #fdfdfd;
-    padding: 20px;
-    border: 1px solid #e5e5e5;
-    border-radius: 12px;
-    margin-right: 20px;
-    max-width: 300px;
-}
-
-.filter-section h3,
-.filter-group h4 {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.filter-group {
-    margin-bottom: 20px;
-}
-
-.filter-group label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+button[type="submit"] {
+    align-self: flex-start;
+    padding: 10px 20px;
     font-size: 14px;
-    color: #555;
-    margin-bottom: 10px;
-}
-
-.filter-group label input {
-    accent-color: #007bff;
-    width: 16px;
-    height: 16px;
-}
-
-.range-inputs input {
-    width: calc(50% - 5px);
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-input[type="range"] {
-    width: 100%;
-    margin-top: 10px;
-    accent-color: #007bff;
-}
-
-.reset-button {
-    padding: 10px 15px;
-    background-color: #007bff;
+    background-color: #28a745;
     color: #fff;
     border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: bold;
+    border-radius: 5px;
     cursor: pointer;
-    text-align: center;
-    transition: background-color 0.2s ease-in-out;
+    transition: background-color 0.3s;
 }
 
-.reset-button:hover {
-    background-color: #0056b3;
+button[type="submit"]:hover {
+    background-color: #218838;
 }
 
 .sort {
     display: flex;
+}
+
+.schedual_submit {
+    padding: 8px 10px;
+    border-radius: 15px;
 }
 
 /* Flight List Section */
@@ -484,6 +432,7 @@ input[type="range"] {
     padding: 10px;
     border-radius: 10px;
     background: rgba(246, 246, 35, 0.737);
+    text-decoration: none;
 }
 
 .flight-list__add i{ 
@@ -519,6 +468,11 @@ input[type="range"] {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     gap: 20px;
     margin-top: 10px;
+}
+
+.shedual_status  {
+    font-size: 14px;
+    font-weight: 600;
 }
 
 
@@ -745,12 +699,18 @@ input[type="range"] {
     text-transform: uppercase;
 }
 
-.shcedual_p {
+.shcedual_input {
     font-size: 14px;
     font-weight: bold;
     margin: 0;
     margin-bottom : 0;
     color: #333;
+    outline: none;
+}
+
+.shcedual_select{ 
+    font-size: 14px;
+    padding: 10px 10px;
 }
 
 .switch {
@@ -770,12 +730,9 @@ input[type="range"] {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 5px 10px;
-    background-color: #333;
-    border-radius: 15px;
     color: #fff;
-    font-size: 24px;
     cursor: pointer;
+    font-size: 14px;
 }
 
 .schedual_time-section,
@@ -809,11 +766,6 @@ input[type="range"] {
     color: #c4b185;
     margin-left: 15px;
     margin-right: 15px;
-}
-
-.icon {
-    font-size: 18px;
-    color: #c4b185;
 }
 
 .duration {
@@ -850,6 +802,237 @@ input[type="range"] {
     background-color: #0056b3;
 }
 
+/* Create Scheduals */
+
+.my {
+    margin-bottom: 20px;
+    margin-top: 30px;
+    text-align: center;
+    font-size: 2.5em;
+    color: #333;
+}
+
+.container_create {
+    margin: 20px auto;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.form-container_create_schedual h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.input-group_create_schedual {
+    margin-bottom: 15px;
+}
+
+.input-group_create_schedual label {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.input-group_create_schedual input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.form-button-group_create_schedual {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.btn-submit, .btn-cancel {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.btn-submit {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+}
+
+.btn-cancel {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.btn-cancel:hover {
+    background-color: #c82333;
+}
+
+/* Campaign */
+/* Toolbar Styles */
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.toolbar-left, .toolbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.btn-toolbar {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    color: #555;
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.btn-toolbar i {
+    margin-right: 5px;
+}
+
+.btn-toolbar:hover {
+    background-color: #f0f0f0;
+}
+
+.btn-add-promo {
+    background-color: #cba247;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.btn-add-promo:hover {
+    background-color: #b8903b;
+}
+
+.search-bar {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    margin-right: 10px;
+    width: 200px;
+}
+
+.search-bar:focus {
+    outline: none;
+    border-color: #bbb;
+}
+
+/* Promo Container */
+.promo-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding: 20px;
+}
+
+/* Promo Card */
+.promo-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.promo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.promo-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    background-color: #e9ecef;
+}
+
+/* Promo Content */
+.promo-content {
+    padding: 15px;
+    text-align: center;
+}
+
+.promo-content h2 {
+    font-size: 1.4rem;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.promo-content p {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.promo-content span {
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+}
+
+.promo-content span[style] {
+    font-weight: bold;
+}
+
+/* Buttons */
+.promo-footer {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #e9ecef;
+}
+
+button.edit {
+    background-color: #ffc107;
+    color: white;
+}
+
+button.edit:hover {
+    background-color: #e0a800;
+}
+
+button.delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+button.delete:hover {
+    background-color: #bd2130;
+}
+
+/* End Create Sheduals */
+
 /* ****************
 MEDIA 
 ************************/
@@ -866,6 +1049,9 @@ MEDIA
     }
     .flight-card__genaral {
         display :inline-block;
+    }
+    .toolbar {
+        display: inline-block;
     }
 }
 
@@ -888,6 +1074,14 @@ MEDIA
         margin-top: 10px;
         align-self: stretch;
         text-align: center;
+    }
+    .main { 
+        margin-top: 10%;
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+    .main h1 {
+        font-size: 35px;
     }
 }
 

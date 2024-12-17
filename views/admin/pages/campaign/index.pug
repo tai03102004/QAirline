@@ -1,0 +1,47 @@
+extends ../../layouts/defaultNotRight.pug
+include ../../mixins/alert.pug
+include ../../mixins/pagination.pug
+include ../../mixins/campaignSearch.pug
+include ../../mixins/filter-type.pug  
+
+
+include ../../mixins/sortInfoAirline.pug
+
+block main
+    +alert-success(5000)
+    h1(class="mb-4 mt-4") Trang thông báo 
+    .toolbar
+        .toolbar-left
+            +filter-type(filterType)
+            button.btn-toolbar
+                +sort(keyword)
+        .toolbar-right
+            +search(keyword)
+            button(style="margin-left: 5px;").btn-add-promo + Add Promo
+
+    main.promo-container
+        each info in infos 
+            .promo-card
+                if info.image
+                    img.promo-image(src=`/admin/image/${info.image}` alt=info.title)
+                else
+                    img.promo-image(src='/admin/image/default.jpg' alt='No Image')
+                .promo-content
+                    h2= info.title
+                    p
+                        | #{info.content}
+                    if info.startDate && info.endDate
+                        span Promo Period: #{new Date(info.startDate).toLocaleDateString()} - #{new Date(info.endDate).toLocaleDateString()}
+                    if info.type === "promotion"
+                        span(style="color: green; font-weight: bold;") (Promotion)
+                    else if info.type === "announcement"
+                        span(style="color: blue; font-weight: bold;") (Announcement)
+                    else if info.type === "news"
+                        span(style="color: orange; font-weight: bold;") (News)
+                    else if info.type === "introduction"
+                        span(style="color: purple; font-weight: bold;") (Introduction)
+                .promo-footer
+                    button.btn.edit Edit
+                    button.btn.delete Delete
+
+    script(src="/admin/script/scriptInfoAirplane.js") 
