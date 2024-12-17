@@ -5,6 +5,7 @@ const port = process.env.PORT || 3000;
 
 // Hide important things
 require("dotenv").config();
+app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
 
 
@@ -51,7 +52,6 @@ app.locals.moment = moment;
 // Routes Client
 const routeClient = require("./routes/client/index.route.js");
 routeClient(app);
-
 // Routes Admin
 const routeAdmin = require("./routes/admin/index.route");
 routeAdmin(app);
@@ -61,6 +61,12 @@ const loginRouter = require('./routes/client/login.route.js');
 
 // Đăng ký router
 app.use('/login', loginRouter);
+
+// Import router
+const checkRouter = require('./routes/client/ticketcheck.route.js');
+
+// Đăng ký router
+app.use('/ticketcheck', checkRouter);
 
 // /admin
 const systemConfig = require("./config/system");

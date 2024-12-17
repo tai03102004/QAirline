@@ -55,7 +55,7 @@ block main
                   span Từ 12 tuổi trở lên.
                 .counter
                   button.btn-decrement(type='button') -
-                  span.count 0
+                  span.count 1
                   button.btn-increment(type='button') +
               .passenger-row
                 .details
@@ -75,7 +75,7 @@ block main
                   button.btn-increment(type='button') +
             .total-passengers
               h2 Tổng số hành khách:
-              p.total-count 0
+              input.total-count(type='text', value='1', readonly='', name='totalpassengers')
             p.note
               | Bạn chỉ có thể đặt tối đa 9 hành khách.
           .promo

@@ -84,11 +84,28 @@ function CreatePopupContent(info) {
     10
   )}`;
 
-  content.innerHTML = `Chuyến bay xuất phát từ ${startTime} <br>
-  Số hiệu: ${info.flightNumber}<br>
-  Bắt đầu từ ${info.departureLocation} đến ${info.arrivalLocation}<br>
-  Tổng thời gian: ${duration}`;
+  content.innerHTML = `
+  <p>Chuyến bay xuất phát từ ${startTime}</p>
+  <p>Số hiệu: ${info.flightNumber}</p>
+  <p>Bắt đầu từ ${info.departureLocation} đến ${info.arrivalLocation}</p>
+  <p>Tổng thời gian: ${duration}</p>`;
   return content;
 }
 
-export { CreateFlightCard, CreatePopupContent };
+function CreateSeat(info, type) {
+  var content = document.createElement(type);
+  content.innerHTML = `
+    Còn ${info.available} chỗ
+  `;
+  return content;
+}
+
+function CreatePrice(info, type) {
+  var content = document.createElement(type);
+  content.innerHTML = `
+    ${info.price} VND
+  `;
+  return content;
+}
+
+export { CreateFlightCard, CreatePopupContent , CreatePrice, CreateSeat};

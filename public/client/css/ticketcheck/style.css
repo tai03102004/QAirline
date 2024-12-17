@@ -1,0 +1,111 @@
+.card-container {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .searching-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #ticketIdInput {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  #checkbtn {
+    padding: 10px 20px;
+    background: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .input-area {
+    display: flex;
+    gap: 10px;
+  }
+
+  #ticketboard {
+    display: none;
+  }
+
+  #deletebtn {
+    padding: 10px 20px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none;
+  }
+
+  .boarding-pass {
+    background: #fff;
+    border: 1px solid #ddd;
+    width: 600px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .header h1 {
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  .header h2 {
+    font-size: 16px;
+    margin: 5px 0 15px;
+    color: #555;
+  }
+  
+  .flight-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .flight-info .left,
+  .flight-info .right {
+    width: 48%;
+  }
+  
+  .flight-info p {
+    margin: 5px 0;
+    font-size: 14px;
+  }
+  
+  .passenger-info {
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+    margin-top: 15px;
+  }
+  
+  .passenger-info p {
+    margin: 5px 0;
+    font-size: 14px;
+  }
+  
+  strong {
+    color: #333;
+  }
+  

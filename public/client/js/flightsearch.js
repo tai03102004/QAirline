@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           // Cập nhật tổng số hành khách
           const updatedTotal = calculateTotalPassengers();
-          totalCountElement.textContent = updatedTotal;
+          totalCountElement.value = updatedTotal;
       }
   };
 

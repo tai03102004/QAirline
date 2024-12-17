@@ -1,0 +1,57 @@
+
+extends ../../layouts/default.pug
+
+block styles
+    link(rel="stylesheet", href="/client/css/ticketcheck/style.css")
+
+block main 
+    .card-container
+      .searching-area
+        h1 Tra c&#x1EE9;u v&eacute;
+        div.input-area
+          input#ticketIdInput(type='text', placeholder='Nhập mã số vé')
+          button#checkbtn Ki&#x1EC3;m tra
+      br
+      .boarding-pass#ticketboard
+        h1 QAirline
+        .flight-info
+          .left
+            p#bookingId
+              strong M&atilde; &Dstrok;&#x1EB7;t Ch&#x1ED7;:
+              |  QTXXLL
+            p#departDate
+              strong Kh&#x1EDF;i H&agrave;nh:
+              |  Th&#x1EE9; Ba, Ng&agrave;y 27 Th&aacute;ng 6
+            p#flightNumber
+              strong Chuy&#x1EBF;n Bay:
+              |  VN 0224
+            p#flightDuration
+              strong Th&#x1EDD;i Gian Bay:
+              |  2 ti&#x1EBF;ng 10 ph&uacute;t
+            p#seatclass
+              strong Khoang:
+              |  Ph&#x1ED5; th&ocirc;ng
+          .right
+            p#departLocation
+              strong SGN
+              |  (H&#x1ED3; Ch&iacute; Minh)
+            p#departTime
+              strong Gi&#x1EDD; Kh&#x1EDF;i H&agrave;nh:
+              |  22:00
+            p#arriveLocation
+              strong HAN
+              |  (H&agrave; N&#x1ED9;i)
+            p#arriveTime
+              strong Gi&#x1EDD; &Dstrok;&#x1EBF;n:
+              |  00:10
+        .passenger-info
+          p#fullname
+            strong T&ecirc;n H&agrave;nh Kh&aacute;ch:
+            |  Xu&acirc;n Ti&#x1EBF;p Tr&#x1ECB;nh
+          p#seatNumber
+            strong Gh&#x1EBF;:
+            |  &Dstrok;&#x1B0;&#x1EE3;c th&ocirc;ng b&aacute;o khi check-in
+      br
+      button#deletebtn Hủy chuyến bay
+      br
+    script(type='module' src='/client/js/ticketcheck/ticketcheck.js') 
