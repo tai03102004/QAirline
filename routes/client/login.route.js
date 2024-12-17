@@ -1,9 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const loginController = require('../controllers/login.controller');
+const loginController = require('../../controllers/client/account/login.controller');
 
-// Định nghĩa các route
-router.get('/', loginController.getLoginPage);
-router.post('/', loginController.handleLogin);
+// Route hiển thị trang đăng nhập
+router.get('/login', (req, res) => {
+    res.render('client/pages/auth/login');
+});
+
+// Route đăng ký
+router.post('/register', loginController.register);
+
+// Route đăng nhập
+router.post('/login', loginController.login);
 
 module.exports = router;

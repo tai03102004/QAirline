@@ -57,6 +57,13 @@ routeClient(app);
 const routeAdmin = require("./routes/admin/index.route");
 routeAdmin(app);
 
+// Routes Login
+const routeLogin = require("./routes/client/login.route");
+app.use("/", routeLogin);
+
+//Routes Flight Information
+const routeFlightInfo = require("./routes/client/flight_list.route");
+app.use("/", routeFlightInfo);
 
 // /admin
 const systemConfig = require("./config/system");

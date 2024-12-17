@@ -13,6 +13,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.6.0",
     "aos": "^2.3.4",
+    "bcrypt": "^5.1.1",
     "body-parse": "^0.1.0",
     "cloudinary": "^2.5.1",
     "cookie-parser": "^1.4.7",
@@ -21,6 +22,7 @@
     "express-flash": "^0.0.2",
     "express-session": "^1.18.1",
     "file-upload-with-preview": "^6.1.2",
+    "jsonwebtoken": "^9.0.2",
     "md5": "^2.3.0",
     "method-override": "^3.0.0",
     "moment": "^2.30.1",

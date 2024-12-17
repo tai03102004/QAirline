@@ -1,0 +1,377 @@
+extends ../../layouts/default.pug
+
+block styles
+  link(rel="stylesheet", href="/client/css/flightinfo/flight_list.css")
+
+block main
+    .text-container
+        .content-box(style="background: #f9fafb")
+          .title THÔNG TIN CHUYẾN BAY
+
+          // Route 1: Hà Nội - Hồ Chí Minh
+          .subtitle#1
+            | HÀ NỘI (HAN) - TP. HỒ CHÍ MINH (SGN)
+          .content
+            div(style="overflow: hidden; overflow-x: auto")
+              table.table(border="1", cellpadding="1", cellspacing="1", style="font-size: 1rem; text-align: inherit; width: 100%")
+                thead
+                  tr
+                    th(nowrap, scope="row")
+                      p(style="text-align: center")
+                        strong Chặng bay
+                    th(nowrap, scope="col")
+                      p(style="text-align: center")
+                        strong Số hiệu
+                    th(nowrap, scope="col")
+                      p(style="text-align: center")
+                        strong Thời gian cất cánh
+                    th(nowrap, scope="col")
+                      p(style="text-align: center")
+                        strong Thời gian hạ cánh
+                    th(nowrap, scope="col")
+                      p(style="text-align: center")
+                        strong Tần suất
+                tbody
+                  tr
+                    td(scope="row", style="text-align: center") HANSGN
+                    td(style="text-align: center") QH203
+                    td(style="text-align: center") 06:35
+                    td(style="text-align: center") 08:45
+                    td(style="text-align: center") 4 - 5 chuyến/tuần
+                  tr
+                    td(scope="row", style="text-align: center") HANSGN
+                    td(style="text-align: center") QH207
+                    td(style="text-align: center") 08:05
+                    td(style="text-align: center") 10:15
+                    td(style="text-align: center") Hằng ngày
+                  tr
+                    td(scope="row", style="text-align: center") HANSGN
+                    td(style="text-align: center") QH211
+                    td(style="text-align: center") 10:35
+                    td(style="text-align: center") 12:45
+                    td(style="text-align: center") Hằng ngày
+                  tr
+                    td(scope="row", style="text-align: center") HANSGN
+                    td(style="text-align: center") QH255
+                    td(style="text-align: center") 16:20
+                    td(style="text-align: center") 18:30
+                    td(style="text-align: center") Hằng ngày
+                  tr
+                    td(scope="row", style="text-align: center") HANSGN
+                    td(style="text-align: center") QH261
+                    td(style="text-align: center") 18:05
+                    td(style="text-align: center") 20:15
+                    td(style="text-align: center") Hằng ngày
+                  tr
+                    td(scope="row", style="text-align: center") HANSGN
+                    td(style="text-align: center") QH263
+                    td(style="text-align: center") 19:05
+                    td(style="text-align: center") 21:15
+                    td(style="text-align: center") Hằng ngày
+                  tr
+                    td(scope="row", style="text-align: center") HANSGN
+                    td(style="text-align: center") QH279
+                    td(style="text-align: center") 20:30
+                    td(style="text-align: center") 22:40
+                    td(style="text-align: center") Hằng ngày
+                  tr
+                    td(scope="row", style="text-align: center") HANSGN
+                    td(style="text-align: center") QH283
+                    td(style="text-align: center") 22:50
+                    td(style="text-align: center") 01:00
+                    td(style="text-align: center") Hằng ngày
+                  tr
+                    td(scope="row", style="text-align: center") SGNHAN
+                    td(style="text-align: center") QH202
+                    td(style="text-align: center") 05:10
+                    td(style="text-align: center") 07:20
+                    td(style="text-align: center") Hằng ngày
+                  tr
+                    td(scope="row", style="text-align: center") SGNHAN
+                    td(style="text-align: center") QH204
+                    td(style="text-align: center") 07:45
+                    td(style="text-align: center") 09:55
+                    td(style="text-align: center") Hằng ngày
+                  tr
+                    td(scope="row", style="text-align: center") SGNHAN
+                    td(style="text-align: center") QH242
+                    td(style="text-align: center") 13:30
+                    td(style="text-align: center") 15:40
+                    td(style="text-align: center") Hằng ngày
+                  tr
+                    td(scope="row", style="text-align: center") SGNHAN
+                    td(style="text-align: center") QH254
+                    td(style="text-align: center") 15:10
+                    td(style="text-align: center") 17:20
+                    td(style="text-align: center") Hằng ngày
+                  tr
+                    td(scope="row", style="text-align: center") SGNHAN
+                    td(style="text-align: center") QH268
+                    td(style="text-align: center") 19:55
+                    td(style="text-align: center") 22:05
+                    td(style="text-align: center") Hằng ngày
+                  tr
+                    td(scope="row", style="text-align: center") SGNHAN
+                    td(style="text-align: center") QH272
+                    td(style="text-align: center") 20:30
+                    td(style="text-align: center") 22:40
+                    td(style="text-align: center") 4 - 5 chuyến/tuần
+                  tr
+                    td(scope="row", style="text-align: center") SGNHAN
+                    td(style="text-align: center") QH276
+                    td(style="text-align: center") 21:55
+                    td(style="text-align: center") 00:05
+                    td(style="text-align: center") Hằng ngày
+                  tr
+                    td(scope="row", style="text-align: center") SGNHAN
+                    td(style="text-align: center") QH288
+                    td(style="text-align: center") 23:20
+                    td(style="text-align: center") 01:25
+                    td(style="text-align: center") Hằng ngày
+
+          #txtp251accordion0
+            .d-flex
+              .col-3.txtp25_nonpadding
+              .col-9.txtp25_nonpadding.bg-white
+
+          .d-block.navMenu(style="background-color: #f2f4f7")
+            .col-12.col-lg-8.p-0.mx-auto
+              ul#dropdownList.w-100.nav.nav-pills.nav-fill.justify-content-center.ulTab(style="z-index: 1")
+
+          #txtp25accordion00
+            #txtp25lv00.collapse.show
+              .d-md-flex.d-none.justify-content-start
+              .dropdown.d-block.d-md-none
+                .dropdown-menu(aria-labelledby="dropdownMenuButton")
+              .content
+
+          // Route 2: Hà Nội - Đà Nẵng
+          .subtitle#2
+            | HÀ NỘI (HAN) - ĐÀ NẴNG (DAD)
+          .content
+            div(style="overflow: hidden; overflow-x: auto")
+              table.table(border="1", cellpadding="1", cellspacing="1", style="font-size: 1rem; text-align: inherit; width: 100%")
+                thead
+                  tr
+                    th(nowrap, scope="row")
+                      p(style="text-align: center")
+                        strong Chặng bay
+                    th(nowrap, scope="col")
+                      p(style="text-align: center")
+                        strong Số hiệu
+                    th(nowrap, scope="col")
+                      p(style="text-align: center")
+                        strong Thời gian cất cánh
+                    th(nowrap, scope="col")
+                      p(style="text-align: center")
+                        strong Thời gian hạ cánh
+                    th(nowrap, scope="col")
+                      p(style="text-align: center")
+                        strong Tần suất
+                tbody
+                  tr
+                    td(scope="row", style="text-align: center") DADHAN
+                    td(style="text-align: center") QH102
+                    td(style="text-align: center") 07:55
+                    td(style="text-align: center") 09:20
+                    td(style="text-align: center") Thứ 4, 6, chủ nhật
+                  tr
+                    td(scope="row", style="text-align: center") DADHAN
+                    td(style="text-align: center") QH104
+                    td(style="text-align: center") 09:35
+                    td(style="text-align: center") 11:00
+                    td(style="text-align: center") Thứ 2, 3, 5, 7
+                  tr
+                    td(scope="row", style="text-align: center") DADHAN
+                    td(style="text-align: center") QH116
+                    td(style="text-align: center") 13:40
+                    td(style="text-align: center") 15:05
+                    td(style="text-align: center") Thứ 2, 3, 5, 7
+                  tr
+                    td(scope="row", style="text-align: center") DADHAN
+                    td(style="text-align: center") QH124
+                    td(style="text-align: center") 18:25
+                    td(style="text-align: center") 19:50
+                    td(style="text-align: center") Thứ 4, 6, chủ nhật
+                  tr
+                    td(scope="row", style="text-align: center") HANDAD
+                    td(style="text-align: center") QH101
+                    td(style="text-align: center") 06:00
+                    td(style="text-align: center") 07:25
+                    td(style="text-align: center") Thứ 4, 6, chủ nhật
+                  tr
+                    td(scope="row", style="text-align: center") HANDAD
+                    td(style="text-align: center") QH103
+                    td(style="text-align: center") 07:40
+                    td(style="text-align: center") 09:05
+                    td(style="text-align: center") Thứ 2, 3, 5, 7
+                  tr
+                    td(scope="row", style="text-align: center") HANDAD
+                    td(style="text-align: center") QH115
+                    td(style="text-align: center") 11:45
+                    td(style="text-align: center") 13:10
+                    td(style="text-align: center") Thứ 2, 3, 5, 7
+                  tr
+                    td(scope="row", style="text-align: center") HANDAD
+                    td(style="text-align: center") QH123
+                    td(style="text-align: center") 16:30
+                    td(style="text-align: center") 17:55
+                    td(style="text-align: center") Thứ 4, 6, chủ nhật
+
+          #txtp251accordion1
+            .d-flex
+              .col-3.txtp25_nonpadding
+              .col-9.txtp25_nonpadding.bg-white
+
+          .d-block.navMenu(style="background-color: #f2f4f7")
+            .col-12.col-lg-8.p-0.mx-auto
+              ul#dropdownList.w-100.nav.nav-pills.nav-fill.justify-content-center.ulTab(style="z-index: 1")
+
+          #txtp25accordion10
+            #txtp25lv10.collapse.show
+              .d-md-flex.d-none.justify-content-start
+              .dropdown.d-block.d-md-none
+                .dropdown-menu(aria-labelledby="dropdownMenuButton")
+              .content
+
+          // Route 3: Hồ Chí Minh - Đà Nẵng
+          .subtitle#3
+            | TP. HỒ CHÍ MINH (SGN) - ĐÀ NẴNG (DAD)
+          .content
+            div(style="overflow: hidden; overflow-x: auto")
+              table.table(border="1", cellpadding="1", cellspacing="1", style="font-size: 1rem; text-align: inherit; width: 100%")
+                thead
+                  tr
+                    th(nowrap, scope="row")
+                      p(style="text-align: center")
+                        strong Chặng bay
+                    th(nowrap, scope="col")
+                      p(style="text-align: center")
+                        strong Số hiệu
+                    th(nowrap, scope="col")
+                      p(style="text-align: center")
+                        strong Thời gian cất cánh
+                    th(nowrap, scope="col")
+                      p(style="text-align: center")
+                        strong Thời gian hạ cánh
+                    th(nowrap, scope="col")
+                      p(style="text-align: center")
+                        strong Tần suất
+                tbody
+                  tr
+                    td(scope="row", style="text-align: center") DADSGN
+                    td(style="text-align: center") QH151
+                    td(style="text-align: center") 07:30
+                    td(style="text-align: center") 09:00
+                    td(style="text-align: center") 4 - 5 chuyến/tuần
+                  tr
+                    td(scope="row", style="text-align: center") DADSGN
+                    td(style="text-align: center") QH16565
+                    td(style="text-align: center") 11:50
+                    td(style="text-align: center") 13:25
+                    td(style="text-align: center") Hằng ngày
+                  tr
+                    td(scope="row", style="text-align: center") DADSGN
+                    td(style="text-align: center") QH173
+                    td(style="text-align: center") 16:00
+                    td(style="text-align: center") 17:30
+                    td(style="text-align: center") Thứ 2
+                  tr
+                    td(scope="row", style="text-align: center") DADSGN
+                    td(style="text-align: center") QH191
+                    td(style="text-align: center") 22:50
+                    td(style="text-align: center") 00:20
+                    td(style="text-align: center") Hằng ngày
+                  tr
+                    td(scope="row", style="text-align: center") SGNDAD
+                    td(style="text-align: center") QH154
+                    td(style="text-align: center") 09:40
+                    td(style="text-align: center") 11:05
+                    td(style="text-align: center") 4 - 5 chuyến/tuần
+                  tr
+                    td(scope="row", style="text-align: center") SGNDAD
+                    td(style="text-align: center") QH170
+                    td(style="text-align: center") 14:05
+                    td(style="text-align: center") 15:30
+                    td(style="text-align: center") Hằng ngày
+                  tr
+                    td(scope="row", style="text-align: center") SGNDAD
+                    td(style="text-align: center") QH180
+                    td(style="text-align: center") 18:10
+                    td(style="text-align: center") 19:35
+                    td(style="text-align: center") Thứ 2
+                  tr
+                    td(scope="row", style="text-align: center") SGNDAD
+                    td(style="text-align: center") QH186
+                    td(style="text-align: center") 20:55
+                    td(style="text-align: center") 22:20
+                    td(style="text-align: center") 4 - 5 chuyến/tuần
+
+          #txtp251accordion2
+            .d-flex
+              .col-3.txtp25_nonpadding
+              .col-9.txtp25_nonpadding.bg-white
+
+          .d-block.navMenu(style="background-color: #f2f4f7")
+            .col-12.col-lg-8.p-0.mx-auto
+              ul#dropdownList.w-100.nav.nav-pills.nav-fill.justify-content-center.ulTab(style="z-index: 1")
+
+          #txtp25accordion20
+            #txtp25lv20.collapse.show
+              .d-md-flex.d-none.justify-content-start
+              .dropdown.d-block.d-md-none
+                .dropdown-menu(aria-labelledby="dropdownMenuButton")
+              .content
+
+          // Route 4: Hà Nội - Nha Trang
+          .subtitle#4 
+            | HÀ NỘI (HAN) - NHA TRANG (CXR)
+          .content
+            div(style="overflow: hidden; overflow-x: auto")
+              table.table(border="1", cellpadding="1", cellspacing="1", style="font-size: 1rem; text-align: inherit; width: 100%")
+                thead
+                  tr
+                    th(nowrap, scope="row")
+                      p(style="text-align: center")
+                        strong Chặng bay
+                    th(nowrap, scope="col")
+                      p(style="text-align: center")
+                        strong Số hiệu
+                    th(nowrap, scope="col")
+                      p(style="text-align: center")
+                        strong Thời gian cất cánh
+                    th(nowrap, scope="col")
+                      p(style="text-align: center")
+                        strong Thời gian hạ cánh
+                    th(nowrap, scope="col")
+                      p(style="text-align: center")
+                        strong Tần suất
+                tbody
+                  tr
+                    td(scope="row", style="text-align: center") CXRHAN
+                    td(style="text-align: center") QH1416
+                    td(style="text-align: center") 15:55
+                    td(style="text-align: center") 17:55
+                    td(style="text-align: center") Hằng ngày
+                  tr
+                    td(scope="row", style="text-align: center") HANCXR
+                    td(style="text-align: center") QH1415
+                    td(style="text-align: center") 13:25
+                    td(style="text-align: center") 15:25
+                    td(style="text-align: center") Hằng ngày
+                  
+          #txtp251accordion3
+            .d-flex
+              .col-3.txtp25_nonpadding
+              .col-9.txtp25_nonpadding.bg-white
+
+          .d-block.navMenu(style="background-color: #f2f4f7")
+            .col-12.col-lg-8.p-0.mx-auto
+              ul#dropdownList.w-100.nav.nav-pills.nav-fill.justify-content-center.ulTab(style="z-index: 1")
+
+          #txtp25accordion30
+            #txtp25lv30.collapse.show
+              .d-md-flex.d-none.justify-content-start
+              .dropdown.d-block.d-md-none
+                .dropdown-menu(aria-labelledby="dropdownMenuButton")
+              .content

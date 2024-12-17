@@ -1,0 +1,66 @@
+doctype html
+html(lang="vi")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title User Profile
+    link(rel="stylesheet", href="/client/css/login/update_info.css")
+  
+  body
+    .container
+      h2 Cập nhật thông tin cá nhân
+      form(id="profileForm")
+        .form-group
+          label(for="fullName") Họ và tên *
+          input(type="text", id="fullName", name="fullName", required)
+        
+        .form-group
+          label(for="gender") Giới tính *
+          select(id="gender", name="gender", required)
+            option(value="") Chọn giới tính
+            option(value="Nam") Nam
+            option(value="Nữ") Nữ
+            option(value="Khác") Khác
+        
+        .form-group
+          label(for="dob") Ngày sinh *
+          input(type="date", id="dob", name="dob", required)
+        
+        .form-group
+          label(for="nationality") Quốc tịch *
+          select(id="nationality", name="nationality", required)
+            option(value="") Chọn quốc tịch
+            option(value="VN") Việt Nam
+            option(value="US") Hoa Kỳ
+            option(value="UK") Vương quốc Anh
+            option(value="FR") Pháp
+            option(value="JP") Nhật Bản
+            option(value="KR") Hàn Quốc
+        
+        .form-group
+          label(for="address") Địa chỉ *
+          textarea(id="address", name="address", rows="4", required)
+        
+        .form-group
+          label(for="province") Tỉnh/Thành phố *
+          input(type="text", id="province", name="province", required)
+        
+        .form-group
+          label(for="city") Quận/Huyện *
+          input(type="text", id="city", name="city", required)
+        
+        .form-group
+          label(for="phone") Số điện thoại *
+          input(type="tel", id="phone", name="phone", required)
+        
+        .form-group
+          label(for="email") Email *
+          input(type="email", id="email", name="email", required)
+        
+        .form-group
+          label(for="passport") Số hộ chiếu
+          input(type="text", id="passport", name="passport")
+        
+        button(type="submit", class="btn") Cập nhật
+
+    script(src="/client/js/update_info.js")

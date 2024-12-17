@@ -1,57 +1,50 @@
 extends ../../layouts/default.pug
 
 block styles
-  link(rel="stylesheet", href="/client/css/login/styles.css")
+  link(rel="stylesheet", href="/client/css/login/login.css")
 
 block main
-  .wrapper
-    //- Form Login
-    .login_box.form-container#login
-      .login-header
-        span Login
-      .input_box
-        input#user.input-field(type="text" required)
-        label(for="user" class="label") Username
-        i.bx.bx-user.icon
-      .input_box
-        input#password.input-field(type="password" required)
-        label(for="password" class="label") Password
-        i.bx.bx-lock-alt.icon
-      .remember-forgot
-        .remember-me
-          input#remember(type="checkbox")
-          label(for="remember") Remember me
-        .forgot
-          a(href="#") Forgot password?
-      .input_box
-        input.input-submit(type="submit" value="Login")
-      .register
-        span Don't have an account?
-        a(href="#" onclick="showRegister()") Register
+    .wrapper
+      .login_box.form-container.active(id="login")
+        .login-header
+          span Login
+        .input_box
+          input(type="text", id="user", class="input-field", required, placeholder="Username")
+          i(class="bx bx-user icon")
+        .input_box
+          input(type="password", id="password", class="input-field", required, placeholder="Password")
+          i(class="bx bx-lock-alt icon")
+        .remember-forgot
+          .remember-me
+            input(type="checkbox", id="remember")
+            label(for="remember") Remember me
+          .forgot
+            a(href="#") Forgot password?
+        .input_box
+          input(type="submit", class="input-submit", value="Login")
+        .register
+          span Don't have an account?
+          a(href="#resgiter", onclick="showRegister()") Register
 
-    //- Form Register
-    .register_box.form-container#register
-      .register-header
-        span Register
-      .input_box
-        input#user.input-field(type="text" required)
-        label(for="user" class="label") Username
-        i.bx.bx-user.icon
-      .input_box
-        input#email.input-field(type="email" required)
-        label(for="email" class="label") Email
-        i.bx.bx-envelope.icon
-      .input_box
-        input#password.input-field(type="password" required)
-        label(for="password" class="label") Password
-        i.bx.bx-lock-alt.icon
-      .terms-conditions
-        input#terms(type="checkbox")
-        label(for="terms") I agree to the terms and conditions
-      .input_box
-        input.input-submit(type="submit" value="Register")
-      .login
-        span Already have an account?
-        a(href="#" onclick="showLogin()") Login
+      .register_box.form-container(id="register")
+        .register-header
+          span Register
+        .input_box
+          input(type="text", id="user", class="input-field", required, placeholder="Username")
+          i(class="bx bx-user icon")
+        .input_box
+          input(type="email", id="email", class="input-field", required, placeholder="Email")
+          i(class="bx bx-envelope icon")
+        .input_box
+          input(type="password", id="password", class="input-field", required, placeholder="Password")
+          i(class="bx bx-lock-alt icon")
+        .terms-conditions
+          input(type="checkbox", id="terms")
+          label(for="terms") I agree to the terms and conditions
+        .input_box
+          input(type="submit", class="input-submit", value="Register")
+        .login
+          span Already have an account?
+          a(href="#login", onclick="showLogin()") Login
 
-  script(src="/client/js/script.js")
+    script(src="/client/js/login/login.js")
