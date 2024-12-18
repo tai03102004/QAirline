@@ -96,8 +96,8 @@ module.exports.searchFlights = async (req, res) => {
   }
 
 module.exports.provideinfo = async (req, res) => {
-    const { passengerNumber, flightNumber } = req.query;
-
+    const { passengerNumber, flightNumber, seatClassChosen } = req.query;
+    console.log(seatClassChosen)
     try {
       const flight = await Flight.findOne({
         flightNumber: flightNumber
@@ -107,7 +107,8 @@ module.exports.provideinfo = async (req, res) => {
         res.render('client/pages/flightinfo/passengerinfo.pug', {
           pageTitle: 'Kết quả tìm kiếm chuyến bay',
           passengerNumber: passengerNumber,
-          flight: flight
+          flight: flight,
+          seatClass: seatClassChosen
         });
       }
     } catch (error) {
@@ -119,14 +120,12 @@ module.exports.provideinfo = async (req, res) => {
 module.exports.savebooking = async (req, res) => {
   try {
       const flight = req.body.flight;
-      console.log(flight);
       const flightId = flight._id;
       const totalSeats = flight.economySeats.total;
       const allSeats = generateSeatNumbers(totalSeats);
       const bookedSeats = await Booking.find({ flightId }, 'seatNumber').lean();
       const bookedSeatNumbers = bookedSeats.map(booking => booking.seatNumber);
       const availableSeat = allSeats.findIndex(seat => !bookedSeatNumbers.includes(seat));
-      console.log(availableSeat);
       if (availableSeat < 0) {
           throw new Error('No available seats for this flight');
       }
@@ -136,9 +135,20 @@ module.exports.savebooking = async (req, res) => {
         element.seatNumber = allSeats[index];
         element.ticketId = flight._id.substring(flight._id.length - 3) + flight.flightNumber + allSeats[index];
         index++;
-        console.log(element.departureTime);
       });
       await Booking.insertMany(passengers);
+      if (passengers[0].seatClasa === 'Economy') {
+        await Flight.updateOne(
+          { _id: flight._id},
+          { $inc: { "economySeats.available": -1 * passengers.length } }
+        )
+      } else {
+        await Flight.updateOne(
+          { _id: flight._id},
+          { $inc: { "businessSeats.available": -1 * passengers.length } }
+        )
+      }
+
       res.status(200).send('Passengers saved successfully');
   } catch (error) {
       console.log(error.message);

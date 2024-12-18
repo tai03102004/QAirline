@@ -10,6 +10,7 @@ block main
         include ../home/booking.pug
     form(action="/passengerinfo", method="GET") 
         input#passengers(type="number", name="passengerNumber", readonly='',style='display: none') 
+        input#seatClassChosen(type="text", name="seatClassChosen", readonly='',style='display: none') 
         div#hidden-info(style='display: none')
             input#flightNumber(type="text", name="flightNumber")
         .flight-container
@@ -30,14 +31,14 @@ block main
                                 #economyinfo
                                     h4 Còn 50 chỗ
                                     h4 2.000.000 VND
-                                button Đặt chỗ
+                                button(onclick=`changeToSaveBooking(true)`) Đặt chỗ
                         .popup-content
                             .business
                                 h3 Hạng thương gia
                                 #businessinfo
                                     h4 Còn 5 chỗ
                                     h4 5.000.000 VND
-                                button Đặt chỗ
+                                button(onclick=`changeToSaveBooking(false)`) Đặt chỗ
     .container
         .flight-list
             .flight-list_inner-head

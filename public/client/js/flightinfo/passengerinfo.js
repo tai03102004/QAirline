@@ -1,5 +1,6 @@
 const numPassengers = passengerNumData;
 const flight = flightData
+const classChosen = seatClass
 
 function generatePassengerForms() {
     
@@ -10,22 +11,22 @@ function generatePassengerForms() {
       const passengerDiv = document.createElement("div");
       passengerDiv.className = "passenger";
       passengerDiv.innerHTML = `
-            <h3>Passenger ${i}</h3>
-            <label for="gender-${i}">Gender*</label>
+            <h3>Hành khách ${i}</h3>
+            <label for="gender-${i}">Giới tính*</label>
             <select id="gender-${i}" name="gender-${i}" required>
-                <option value="">Select</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
+                <option value="">Lựa chọn</option>
+                <option value="male">Nam</option>
+                <option value="female">Nữ</option>
+                <option value="other">Khác</option>
             </select>
 
-            <label for="first-name-${i}">Middle name and First/Given name (as in ID/passport)*</label>
+            <label for="first-name-${i}">Tên đệm và Tên (giống trong ID / Hộ chiếu)*</label>
             <input type="text" id="first-name-${i}" name="first-name-${i}" class="first-name" required>
 
-            <label for="last-name-${i}">Last/Family name (as in passport)*</label>
+            <label for="last-name-${i}">Họ (giống trong Hộ chiếu)*</label>
             <input type="text" id="last-name-${i}" name="last-name-${i}" class="last-name" required>
 
-            <label for="dob-${i}">Date of birth*</label>
+            <label for="dob-${i}">Ngày sinh*</label>
             <input type="date" id="dob-${i}" name="dob-${i}" required>
         `;
 
@@ -42,9 +43,7 @@ document.getElementById('submitForm').addEventListener('click', async () => {
     const phone = document.querySelector('.contact-phone').value
     
     passengerForms.forEach(form => {
-        
         const fullname = form.querySelector('.first-name').value + " " + form.querySelector('.last-name').value;
-        console.log(new Date("2024-12-01T08:00:00Z"));
         var departureTime = new Date(`${flight.departureTime}Z`);
         var arrivalTime = new Date(`${flight.arrivalTime}Z`);
         const passenger = {
@@ -59,7 +58,7 @@ document.getElementById('submitForm').addEventListener('click', async () => {
             departureLocation: flight.departureLocation,
             arrivalLocation: flight.arrivalLocation,
             seatNumber: "111",
-            seatClass: 'Economy',
+            seatClass: classChosen,
             totalAmount: flight.economySeats.price
         };
         passengers.push(passenger);

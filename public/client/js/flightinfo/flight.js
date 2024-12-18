@@ -120,3 +120,12 @@ if (sort) {
         optionSelected.selected = true;
     }
 }
+
+window.changeToSaveBooking = function(isEconomy) {
+  const seatClassChosen = document.querySelector('#seatClassChosen')
+  if (isEconomy) {
+    seatClassChosen.value = 'Economy'
+  } else {
+    seatClassChosen.value = 'Business'
+  }
+}

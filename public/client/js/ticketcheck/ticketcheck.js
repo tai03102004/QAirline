@@ -55,8 +55,9 @@ async function checkTicket() {
     try {
         const response = await fetch(`/ticketcheck/${ticketId}`);
         if (response.status === 404) {
-            document.getElementById('ticketInfo').innerHTML = '<p>Không tìm thấy vé!</p>';
+            alert("Không tìm thấy vé")
         } else if (response.status === 200) {
+            
             ticketboard.style.display = 'unset';
             deletebtn.style.display = 'unset';
 
