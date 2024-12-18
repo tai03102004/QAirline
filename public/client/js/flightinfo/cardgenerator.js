@@ -103,7 +103,7 @@ function CreateSeat(info, type) {
 function CreatePrice(info, type) {
   var content = document.createElement(type);
   content.innerHTML = `
-    ${info.price} VND
+    ${info.price.toLocaleString('vi-VN')} VND
   `;
   return content;
 }

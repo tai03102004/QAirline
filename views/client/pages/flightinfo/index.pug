@@ -1,6 +1,7 @@
 extends ../../layouts/default.pug
 
 block styles
+    link(rel="stylesheet", href="/admin/css/style.css")
     link(rel="stylesheet", href="/client/css/home.css")
     link(rel="stylesheet", href="/client/css/flightsearch/style.css")
 
@@ -37,9 +38,62 @@ block main
                                     h4 Còn 5 chỗ
                                     h4 5.000.000 VND
                                 button Đặt chỗ
-    
+    .container
+        .flight-list
+            .flight-list_inner-head
+                .flight__sum
+                    .flight__sum_title Danh sách chuyến bay
+                    .flight__sum_subTitle (#{flights.length} result#{flights.length > 1 ? 's' : ''})
+                .flight-list__sort
+                    .flight-list__sort
+                        <span class="flight-list__sort_title">Sắp xếp theo:</span>
+                        .sort
+                            select.flight-list__sort_dropdown(name='sort' sort-select='sort-select')
+                                option(value='' selected='selected') -- Ch&#x1ECD;n ki&#x1EC3;u s&#x1EAF;p x&#x1EBF;p --
+                                option(value='price-desc') Gi&aacute; cao nh&#x1EA5;t
+                                option(value='price-asc') Gi&aacute; th&#x1EA5;p nh&#x1EA5;t
+
+
+            each flight in flights
+                .flight-card
+                    .flight-info
+                        .airline-section
+                            //- img.logo(src="path/to/logo.png" alt="Airline Logo")
+                            .airline-details
+                                span.flight-number #{flight.flightNumber}
+                        .flight-details
+                            .schedual_time-section
+                                span.departure-time  #{new Date(flight.departureTime).toLocaleString()} 
+                                span.location #{flight.departureLocation}
+                            .schedual_route
+                                span.duration #{flight.duration} 
+                                .route_hihi
+                                    span.airport-code #{flight.departureLocation}
+                                    span.separator →
+                                    span.icon ✈️
+                                    span.separator →
+                                    span.airport-code #{flight.arrivalLocation} 
+                                
+                            .schedual_arrival-section
+                                span.arrival-time #{new Date(flight.arrivalTime).toLocaleString()}
+                                span.location #{flight.arrivalLocation} 
+
+
+                    .schedual-pvd
+                        .price
+                            if searchInfo.classchosen === 'businessclass'
+                                b #{flight.businessSeats.price.toLocaleString('vi-VN')} VND
+                            else
+                                b #{flight.economySeats.price.toLocaleString('vi-VN')} VND
+
+                        .shedual_status 
+                            | #{flight.status}
+                        //- a.btn_flight(href=`/admin/scheduals/detail/${flight._id}`) View Detail
+                        button.btn_flight(onclick=`openDetail(${JSON.stringify(flight)})`,type='button') Xem chi tiết
+    //- if(schedual.length > 0)
+    //-     +initPagination(pagination)
     script.
         const flightsData = !{JSON.stringify(flights)};
         const passengersTotal = !{JSON.stringify(totalpassengers)};
         const searchInfo = !{JSON.stringify(searchInfo)};
-    script(type='module' src='/client/js/flightinfo/flight.js')
+    script(type='module' src='/client/js/flightinfo/flight.js' defer)

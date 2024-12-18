@@ -3,6 +3,23 @@ const Data = require("../../../public/client/js/flightinfo/data");
 const Flight = require('../../../models/Flights');
 const Booking = require('../../../models/booking.model')
 
+function calculateTimeDifference(startTime, endTime) {
+  const start = new Date(startTime);
+  const end = new Date(endTime);
+
+  const diff = end - start;
+
+  const hours = Math.floor(diff / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+  var time =
+    "" +
+    (hours != 0 ? `${hours} tiếng ` : "") +
+    (minutes != 0 ? `${minutes} phút` : "");
+
+  return time;
+}
+
 module.exports.index = (req, res) => {
     res.render('client/pages/flightsearch/index.pug', {
         pageTitle: "Tim kiem"
@@ -12,6 +29,24 @@ module.exports.index = (req, res) => {
 module.exports.searchFlights = async (req, res) => {
     const { departureLocation, arrivalLocation, departDate, totalpassengers, classchosen } = req.query;
     try {
+      let sort = {};
+      if (req.query.sortKey && req.query.sortValue) {
+          if (req.query.sortKey === 'price') {
+              // 1: Tăng dần ; -1: Giảm dần
+              if (classchosen === 'economy') {
+                  sort['economySeats.price'] = req.query.sortValue === 'asc' ? 1 : -1;
+              } else {
+                  sort['businessSeats.price'] = req.query.sortValue === 'asc' ? 1 : -1;
+              }
+          } else {
+              sort[req.query.sortKey] = req.query.sortValue === 'asc' ? 1 : -1;
+          }
+      } else {
+          sort = {
+              _id: 1
+          }; // Sắp xếp ổn định theo _id tăng dần
+      }
+
       let flights
       if (classchosen === 'economyclass') {
         flights = await Flight.find(
@@ -21,7 +56,7 @@ module.exports.searchFlights = async (req, res) => {
             departureTime: { $regex: `^${departDate}` },
             "economySeats.available": { $gte: totalpassengers }
           }
-        );
+        ).sort(sort);
       } else if (classchosen === 'businessclass') {
         flights = await Flight.find(
           { 
@@ -29,13 +64,20 @@ module.exports.searchFlights = async (req, res) => {
             arrivalLocation: arrivalLocation,
             departureTime: { $regex: `^${departDate}` },
             "businessSeats.available": { $gte: totalpassengers } 
-          });
+          }).sort(sort);
       } else {
         flights = await Flight.find({
           departureLocation: departureLocation,
           arrivalLocation: arrivalLocation,
           departureTime: { $regex: `^${departDate}` }
-        });
+        }).sort(sort);
+      }
+
+      if (flights) {
+        flights.forEach( (flight) => {
+          const duration = calculateTimeDifference(flight.departureTime, flight.arrivalTime);
+          flight["duration"] = duration
+        })
       }
 
       const searchInfo = {
