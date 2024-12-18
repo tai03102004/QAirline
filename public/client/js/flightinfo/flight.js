@@ -53,3 +53,25 @@ window.addEventListener("click", function (event) {
     popupText.innerHTML = "";
   }
 });
+
+const totalpassengers = document.querySelector('#totalpassengers')
+totalpassengers.value = parseInt(passengersTotal)
+console.log(searchInfo)
+const departureLocation = document.querySelector('#departureLocation')
+const arrivalLocation = document.querySelector('#arrivalLocation')
+const departDate = document.querySelector('#departDate')
+departureLocation.value = searchInfo.departureLocation
+arrivalLocation.value = searchInfo.arrivalLocation
+console.log(typeof searchInfo.departDate)
+departDate.value = searchInfo.departDate
+
+const economybtn = document.querySelector('#economyclass')
+const businessbtn = document.querySelector('#businessclass')
+const classchosen = document.querySelector('#classchosen')
+
+classchosen.value = searchInfo.classchosen
+if (classchosen.value === 'economyclass') {
+  economybtn.classList.add('class-button-choose')
+} else if (classchosen.value === 'businessclass') {
+  businessbtn.classList.add('class-button-choose')
+}

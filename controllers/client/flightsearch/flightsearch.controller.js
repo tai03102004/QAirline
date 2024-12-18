@@ -10,18 +10,43 @@ module.exports.index = (req, res) => {
 }
 
 module.exports.searchFlights = async (req, res) => {
-    const { departureLocation, arrivalLocation, departDate, totalpassengers } = req.query;
+    const { departureLocation, arrivalLocation, departDate, totalpassengers, classchosen } = req.query;
     try {
-      const flights = await Flight.find({
-        departureLocation: departureLocation,
-        arrivalLocation: arrivalLocation,
-        departureTime: { $regex: `^${departDate}` }
-      });
+      let flights
+      if (classchosen === 'economyclass') {
+        flights = await Flight.find(
+          { 
+            departureLocation: departureLocation,
+            arrivalLocation: arrivalLocation,
+            departureTime: { $regex: `^${departDate}` },
+            "economySeats.available": { $gte: totalpassengers }
+          }
+        );
+      } else if (classchosen === 'businessclass') {
+        flights = await Flight.find(
+          { 
+            departureLocation: departureLocation,
+            arrivalLocation: arrivalLocation,
+            departureTime: { $regex: `^${departDate}` },
+            "businessSeats.available": { $gte: totalpassengers } 
+          });
+      } else {
+        flights = await Flight.find({
+          departureLocation: departureLocation,
+          arrivalLocation: arrivalLocation,
+          departureTime: { $regex: `^${departDate}` }
+        });
+      }
+
+      const searchInfo = {
+        departureLocation, arrivalLocation, departDate, totalpassengers, classchosen
+      }
       
       res.render('client/pages/flightinfo/index.pug', {
         pageTitle: 'Kết quả tìm kiếm chuyến bay',
         flights: flights,
-        totalpassengers: totalpassengers
+        totalpassengers: totalpassengers,
+        searchInfo: searchInfo
       });
     } catch (error) {
       res.status(500).json({ message: 'Lỗi khi lấy dữ liệu chuyến bay', error });
