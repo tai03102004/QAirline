@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const generate = require("../helper/generate");
 // Client
 const accountSchema = new mongoose.Schema({
-    fullName: String,
+    name: String,
     name_id: String,
     email: String,
     phone: String,

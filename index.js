@@ -68,6 +68,9 @@ const checkRouter = require('./routes/client/ticketcheck.route.js');
 // Đăng ký router
 app.use('/ticketcheck', checkRouter);
 
+const routeFlightInfo = require("./routes/client/flight_list.route");
+app.use("/", routeFlightInfo);
+
 // /admin
 const systemConfig = require("./config/system");
 app.locals.prefixAdmin = systemConfig.prefixAdmin;

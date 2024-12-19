@@ -14,7 +14,7 @@
 }
 
 body {
-  background-image: url("/client/images/background.jpeg");
+  background-image: url("/client/images/bkg.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -225,7 +225,10 @@ input::placeholder {
 }
 
 .register a {
+  padding: 10px;
   font-weight: 500;
+  color: #10346b;
+  font-style: italic;
 }
 
 .login {
@@ -233,7 +236,10 @@ input::placeholder {
 }
 
 .login a {
+  padding: 10px;
   font-weight: 500;
+  color: #10346b;
+  font-style: italic;
 }
 
 @media only screen and (max-width: 564px) {

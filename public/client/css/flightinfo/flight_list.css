@@ -3,7 +3,7 @@
   margin: 0 auto;
   padding: 16px;
   background: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   width: 100%;
   box-sizing: border-box;
 }
@@ -12,6 +12,8 @@
   padding: 24px;
   background: #f9fafb;
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   border-radius: 8px;
   border: 1px solid #e0e0e0;
 }
@@ -36,14 +38,8 @@
   overflow-x: auto;
 }
 
-.table-wrapper {
-  overflow-x: auto;
-  margin-top: 20px;
-  width: 100%;
-}
-
 .table {
-  width: 100%;
+  font-family: "Roboto", sans-serif;
   border-collapse: collapse;
   font-size: 16px;
   color: #333;
