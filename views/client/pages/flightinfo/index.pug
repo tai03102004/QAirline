@@ -14,31 +14,64 @@ block main
         div#hidden-info(style='display: none')
             input#flightNumber(type="text", name="flightNumber")
         .flight-container
-            .content
             #popup.popup
                 .popup-container
                     .popup-content
-                        h2 Th&ocirc;ng tin chi ti&#x1EBF;t
-                        br
+                        .title
+                            h3 Th&ocirc;ng tin chi ti&#x1EBF;t
+                            button#closePopup &Dstrok;&oacute;ng
                         #popupText
+                        span Chuyến bay số hiệu 
+                            strong#detailFlightNumber VN1234
+                        span  Khởi hành ngày 
+                            strong#detailDepartDate hehe
+                            br
+                        span Tổng thời gian 
+                            strong#detailDuration duration
+                            br
+                        .detail-timeline
+                            span Khởi hành từ 
+                                strong#detailDepartLocation location 
+                                br
+                            span lúc 
+                                strong#detailDepartTime hehe
+                                br
+                            br
+                            span Hạ cánh tại 
+                                strong#detailArriveLocation locate 
+                                br
+                            span lúc 
+                                strong#detailArriveTime hehe
+                                br
+
                         br
-                        button#closePopup &Dstrok;&oacute;ng
-                    .class-container
-                        .popup-content
+                        .class-container
                             .economy
-                                h3 Hạng phổ thông
-                                h4
+                                h5 Hạng phổ thông
                                 #economyinfo
-                                    h4 Còn 50 chỗ
-                                    h4 2.000.000 VND
+                                    span Còn 
+                                        strong#detailEconomySeats 40
+                                        |  chỗ
+                                        br
+                                    span Giá vé 
+                                        strong#detailEconomyPrice 2.000.000
+                                        |  VND
+                                        br
                                 button(onclick=`changeToSaveBooking(true)`) Đặt chỗ
-                        .popup-content
                             .business
-                                h3 Hạng thương gia
+                                h5 Hạng thương gia
                                 #businessinfo
-                                    h4 Còn 5 chỗ
-                                    h4 5.000.000 VND
+                                    span Còn 
+                                        strong#detailBusinessSeats 40
+                                        |  chỗ
+                                        br
+                                    span Giá vé 
+                                        strong#detailBusinessPrice 2.000.000
+                                        |  VND
+                                        br
                                 button(onclick=`changeToSaveBooking(false)`) Đặt chỗ
+                        
+                    
     .container
         .flight-list
             .flight-list_inner-head

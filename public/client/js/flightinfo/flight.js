@@ -1,7 +1,6 @@
-import { CreateFlightCard as _CreateFlightCard, CreatePopupContent as _CreatePopupContent, CreatePrice, CreateSeat } from './cardgenerator.js';
+import { CreateFlightCard as _CreateFlightCard, CreatePopupContent as _CreatePopupContent, CreatePrice, CreateSeat, calculateTimeDifference } from './cardgenerator.js';
 const CreateFlightCard = _CreateFlightCard;
 const CreatePopupContent = _CreatePopupContent;
-
 
 var container = document.getElementsByClassName("container")[0];
 var content = document.getElementsByClassName("content")[0];
@@ -76,18 +75,6 @@ if (classchosen.value === 'economyclass') {
   businessbtn.classList.add('class-button-choose')
 }
 
-window.openDetail = function(flight) {
-  popup.classList.add("showPopup");
-  flightNumber.value = flight.flightNumber
-  popupText.appendChild(CreatePopupContent(flight));
-  economyinfo.innerHTML = '';
-  economyinfo.appendChild(CreateSeat(flight.economySeats, "h4"))
-  economyinfo.appendChild(CreatePrice(flight.economySeats, "h4"))
-  businessinfo.innerHTML = '';
-  businessinfo.appendChild(CreateSeat(flight.businessSeats, "h4"))
-  businessinfo.appendChild(CreatePrice(flight.businessSeats, "h4"))  
-}
-
 const sort = document.querySelector(".sort");
 if (sort) {
     let url = new URL(window.location.href);
@@ -128,4 +115,43 @@ window.changeToSaveBooking = function(isEconomy) {
   } else {
     seatClassChosen.value = 'Business'
   }
+}
+
+const detailFlightNumber = document.querySelector('#detailFlightNumber')
+const detailDepartDate = document.querySelector('#detailDepartDate')
+const detailDuration = document.querySelector('#detailDuration')
+const detailDepartLocation = document.querySelector('#detailDepartLocation')
+const detailDepartTime = document.querySelector('#detailDepartTime')
+const detailArriveLocation = document.querySelector('#detailArriveLocation')
+const detailArriveTime = document.querySelector('#detailArriveTime')
+const detailEconomySeats = document.querySelector('#detailEconomySeats')
+const detailEconomyPrice = document.querySelector('#detailEconomyPrice')
+const detailBusinessSeats = document.querySelector('#detailBusinessSeats')
+const detailBusinessPrice = document.querySelector('#detailBusinessPrice')
+
+window.openDetail = function(flight) {
+  popup.classList.add("showPopup");
+  flightNumber.value = flight.flightNumber
+
+  const uncorrectDepartDate = new Date(flight.departureTime)
+  const uncorrectArriveDate = new Date(flight.arrivalTime)
+
+  detailFlightNumber.innerText = flight.flightNumber
+
+  detailDepartDate.innerText = uncorrectDepartDate.toLocaleDateString()
+  detailDepartTime.innerText = uncorrectDepartDate.toLocaleTimeString()
+
+  detailArriveTime.innerText = uncorrectArriveDate.toLocaleTimeString()
+
+  detailDuration.innerText = calculateTimeDifference(flight.departureTime, flight.arrivalTime)
+
+  detailDepartLocation.innerText = flight.departureLocation
+  detailArriveLocation.innerText = flight.arrivalLocation
+
+  detailEconomySeats.innerText = flight.economySeats.available
+  detailEconomyPrice.innerText = flight.economySeats.price.toLocaleString('vi-VN')
+
+  detailBusinessSeats.innerText = flight.businessSeats.available
+  detailBusinessPrice.innerText = flight.businessSeats.price.toLocaleString('vi-VN')
+
 }

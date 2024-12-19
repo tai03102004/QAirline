@@ -108,4 +108,4 @@ function CreatePrice(info, type) {
   return content;
 }
 
-export { CreateFlightCard, CreatePopupContent , CreatePrice, CreateSeat};
+export { CreateFlightCard, CreatePopupContent , CreatePrice, CreateSeat, calculateTimeDifference};
