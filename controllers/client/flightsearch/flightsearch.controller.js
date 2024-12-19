@@ -2,6 +2,7 @@
 const Data = require("../../../public/client/js/flightinfo/data");
 const Flight = require('../../../models/Flights');
 const Booking = require('../../../models/booking.model')
+const sendMail = require('../../../config/sendEmail')
 
 function calculateTimeDifference(startTime, endTime) {
   const start = new Date(startTime);
@@ -137,7 +138,7 @@ module.exports.savebooking = async (req, res) => {
         index++;
       });
       await Booking.insertMany(passengers);
-      if (passengers[0].seatClasa === 'Economy') {
+      if (passengers[0].seatClass === 'Economy') {
         await Flight.updateOne(
           { _id: flight._id},
           { $inc: { "economySeats.available": -1 * passengers.length } }
@@ -148,8 +149,14 @@ module.exports.savebooking = async (req, res) => {
           { $inc: { "businessSeats.available": -1 * passengers.length } }
         )
       }
-
-      res.status(200).send('Passengers saved successfully');
+  
+      await sendMail(
+      `Quý khách ${passengers[0].passengerEmail}`,
+      `Thông tin chuyến bay ${flight.flightNumber} và ghế ngồi của bạn`,
+      `Thông tin chuyến bay ${flight.flightNumber} và ghế ngồi của bạn`,
+      generateEmailTemplate(flight, passengers)
+    );
+    res.status(200).send('Passengers saved successfully');
   } catch (error) {
       console.log(error.message);
       res.status(500).send('Error saving passengers: ' + error.message);
@@ -168,4 +175,102 @@ function generateSeatNumbers(totalSeats) {
   }
 
   return seats;
+}
+
+function generateEmailTemplate(flightInfo, passengers) {
+  let passengerRows = passengers.map((p) => {
+      return `
+          <tr>
+              <td style="padding: 8px; border: 1px solid #ccc;">${p.passengerName}</td>
+              <td style="padding: 8px; border: 1px solid #ccc;">${p.seatNumber}</td>
+              <td style="padding: 8px; border: 1px solid #ccc;">${p.ticketId}</td>
+          </tr>
+      `;
+  }).join('');
+
+  return `
+  <!DOCTYPE html>
+  <html>
+  <head>
+      <style>
+          body {
+              font-family: Arial, sans-serif;
+              line-height: 1.6;
+              margin: 0;
+              padding: 0;
+              background-color: #f9f9f9;
+          }
+          .container {
+              width: 600px;
+              margin: 20px auto;
+              background-color: #ffffff;
+              box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+              border-radius: 5px;
+              overflow: hidden;
+          }
+          .header {
+              background-color: #0056b3;
+              color: white;
+              text-align: center;
+              padding: 10px 0;
+              font-size: 18px;
+              font-weight: bold;
+          }
+          .content {
+              padding: 20px;
+          }
+          table {
+              width: 100%;
+              border-collapse: collapse;
+          }
+          th, td {
+              border: 1px solid #ccc;
+              padding: 8px;
+              text-align: left;
+          }
+          .footer {
+              background-color: #f1f1f1;
+              text-align: center;
+              padding: 10px;
+              font-size: 12px;
+              color: #777;
+          }
+      </style>
+  </head>
+  <body>
+      <div class="container">
+          <!-- Header -->
+          <div class="header">
+              Thông tin chuyến bay của quý khách
+          </div>
+
+          <!-- Nội dung chính -->
+          <div class="content">
+              <p><strong>Chuyến bay:</strong> ${flightInfo.flightNumber}</p>
+              <p><strong>Hành trình:</strong> ${flightInfo.departureLocation} → ${flightInfo.arrivalLocation}</p>
+              <p><strong>Thời gian:</strong> ${flightInfo.departureTime} → ${flightInfo.arrivalTime}</p>
+
+              <h3>Danh sách hành khách</h3>
+              <table>
+                  <thead>
+                      <tr>
+                          <th>Tên hành khách</th>
+                          <th>Ghế ngồi</th>
+                          <th>Số vé</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      ${passengerRows}
+                  </tbody>
+              </table>
+          </div>
+
+          <!-- Footer -->
+          <div class="footer">
+              Đây là email thông báo tự động. Vui lòng không trả lời email này.
+          </div>
+      </div>
+  </body>
+  </html>
+  `;
 }
