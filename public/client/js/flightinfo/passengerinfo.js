@@ -72,7 +72,7 @@ document.getElementById('submitForm').addEventListener('click', async () => {
         });
 
         if (response.status === 200) {
-            alert('Thông tin hành khách đã được lưu thành công!');
+            alert('Thông tin hành khách đã được lưu thành công!\nVui lòng kiểm tra thông tin trong email quý khách đăng ký');
             window.location.href = '/';
         } else {
             alert('Lỗi khi lưu thông tin hành khách.');

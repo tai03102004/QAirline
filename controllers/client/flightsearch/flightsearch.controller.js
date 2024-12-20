@@ -5,6 +5,15 @@ const Booking = require('../../../models/booking.model')
 const sendMail = require('../../../config/sendEmail')
 const Airport = require('../../../models/airport.model')
 
+module.exports.getAllAirports = async (req, res) => {
+  try {
+    const airports = await Airport.find();
+    res.status(200).json(airports);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching flight data', error: error.message });
+  }
+};
+
 function calculateTimeDifference(startTime, endTime) {
   const start = new Date(startTime);
   const end = new Date(endTime);
@@ -31,6 +40,8 @@ module.exports.index = (req, res) => {
 module.exports.searchFlights = async (req, res) => {
     const { departureLocation, arrivalLocation, departDate, totalpassengers, classchosen } = req.query;
     try {
+      const departureCode = (departureLocation.match(/\((.*?)\)/))[1]
+      const arrivalCode = (arrivalLocation.match(/\((.*?)\)/))[1]
       let sort = {};
       if (req.query.sortKey && req.query.sortValue) {
           if (req.query.sortKey === 'price') {
@@ -53,8 +64,8 @@ module.exports.searchFlights = async (req, res) => {
       if (classchosen === 'economyclass') {
         flights = await Flight.find(
           { 
-            departureLocation: departureLocation,
-            arrivalLocation: arrivalLocation,
+            departureLocation: departureCode,
+            arrivalLocation: arrivalCode,
             departureTime: { $regex: `^${departDate}` },
             "economySeats.available": { $gte: totalpassengers }
           }
@@ -62,15 +73,15 @@ module.exports.searchFlights = async (req, res) => {
       } else if (classchosen === 'businessclass') {
         flights = await Flight.find(
           { 
-            departureLocation: departureLocation,
-            arrivalLocation: arrivalLocation,
+            departureLocation: departureCode,
+            arrivalLocation: arrivalCode,
             departureTime: { $regex: `^${departDate}` },
             "businessSeats.available": { $gte: totalpassengers } 
           }).sort(sort);
       } else {
         flights = await Flight.find({
-          departureLocation: departureLocation,
-          arrivalLocation: arrivalLocation,
+          departureLocation: departureCode,
+          arrivalLocation: arrivalCode,
           departureTime: { $regex: `^${departDate}` }
         }).sort(sort);
       }
@@ -82,8 +93,16 @@ module.exports.searchFlights = async (req, res) => {
         })
       }
 
+      const departAirport = await Airport.findOne({
+        code: departureCode
+      })
+
+      const arriveAirport = await Airport.findOne({
+        code: arrivalCode
+      })
+
       const searchInfo = {
-        departureLocation, arrivalLocation, departDate, totalpassengers, classchosen
+        departureLocation, arrivalLocation, departDate, totalpassengers, classchosen, departAirport, arriveAirport
       }
       
       res.render('client/pages/flightinfo/index.pug', {
@@ -150,12 +169,25 @@ module.exports.savebooking = async (req, res) => {
           { $inc: { "businessSeats.available": -1 * passengers.length } }
         )
       }
+
+      const departAirport = await Airport.findOne({
+        code: flight.departureLocation
+      })
+
+      const arriveAirport = await Airport.findOne({
+        code: flight.arrivalLocation
+      })
+
+      const departDate = new Date(flight.departureTime).toLocaleString('vi-VN')
+      const arriveDate = new Date(flight.arrivalTime).toLocaleString('vi-VN')
+
+      console.log(departDate)
   
       await sendMail(
       `Quý khách ${passengers[0].passengerEmail}`,
       `Thông tin chuyến bay ${flight.flightNumber} và ghế ngồi của bạn`,
       `Thông tin chuyến bay ${flight.flightNumber} và ghế ngồi của bạn`,
-      generateEmailTemplate(flight, passengers)
+      generateEmailTemplate(flight, passengers, departAirport, arriveAirport, departDate, arriveDate)
     );
     res.status(200).send('Passengers saved successfully');
   } catch (error) {
@@ -178,7 +210,7 @@ function generateSeatNumbers(totalSeats) {
   return seats;
 }
 
-function generateEmailTemplate(flightInfo, passengers) {
+function generateEmailTemplate(flightInfo, passengers, departAirport, arriveAirport, departDate, arriveDate) {
   let passengerRows = passengers.map((p) => {
       return `
           <tr>
@@ -248,8 +280,8 @@ function generateEmailTemplate(flightInfo, passengers) {
           <!-- Nội dung chính -->
           <div class="content">
               <p><strong>Chuyến bay:</strong> ${flightInfo.flightNumber}</p>
-              <p><strong>Hành trình:</strong> ${flightInfo.departureLocation} → ${flightInfo.arrivalLocation}</p>
-              <p><strong>Thời gian:</strong> ${flightInfo.departureTime} → ${flightInfo.arrivalTime}</p>
+              <p><strong>Hành trình:</strong> ${departAirport.name} (${departAirport.province}) → ${arriveAirport.name} (${arriveAirport.province})</p>
+              <p><strong>Thời gian:</strong> ${departDate} → ${arriveDate}</p>
 
               <h3>Danh sách hành khách</h3>
               <table>

@@ -1,8 +1,37 @@
-// Xử lý cho dropdown depart
+//Lấy dữ liệu sân bay
+const locationDropdown = document.querySelectorAll('.locationDropdown')
+
+async function fetchAllAirports() {
+  let airportsFetchedData
+  try {
+    const response = await fetch('/getairports');
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    airportsFetchedData = await response.json();
+    console.log(airportsFetchedData);
+  } catch (error) {
+    console.error('Error fetching airports data:', error);
+  }
+  return airportsFetchedData
+}
+
+const airportData = await fetchAllAirports()
+
+locationDropdown.forEach(dropdown => {
+  dropdown.innerHTML = ''
+  airportData.forEach(airport => {
+    const airportLocation = document.createElement('li')
+    airportLocation.innerText = `${airport.province} (${airport.code})`
+    dropdown.appendChild(airportLocation)
+  }) 
+})
+
 const departInput = document.querySelector('.depart-dropdown .dropdown-input');
 const departContent = document.querySelector('.depart-dropdown .dropdown-content');
 const departItems = departContent.querySelectorAll('ul li');
 
+// Xử lý cho dropdown depart
 departInput.addEventListener('click', () => {
   departContent.style.display = 'block';
 });

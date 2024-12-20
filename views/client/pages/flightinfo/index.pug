@@ -19,11 +19,11 @@ block main
                     .popup-content
                         .title
                             h3 Th&ocirc;ng tin chi ti&#x1EBF;t
-                            button#closePopup &Dstrok;&oacute;ng
+                            button(type='button')#closePopup &Dstrok;&oacute;ng
                         #popupText
                         span Chuyến bay số hiệu 
                             strong#detailFlightNumber VN1234
-                        span  Khởi hành ngày 
+                        span  khởi hành ngày 
                             strong#detailDepartDate hehe
                             br
                         span Tổng thời gian 
@@ -31,14 +31,18 @@ block main
                             br
                         .detail-timeline
                             span Khởi hành từ 
-                                strong#detailDepartLocation location 
+                                strong#detailDepartAirport location 
+                                |  tại 
+                                strong#detailDepartLocation
                                 br
                             span lúc 
                                 strong#detailDepartTime hehe
                                 br
                             br
                             span Hạ cánh tại 
-                                strong#detailArriveLocation locate 
+                                strong#detailArriveAirport locate 
+                                |  tại 
+                                strong#detailArriveLocation
                                 br
                             span lúc 
                                 strong#detailArriveTime hehe
