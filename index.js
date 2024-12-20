@@ -56,11 +56,11 @@ routeClient(app);
 const routeAdmin = require("./routes/admin/index.route");
 routeAdmin(app);
 
-// Import router
-const loginRouter = require('./routes/client/login.route.js');
+const loginRoute = require('./routes/client/login.route');
+const registerRoute = require('./routes/client/register.route');
 
-// Đăng ký router
-app.use('/login', loginRouter);
+app.use('/login', loginRoute);  // Đăng nhập
+app.use('/register', registerRoute);  // Đăng ký
 
 // Import router
 const checkRouter = require('./routes/client/ticketcheck.route.js');
@@ -70,6 +70,9 @@ app.use('/ticketcheck', checkRouter);
 
 const routeFlightInfo = require("./routes/client/flight_list.route");
 app.use("/", routeFlightInfo);
+
+const profileRouter = require('./routes/client/update_info.route.js'); 
+app.use('/', profileRouter);
 
 // /admin
 const systemConfig = require("./config/system");

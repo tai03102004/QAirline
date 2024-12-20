@@ -36,6 +36,7 @@ h2 {
   height: 120px;
   border-radius: 50%;
   margin-bottom: 15px;
+  border: 3px solid #007f22;
 }
 
 .form-group {
@@ -66,7 +67,7 @@ textarea {
   resize: vertical;
 }
 
-.btn {
+.input-submit {
   padding: 10px 20px;
   background-color: #23be30;
   color: white;
@@ -84,6 +85,6 @@ textarea {
   margin-right: auto;
 }
 
-.btn:hover {
+.input-submit:hover {
   background-color: #1d9c26;
 }

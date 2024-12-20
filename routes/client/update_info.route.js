@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const updateProfileController = require('../../controllers/client/auth/profile.controller');
+const profileController = require('../../controllers/client/auth/profile.controller');
 
-router.put('/profile', updateProfileController.updateProfile);
+router.get('/profile', profileController.getProfile);
+router.post('/profile', profileController.updateProfile);  
 
 module.exports = router;

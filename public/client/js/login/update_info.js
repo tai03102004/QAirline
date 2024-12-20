@@ -1,5 +1,5 @@
 document.getElementById('profileForm').addEventListener('submit', function (e) {
-  e.preventDefault();
+  e.preventDefault(); // Ngừng reload trang khi submit
 
   // Collect form data
   const name = document.getElementById('name').value;
@@ -28,7 +28,7 @@ document.getElementById('profileForm').addEventListener('submit', function (e) {
   };
 
   // Send the data to the server using fetch
-  fetch('/api/account/update-profile', {
+  fetch('/api/account/profile', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

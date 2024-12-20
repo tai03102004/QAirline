@@ -28,29 +28,7 @@ html(lang="vi")
           input.input-submit(type="submit" value="Login")
         .register
           span Don't have an account?
-          a(href="#" onclick="showRegister()") Register
-
-      //- Form Register
-      form.register_box.form-container#register(action='/login/signupaccount' method='POST')
-        .register-header
-          span Register
-        .input_box
-          input#user.input-field(type="text" name='signupUsername' required placeholder="Username")
-          i.bx.bx-user.icon
-        .input_box
-          input#email.input-field(type="email" name='signupEmail' required placeholder="Email")
-          i.bx.bx-envelope.icon
-        .input_box
-          input#password.input-field(type="password" name='signupPassword' required placeholder="Password")
-          i.bx.bx-lock-alt.icon
-        .terms-conditions
-          input#terms(type="checkbox")
-          label(for="terms") I agree to the terms and conditions
-        .input_box
-          input.input-submit(type="submit" value="Register")
-        .login
-          span Already have an account?
-          a(href="#" onclick="showLogin()") Login
+          a(href="/register" onclick="showRegister()") Register
 
     script(src="/client/js/login/script.js")
       

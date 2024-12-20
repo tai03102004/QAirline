@@ -9,17 +9,17 @@ html(lang="vi")
   body
     .container
       .left
-        img(src="https://i.pinimg.com/736x/02/72/35/02723528ae01d17bbf67ccf6b8da8a6b.jpg", alt="Ảnh đại diện người dùng")
+        img(src="https://i.pinimg.com/736x/02/72/35/02723528ae01d17bbf67ccf6b8da8a6b.jpg", alt="avatar")
         
       h2 Cập nhật thông tin cá nhân
       form#profileForm
         .form-group
           label(for="name") Họ và tên *
-          input(type="text", id="name", name="name", required)
+          input(type="text", id="name", name="name", )
         
         .form-group
           label(for="gender") Giới tính *
-          select(id="gender", name="gender", required)
+          select(id="gender", name="gender", )
             option(value="") Chọn giới tính
             option(value="Nam") Nam
             option(value="Nữ") Nữ
@@ -27,11 +27,11 @@ html(lang="vi")
         
         .form-group
           label(for="dob") Ngày sinh *
-          input(type="date", id="dob", name="dob", required)
+          input(type="date", id="dob", name="dob", )
         
         .form-group
           label(for="nationality") Quốc tịch *
-          select(id="nationality", name="nationality", required)
+          select(id="nationality", name="nationality", )
             option(value="") Chọn quốc tịch
             option(value="VN") Việt Nam
             option(value="US") Hoa Kỳ
@@ -42,28 +42,28 @@ html(lang="vi")
         
         .form-group
           label(for="address") Địa chỉ *
-          textarea(id="address", name="address", rows="4", required)
+          textarea(id="address", name="address", rows="4", )
         
         .form-group
           label(for="province") Tỉnh/Thành phố *
-          input(type="text", id="province", name="province", required)
+          input(type="text", id="province", name="province", )
         
         .form-group
           label(for="city") Quận/Huyện *
-          input(type="text", id="city", name="city", required)
+          input(type="text", id="city", name="city", )
         
         .form-group
           label(for="phone") Số điện thoại *
-          input(type="tel", id="phone", name="phone", required)
+          input(type="tel", id="phone", name="phone", )
         
         .form-group
           label(for="email") Email *
-          input(type="email", id="email", name="email", required)
+          input(type="email", id="email", name="email", )
         
         .form-group
           label(for="passport") Số hộ chiếu
           input(type="text", id="passport", name="passport")
         
-        button(type="submit", class="btn") Cập nhật
+        input.input-submit(type="submit", value="Cập nhật")
 
     script(src="/client/js/update_info.js")
