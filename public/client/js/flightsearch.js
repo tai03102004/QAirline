@@ -104,28 +104,6 @@ document.addEventListener('click', (event) => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const oneWayRadio = document.getElementById('oneway');
-    const roundTripRadio = document.getElementById('roundtrip');
-    const returningGroup = document.getElementById('returning-group');
-
-    // Hàm để cập nhật trạng thái hiển thị của "Returning"
-    function toggleReturningField() {
-        if (oneWayRadio.checked) {
-            returningGroup.style.display = 'none'; // Ẩn trường Returning
-        } else {
-            returningGroup.style.display = 'block'; // Hiện trường Returning
-        }
-    }
-
-    // Kiểm tra trạng thái ban đầu khi trang được tải
-    toggleReturningField();
-
-    // Lắng nghe sự thay đổi khi người dùng chọn các option
-    oneWayRadio.addEventListener('change', toggleReturningField);
-    roundTripRadio.addEventListener('change', toggleReturningField);
-});
-
-document.addEventListener('DOMContentLoaded', () => {
   const maxPassengers = 9; // Giới hạn tổng số hành khách
   const totalCountElement = document.querySelector('.total-count'); // Phần tử hiển thị tổng số hành khách
 
