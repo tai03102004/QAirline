@@ -3,6 +3,7 @@ const Data = require("../../../public/client/js/flightinfo/data");
 const Flight = require('../../../models/Flights');
 const Booking = require('../../../models/booking.model')
 const sendMail = require('../../../config/sendEmail')
+const Airport = require('../../../models/airport.model')
 
 function calculateTimeDifference(startTime, endTime) {
   const start = new Date(startTime);
