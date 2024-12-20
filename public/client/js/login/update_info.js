@@ -1,5 +1,5 @@
 document.getElementById('profileForm').addEventListener('submit', function (e) {
-  e.preventDefault(); // Ngừng reload trang khi submit
+  e.preventDefault(); 
 
   // Collect form data
   const name = document.getElementById('name').value;

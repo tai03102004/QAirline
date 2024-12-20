@@ -38,8 +38,7 @@ const updateProfile = async (req, res) => {
 
         // Lưu thông tin đã cập nhật vào cơ sở dữ liệu
         await account.save();
-
-        // Trả về phản hồi thành công
+        
         res.status(200).json({ success: true, message: 'Cập nhật thông tin thành công!' });
     } catch (error) {
         console.error('Lỗi khi cập nhật thông tin người dùng:', error);
