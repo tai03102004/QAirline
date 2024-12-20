@@ -126,7 +126,7 @@ module.exports.provideinfo = async (req, res) => {
       
       if (flight) {
         res.render('client/pages/flightinfo/passengerinfo.pug', {
-          pageTitle: 'Kết quả tìm kiếm chuyến bay',
+          pageTitle: 'Điền thông tin hành khách',
           passengerNumber: passengerNumber,
           flight: flight,
           seatClass: seatClassChosen
@@ -188,7 +188,7 @@ module.exports.savebooking = async (req, res) => {
       `Thông tin chuyến bay ${flight.flightNumber} và ghế ngồi của bạn`,
       `Thông tin chuyến bay ${flight.flightNumber} và ghế ngồi của bạn`,
       generateEmailTemplate(flight, passengers, departAirport, arriveAirport, departDate, arriveDate)
-    );
+      );
     res.status(200).send('Passengers saved successfully');
   } catch (error) {
       console.log(error.message);
