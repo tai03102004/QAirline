@@ -13,11 +13,22 @@
 .popup-content {
   background-color: rgb(252, 245, 245);
   margin: 0px;
-  padding: 20px;
+  margin-top: 40px;
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   border: 1px solid #888888;
-  width: auto;
+  width: fit-content;
+  height: fit-content;
   border-radius: 10px;
   font-size: large;
+}
+
+.popup-content {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef); /* Gradient background */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng */
+  color: #333; /* Màu chữ */
 }
 
 .popup-content button {
@@ -25,14 +36,15 @@
   margin: 0 auto;
   border-width: 0px;
   border-radius: 5px;
-  background-color: rgb(247, 199, 26);
-  border-color: rgb(182, 144, 9);
-  font-size: medium;
-  padding: 2.5%;
+  background-color: #007bff;
+  color: #fff;
+  font-size: large;
+  font-weight: bold;
+  padding: 5px;
   cursor: pointer;
 }
 
-.popup-content h2, h3 {
+.popup-content h2, h3, h5 {
   margin: 0;
   color: rgb(34, 74, 128);
 }
@@ -56,4 +68,70 @@
 .class-container {
   display: flex;
   flex-direction: column;
+}
+
+.popup-content button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.popup-container {
+  display: flex;
+  flex-direction: row; /* Hiển thị theo hàng */
+  gap: 10px; /* Khoảng cách giữa các cột */
+}
+.class-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 50px;
+  padding-right: 50px;
+  border-top: 2px solid #0056b3;
+  justify-content: center;
+}
+
+.popup-content span {
+  font-size: medium;
+}
+
+.popup-content strong {
+  font-size: larger;
+}
+
+.popup-content .detail-timeline {
+  border-left: 2px solid #0056b3;
+  padding-left: 10px;
+  margin-left: 50px;
+}
+
+.popup-content .business {
+  border-left: 2px solid #0056b3;
+  padding-left: 10px;
+}
+
+.popup-content .business, .economy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.class-container h5 {
+  font-size: larger;
+}
+
+.class-container .business, .economy {
+  padding: 20px;
+  padding-top: 10px;
+  padding-bottom: 0px;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+}
+
+#closePopup {
+  margin-right: 0px;
 }

@@ -142,3 +142,32 @@ document.addEventListener('DOMContentLoaded', () => {
       button.addEventListener('click', () => updatePassengerCount(button, -1));
   });
 });
+
+const economybtn = document.querySelector('#economyclass')
+const businessbtn = document.querySelector('#businessclass')
+const classchosen = document.querySelector('#classchosen')
+
+economybtn.onclick = function() {chooseClass(true)}
+businessbtn.onclick = function() {chooseClass(false)}
+
+function chooseClass(isEconomy) {
+  if (isEconomy) {
+    if (classchosen.value === 'economyclass') {
+      economybtn.classList.remove('class-button-choose')
+      classchosen.value = 'none'
+    } else {
+      economybtn.classList.add('class-button-choose')
+      businessbtn.classList.remove('class-button-choose')
+      classchosen.value = 'economyclass'
+    }
+  } else {
+    if (classchosen.value === 'businessclass') {
+      businessbtn.classList.remove('class-button-choose')
+      classchosen.value = 'none'
+    } else {
+      economybtn.classList.remove('class-button-choose')
+      businessbtn.classList.add('class-button-choose')
+      classchosen.value = 'businessclass'
+    }
+  }
+}

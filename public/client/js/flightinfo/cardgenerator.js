@@ -103,9 +103,9 @@ function CreateSeat(info, type) {
 function CreatePrice(info, type) {
   var content = document.createElement(type);
   content.innerHTML = `
-    ${info.price} VND
+    ${info.price.toLocaleString('vi-VN')} VND
   `;
   return content;
 }
 
-export { CreateFlightCard, CreatePopupContent , CreatePrice, CreateSeat};
+export { CreateFlightCard, CreatePopupContent , CreatePrice, CreateSeat, calculateTimeDifference};
