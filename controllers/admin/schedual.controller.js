@@ -1,6 +1,7 @@
 const Scheduals = require("../../models/list-flight.model");
 const paginationHelper = require("../../helper/pagination");
 const searchHelper = require("../../helper/search");
+const systemConfig = require("../../config/system");
 
 
 // [GET] /admin/scheduals
@@ -132,8 +133,15 @@ module.exports.index = async (req, res) => {
 
 // [GET] /admin/detail/:id
 module.exports.detail = async (req, res) => {
+    const id = req.params.id;
+    const schedule = await Scheduals.findOne({
+        _id: id,
+        deleted: false,
+    });
+
     res.render("admin/pages/scheduals/detail", {
         pageTitle: "Xem chi tiết chuyến bay",
+        schedule: schedule,
     });
 }
 
@@ -192,4 +200,77 @@ module.exports.createPost = async (req, res) => {
     //     console.error(err);
     //     res.redirect("back");
     // }
+};
+
+// [GET] /admin/scheduals/edit/:id
+module.exports.edit = async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        // Tìm lịch bay dựa vào ID và chưa bị xóa
+        const schedule = await Scheduals.findOne({
+            _id: id,
+            deleted: false,
+        });
+
+        if (!schedule) {
+            req.flash("error", "Lịch bay không tồn tại");
+            return res.redirect(`/${systemConfig.prefixAdmin}/scheduals`);
+        }
+
+        // Render trang chỉnh sửa với dữ liệu lịch bay
+        res.render("admin/pages/scheduals/edit", {
+            pageTitle: "Chỉnh sửa lịch bay",
+            schedule,
+        });
+    } catch (err) {
+        console.error("Lỗi khi lấy lịch bay:", err);
+        req.flash("error", "Có lỗi xảy ra khi lấy thông tin lịch bay");
+        res.redirect(`/${systemConfig.prefixAdmin}/scheduals`);
+    }
+};
+
+// [PATCH] /admin/scheduals/edit/:id
+module.exports.editPost = async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        // Chuyển đổi dữ liệu nhận từ form và chuẩn bị dữ liệu cập nhật
+        const updatedData = {
+            departureTime: req.body.departureTime ? new Date(req.body.departureTime) : undefined,
+            arrivalTime: req.body.arrivalTime ? new Date(req.body.arrivalTime) : undefined,
+            economySeats: {
+                total: parseInt(req.body.economyTotal, 10) || 0,
+                price: parseFloat(req.body.economyPrice) || 0,
+            },
+            businessSeats: {
+                total: parseInt(req.body.businessTotal, 10) || 0,
+                price: parseFloat(req.body.businessPrice) || 0,
+            },
+            status: req.body.status,
+            updatedAt: new Date(),
+        };
+
+        // Xóa các trường undefined để tránh ghi đè sai trong CSDL
+        Object.keys(updatedData).forEach(key => {
+            if (updatedData[key] === undefined) delete updatedData[key];
+        });
+
+        // Cập nhật lịch bay
+        const result = await Scheduals.findByIdAndUpdate(id, updatedData, {
+            new: true,
+        });
+
+        if (!result) {
+            req.flash("error", "Lỗi khi cập nhật lịch bay");
+            return res.redirect(`/${systemConfig.prefixAdmin}/scheduals`);
+        }
+
+        req.flash("success", "Cập nhật lịch bay thành công");
+        res.redirect(`/${systemConfig.prefixAdmin}/scheduals`);
+    } catch (err) {
+        console.error("Lỗi khi cập nhật lịch bay:", err);
+        req.flash("error", "Có lỗi xảy ra trong quá trình cập nhật");
+        res.redirect("back");
+    }
 };

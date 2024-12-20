@@ -1,0 +1,113 @@
+extends ../../layouts/defaultNotRight.pug
+include ../../mixins/alert.pug
+
+block main
+    +alert-error(5000)
+
+    h1(class="mb-4 mt-4") Thêm mới thông báo hãng hàng không
+
+    form(
+        action=`/${prefixAdmin}/campaign/create`
+        method="POST"
+        enctype="multipart/form-data"
+    )
+        div(class="form-group")
+            label(for="title") Tiêu đề
+            input(
+                type="text"
+                class="form-control"
+                id="title"
+                name="title"
+                required
+            )
+        div(class="form-group")
+            label(for="type") Loại thông báo
+            select(
+                class="form-control"
+                id="type"
+                name="type"
+                required
+            )
+                option(value="introduction") Giới thiệu
+                option(value="promotion") Khuyến mãi
+                option(value="announcement") Thông báo
+                option(value="news") Tin tức
+        div(class="form-group")
+            label(for="content") Nội dung
+            textarea(
+                class="form-control"
+                id="content"
+                name="content"
+                rows="5"
+                required
+            )
+        div(
+            class="form-group"
+            upload-image
+        )
+            label(for="thumbnail") Ảnh
+            input(
+                type="file"
+                class="form-control-file"
+                id="thumbnail"
+                name="thumbnail"
+                accept="image/*"
+                upload-image-input
+            )
+            img(
+                src=""
+                class="image-preview"
+                upload-image-preview
+            )
+        div(class="form-group")
+            label(for="startDate") Ngày bắt đầu
+            input(
+                type="date"
+                class="form-control"
+                id="startDate"
+                name="startDate"
+            )
+        div(class="form-group")
+            label(for="endDate") Ngày kết thúc
+            input(
+                type="date"
+                class="form-control"
+                id="endDate"
+                name="endDate"
+            )
+        div(class="form-group")
+            label(for="priority") Độ ưu tiên
+            input(
+                type="number"
+                class="form-control"
+                id="priority"
+                name="priority"
+                value="0"
+                min="0"
+            )
+        div(class="form-group form-check form-check-inline")
+            input(
+                type="radio"
+                class="form-check-input"
+                id="statusActive"
+                name="status"
+                value="active"
+                checked
+            )
+            label(for="statusActive" class="form-check-label") Hoạt động
+        div(class="form-group form-check form-check-inline")
+            input(
+                type="radio"
+                class="form-check-input"
+                id="statusInActive"
+                name="status"
+                value="inactive"
+            )
+            label(for="statusInActive" class="form-check-label") Dừng hoạt động
+        div(class="form-group")
+            button(
+                type="submit"
+                class="btn btn-primary"
+            ) Tạo mới
+            span.button-space(style="margin-left: 10px")
+                a(href=`/${prefixAdmin}/campaign`, class="btn btn-secondary") Quay lại

@@ -1,0 +1,52 @@
+extends ../../layouts/default.pug
+
+block styles
+    link(rel="stylesheet", href="/client/css/contact/contact.css")
+
+block main 
+    section
+      .section-header_info
+        .container_info
+          h2 Liên Hệ
+          p
+            | 3Wings là hãng bay được sáng lập bởi các thành viên đầy nhiệt huyết: Tài, Thanh, Hoàng. Chúng tôi mang sứ mệnh kết nối mọi người qua những hành trình bay an toàn, tiện nghi, và đáng nhớ. Với tinh thần không ngừng sáng tạo, 3Wings cam kết đem lại những trải nghiệm vượt mong đợi cho hành khách của mình.
+      .container_info
+        .row_info
+          .contact-info
+            .contact-info-item
+              .contact-info-icon
+                i.fas.fa-home
+              .contact-info-content
+                h4 Địa Chỉ
+                p
+                  | 4671 Đường Sugar Camp,
+                  br
+                  |  Owatonna, Minnesota, 
+                  br
+                  | 55060
+            .contact-info-item
+              .contact-info-icon
+                i.fa-solid.fa-phone
+              .contact-info-content
+                h4 Số Điện Thoại
+                p 571-457-2321
+            .contact-info-item
+              .contact-info-icon
+                i.fas.fa-envelope
+              .contact-info-content
+                h4 Email
+                p ntamerrwael@mfano.ga
+          .contact-form
+            form#contact-form(action='')
+              h2 Gửi Tin Nhắn
+              .input-box
+                input(type='text', required='true', name='')
+                span Họ Tên
+              .input-box
+                input(type='email', required='true', name='')
+                span Email
+              .input-box
+                textarea(required='true', name='')
+                span Nhập tin nhắn của bạn...
+              .input-box
+                input(type='submit', value='Gửi', name='')
