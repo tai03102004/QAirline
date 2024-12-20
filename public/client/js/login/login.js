@@ -37,6 +37,7 @@ registerForm.querySelector('form').addEventListener('submit', function (e) {
     if (data.success) {
       alert('Registration successful');
       window.location.href = '/profile';
+      showLogin(); // Chuyển sang form đăng nhập
     } else {
       alert('Registration failed: ' + data.message);
     }
@@ -63,7 +64,7 @@ loginForm.querySelector('form').addEventListener('submit', function (e) {
     if (data.token) {
       alert('Login successful');
       localStorage.setItem('token', data.token); // Lưu token vào localStorage
-      window.location.href = '/flight_listlist';
+      window.location.href = '/flight_list';
     } else {
       alert('Login failed: ' + data.message);
     }
