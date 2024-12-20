@@ -1,5 +1,6 @@
 const Booking = require('../../../models/booking.model')
 const Flight = require('../../../models/Flights');
+const Airport = require('../../../models/airport.model')
 
 module.exports.find = async (req, res) => {
     const { ticketId } = req.params;
@@ -11,7 +12,19 @@ module.exports.find = async (req, res) => {
         if (!booking) {
             return res.status(404).json({ message: 'Không tìm thấy vé!' });
         }
-        res.status(200).json(booking);
+        const departAirport = await Airport.findOne({
+            code: booking.departureLocation
+        })
+
+        const arriveAirport = await Airport.findOne({
+            code: booking.arrivalLocation
+        })
+        const response = {
+            booking,
+            departAirport,
+            arriveAirport
+        }
+        res.status(200).json(response);
     } catch (error) {
         res.status(500).json({ message: 'Lỗi server', error });
     }

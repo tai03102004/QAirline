@@ -121,8 +121,10 @@ const detailFlightNumber = document.querySelector('#detailFlightNumber')
 const detailDepartDate = document.querySelector('#detailDepartDate')
 const detailDuration = document.querySelector('#detailDuration')
 const detailDepartLocation = document.querySelector('#detailDepartLocation')
+const detailDepartAirport = document.querySelector('#detailDepartAirport')
 const detailDepartTime = document.querySelector('#detailDepartTime')
 const detailArriveLocation = document.querySelector('#detailArriveLocation')
+const detailArriveAirport = document.querySelector('#detailArriveAirport')
 const detailArriveTime = document.querySelector('#detailArriveTime')
 const detailEconomySeats = document.querySelector('#detailEconomySeats')
 const detailEconomyPrice = document.querySelector('#detailEconomyPrice')
@@ -145,8 +147,11 @@ window.openDetail = function(flight) {
 
   detailDuration.innerText = calculateTimeDifference(flight.departureTime, flight.arrivalTime)
 
-  detailDepartLocation.innerText = flight.departureLocation
-  detailArriveLocation.innerText = flight.arrivalLocation
+  detailDepartLocation.innerText = searchInfo.departAirport.province
+  detailArriveLocation.innerText = searchInfo.arriveAirport.province
+
+  detailDepartAirport.innerText = searchInfo.departAirport.name
+  detailArriveAirport.innerText = searchInfo.arriveAirport.name
 
   detailEconomySeats.innerText = flight.economySeats.available
   detailEconomyPrice.innerText = flight.economySeats.price.toLocaleString('vi-VN')
