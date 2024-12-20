@@ -55,12 +55,16 @@ async function checkTicket() {
     try {
         const response = await fetch(`/ticketcheck/${ticketId}`);
         if (response.status === 404) {
-            document.getElementById('ticketInfo').innerHTML = '<p>Không tìm thấy vé!</p>';
+            alert("Không tìm thấy vé")
         } else if (response.status === 200) {
+            
             ticketboard.style.display = 'unset';
             deletebtn.style.display = 'unset';
 
-            const booking = await response.json();
+            const result = await response.json();
+            const booking = result.booking
+            const departAirport = result.departAirport
+            const arriveAirport = result.arriveAirport
             const departdate = new Date(booking.departureTime);
             const arrivedate = new Date(booking.arrivalTime);
             console.log(departdate.toLocaleString().substr(9))
@@ -70,11 +74,11 @@ async function checkTicket() {
             flightNumber.innerHTML = `<strong>Chuyến Bay:</strong> ${booking.flightNumber}`;
             flightDuration.innerHTML = `<strong>Thời Gian Bay:</strong> ${calculateTimeDifference(booking.departureTime, booking.arrivalTime)}`;
             seatclass.innerHTML = `<strong>Hạng:</strong> ${booking.seatClass}`;
-            departLocation.innerHTML = `<strong>Khởi hành từ</strong> ${booking.departureLocation}`;
+            departLocation.innerHTML = `<strong>Khởi hành từ:</strong> ${departAirport.name} (${departAirport.province})`;
             const departtime = departdate.toLocaleString().substr(0, 9);
             const arrivetime = arrivedate.toLocaleString().substr(0, 9);
             departTime.innerHTML = `<strong>Giờ Khởi Hành:</strong> ${departtime}`;
-            arriveLocation.innerHTML = `<strong>Điểm đến</strong> ${booking.arrivalLocation}`;
+            arriveLocation.innerHTML = `<strong>Điểm đến:</strong> ${arriveAirport.name} (${arriveAirport.province})`;
             arriveTime.innerHTML = `<strong>Giờ Đến:</strong> ${arrivetime}`;
             fullname.innerHTML = `<strong>Tên Hành Khách:</strong> ${booking.passengerName}`;
             seatNumber.innerHTML = `<strong>Ghế:</strong> ${booking.seatNumber}`;

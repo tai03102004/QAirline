@@ -5,17 +5,18 @@ block styles
 
 block main 
     .info-container
-      h1 Flight Booking
+      h1 Đặt chuyến bay
       form#booking-form
         #passenger-info-container
         div
-            h3 Contact Information
+            h3 Thông tin liên lạc
             label(for='contact-email') Email*
             input.contact-email(type='email', name='contact-email', required='')
-            label(for='contact-phone') Phone Number*
-            input.contact-phone(type='number', name='contact-phone', required='')
-        button#submitForm.btn(type='button') Submit
+            label(for='contact-phone') Số điện thoại*
+            input.contact-phone(type='text', name='contact-phone', required='', minlength='10', maxlength='10')
+        button#submitForm.btn(type='button') Xác nhận
     script.
         const passengerNumData = !{JSON.stringify(passengerNumber)};
         const flightData = !{JSON.stringify(flight)}
+        const seatClass = !{JSON.stringify(seatClass)}
     script(type='module' src='/client/js/flightinfo/passengerinfo.js')

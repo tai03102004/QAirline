@@ -1,40 +1,59 @@
 section.booking__container
     .booking__nav
-        span Economy Class
-        span Business Class
-        span First Class
-    form
+        button.class-button#economyclass Hạng phổ thông
+        button.class-button#businessclass Hạng thương gia
+    form(action='/search-flights' method='GET')
+        input#classchosen(type='text', placeholder='', name='classchosen', style='display: none')
         .form__group
             span
                 i.ri-map-pin-line
             .input__content
-                .input__group
-                    input(type='text')
-                    label Location
-                    p Where are you goung?
+                .dropdown-location.depart-dropdown
+                    h5 Điểm khởi hành
+                    input.dropdown-input#departureLocation(type='text', placeholder='', name='departureLocation', required)
+                    .dropdown-content
+                        .region
+                            h3 VI&#x1EC6;T NAM
+                            ul.locationDropdown
+                                li Hanoi
+                                li Ho Chi Minh
+                                li Da Nang
+                                li Nha Trang
+                                li Can Tho
+                                li Hai Phong
+                    p Bạn khởi hành từ đâu?
+        .form__group
+            span
+                i.ri-map-pin-line
+            .input__content
+                .dropdown-location.arrive-dropdown
+                    h5 Điểm đến
+                    input.dropdown-input#arrivalLocation(type='text', placeholder='', name='arrivalLocation', required)
+                    .dropdown-content
+                        .region
+                            h3 VI&#x1EC6;T NAM
+                            ul.locationDropdown
+                                li Hanoi
+                                li Ho Chi Minh
+                                li Da Nang
+                                li Nha Trang
+                                li Can Tho
+                                li Hai Phong
+                    p Bạn sẽ đi tới đâu?
         .form__group
             span
                 i.ri-user-3-line
             .input__content
-                .input__group
-                    input(type='number')
-                    label Travellers
-                    p Add guests
+                h5 Số vé &#40;tối đa 9&#41;
+                input#totalpassengers(type='number', value='1', name='totalpassengers', min='1', max='9', required)
+                p Nhóm bạn có bao nhiêu người?
         .form__group
             span
                 i.ri-calendar-line
             .input__content
-                .input__group
-                    input(type='text')
-                    label Departure
-                    p Add date
-        .form__group
-            span
-                i.ri-calendar-line
-            .input__content
-                .input__group
-                    input(type='text')
-                    label Return
-                    p Add date
-        button.button
+                h5 Ngày khởi hành
+                input#departDate(type='date', name='departDate', required)
+                p Bạn đi vào hôm nào?
+        button.button(type='submit', value='Tìm chuyến bay')
             i.ri-search-line
+script(type='module' src='/client/js/flightsearch.js')

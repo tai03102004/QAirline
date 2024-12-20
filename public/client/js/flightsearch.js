@@ -1,8 +1,37 @@
-// Xử lý cho dropdown depart
+//Lấy dữ liệu sân bay
+const locationDropdown = document.querySelectorAll('.locationDropdown')
+
+async function fetchAllAirports() {
+  let airportsFetchedData
+  try {
+    const response = await fetch('/getairports');
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    airportsFetchedData = await response.json();
+    console.log(airportsFetchedData);
+  } catch (error) {
+    console.error('Error fetching airports data:', error);
+  }
+  return airportsFetchedData
+}
+
+const airportData = await fetchAllAirports()
+
+locationDropdown.forEach(dropdown => {
+  dropdown.innerHTML = ''
+  airportData.forEach(airport => {
+    const airportLocation = document.createElement('li')
+    airportLocation.innerText = `${airport.province} (${airport.code})`
+    dropdown.appendChild(airportLocation)
+  }) 
+})
+
 const departInput = document.querySelector('.depart-dropdown .dropdown-input');
 const departContent = document.querySelector('.depart-dropdown .dropdown-content');
 const departItems = departContent.querySelectorAll('ul li');
 
+// Xử lý cho dropdown depart
 departInput.addEventListener('click', () => {
   departContent.style.display = 'block';
 });
@@ -75,28 +104,6 @@ document.addEventListener('click', (event) => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const oneWayRadio = document.getElementById('oneway');
-    const roundTripRadio = document.getElementById('roundtrip');
-    const returningGroup = document.getElementById('returning-group');
-
-    // Hàm để cập nhật trạng thái hiển thị của "Returning"
-    function toggleReturningField() {
-        if (oneWayRadio.checked) {
-            returningGroup.style.display = 'none'; // Ẩn trường Returning
-        } else {
-            returningGroup.style.display = 'block'; // Hiện trường Returning
-        }
-    }
-
-    // Kiểm tra trạng thái ban đầu khi trang được tải
-    toggleReturningField();
-
-    // Lắng nghe sự thay đổi khi người dùng chọn các option
-    oneWayRadio.addEventListener('change', toggleReturningField);
-    roundTripRadio.addEventListener('change', toggleReturningField);
-});
-
-document.addEventListener('DOMContentLoaded', () => {
   const maxPassengers = 9; // Giới hạn tổng số hành khách
   const totalCountElement = document.querySelector('.total-count'); // Phần tử hiển thị tổng số hành khách
 
@@ -142,3 +149,32 @@ document.addEventListener('DOMContentLoaded', () => {
       button.addEventListener('click', () => updatePassengerCount(button, -1));
   });
 });
+
+const economybtn = document.querySelector('#economyclass')
+const businessbtn = document.querySelector('#businessclass')
+const classchosen = document.querySelector('#classchosen')
+
+economybtn.onclick = function() {chooseClass(true)}
+businessbtn.onclick = function() {chooseClass(false)}
+
+function chooseClass(isEconomy) {
+  if (isEconomy) {
+    if (classchosen.value === 'economyclass') {
+      economybtn.classList.remove('class-button-choose')
+      classchosen.value = 'none'
+    } else {
+      economybtn.classList.add('class-button-choose')
+      businessbtn.classList.remove('class-button-choose')
+      classchosen.value = 'economyclass'
+    }
+  } else {
+    if (classchosen.value === 'businessclass') {
+      businessbtn.classList.remove('class-button-choose')
+      classchosen.value = 'none'
+    } else {
+      economybtn.classList.remove('class-button-choose')
+      businessbtn.classList.add('class-button-choose')
+      classchosen.value = 'businessclass'
+    }
+  }
+}

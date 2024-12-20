@@ -193,20 +193,22 @@ h2 {
   cursor: pointer;
   text-align: center;
   min-width: 93px;
+  font-size: large;
 }
 
-.class-button:hover {
+.class-button:not(.class-button-choose):hover {
   background-color: #d1e9ff;
   border-color: rgb(34, 74, 128);
+  color: black;
 }
 
-.class-button:focus {
+.class-button-choose {
   background-color: #0066cc;
   color: #fff;
   border-color: #004080;
 }
 
-.dropdown {
+.dropdown-location {
   position: relative;
   display: inline-block;
   max-width: 200px;
@@ -241,7 +243,7 @@ h2 {
 }
 
 .dropdown-content .region {
-  padding: 10px;
+  padding: 15px;
   border-bottom: 1px solid #ddd;
 }
 
