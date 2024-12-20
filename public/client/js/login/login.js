@@ -36,7 +36,7 @@ registerForm.querySelector('form').addEventListener('submit', function (e) {
   .then(data => {
     if (data.success) {
       alert('Registration successful');
-      showLogin(); // Chuyển sang form đăng nhập
+      window.location.href = '/profile';
     } else {
       alert('Registration failed: ' + data.message);
     }

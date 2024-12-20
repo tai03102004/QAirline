@@ -8,11 +8,14 @@ html(lang="vi")
   
   body
     .container
+      .left
+        img(src="https://i.pinimg.com/736x/02/72/35/02723528ae01d17bbf67ccf6b8da8a6b.jpg", alt="Ảnh đại diện người dùng")
+        
       h2 Cập nhật thông tin cá nhân
-      form(id="profileForm")
+      form#profileForm
         .form-group
-          label(for="fullName") Họ và tên *
-          input(type="text", id="fullName", name="fullName", required)
+          label(for="name") Họ và tên *
+          input(type="text", id="name", name="name", required)
         
         .form-group
           label(for="gender") Giới tính *

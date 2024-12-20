@@ -1,0 +1,47 @@
+.snowflake {
+    position: fixed;
+    top: -50px;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    background-image: url('/client/images/snowflake.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 1;
+    animation: fall 170s linear infinite, sway 3s ease-in-out infinite, rotateSnowflake 30s linear infinite; 
+    transform-origin: center center;
+    z-index: 9999;
+    filter: invert(100%) sepia(100%) saturate(7000%) hue-rotate(1000deg);
+}
+
+/* Hiệu ứng rơi */
+@keyframes fall {
+    0% {
+        top: -50px;
+        opacity: 1;
+    }
+    100% {
+        top: 100%;
+        opacity: 0.4;
+    }
+}
+
+/* Hiệu ứng rung lắc */
+@keyframes sway {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(30px); 
+    }
+}
+
+/* Hiệu ứng xoay */
+@keyframes rotateSnowflake {
+    0% {
+        transform: rotate(0deg); 
+    }
+    100% {
+        transform: rotate(160deg); 
+    }
+}

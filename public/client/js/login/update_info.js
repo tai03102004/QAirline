@@ -1,25 +1,49 @@
-document
-  .getElementById("profileForm")
-  .addEventListener("submit", function (event) {
-    event.preventDefault();
+document.getElementById('profileForm').addEventListener('submit', function (e) {
+  e.preventDefault();
 
-    // Lấy dữ liệu từ form
-    const formData = {
-      fullName: document.getElementById("fullName").value,
-      gender: document.getElementById("gender").value,
-      dob: document.getElementById("dob").value,
-      nationality: document.getElementById("nationality").value,
-      address: document.getElementById("address").value,
-      province: document.getElementById("province").value,
-      city: document.getElementById("city").value,
-      phone: document.getElementById("phone").value,
-      email: document.getElementById("email").value,
-      passport: document.getElementById("passport").value,
-    };
+  // Collect form data
+  const name = document.getElementById('name').value;
+  const gender = document.getElementById('gender').value;
+  const dob = document.getElementById('dob').value;
+  const nationality = document.getElementById('nationality').value;
+  const address = document.getElementById('address').value;
+  const province = document.getElementById('province').value;
+  const city = document.getElementById('city').value;
+  const phone = document.getElementById('phone').value;
+  const email = document.getElementById('email').value;
+  const passport = document.getElementById('passport').value;
 
-    // Lưu dữ liệu vào localStorage
-    localStorage.setItem("profileData", JSON.stringify(formData));
+  // Prepare data to send
+  const formData = {
+    name,
+    gender,
+    dob,
+    nationality,
+    address,
+    province,
+    city,
+    phone,
+    email,
+    passport,
+  };
 
-    // Chuyển sang trang profile
-    window.location.href = "profile.pug";
-  });
+  // Send the data to the server using fetch
+  fetch('/api/account/update-profile', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        alert('Thông tin đã được cập nhật!');
+      } else {
+        alert('Cập nhật không thành công: ' + data.message);
+      }
+    })
+    .catch((error) => {
+      alert('Lỗi: ' + error.message);
+    });
+});
