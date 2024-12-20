@@ -36,21 +36,28 @@ function generatePassengerForms() {
 
 generatePassengerForms();
 
+const bookingForm = document.querySelector('#booking-form')
+
 document.getElementById('submitForm').addEventListener('click', async () => {
+    if (!bookingForm.checkValidity()) {
+        bookingForm.reportValidity()
+        return
+    }
     const passengers = [];
     const passengerForms = document.getElementById('passenger-info-container').childNodes;
     const email = document.querySelector('.contact-email').value;
-    const phone = document.querySelector('.contact-phone').value
-    
+    const phone = document.querySelector('.contact-phone').value;
+
     passengerForms.forEach(form => {
-        const fullname = form.querySelector('.first-name').value + " " + form.querySelector('.last-name').value;
+        const fullname = form.querySelector('.first-name').value.trim() + " " + form.querySelector('.last-name').value.trim();
+
         var departureTime = new Date(`${flight.departureTime}Z`);
         var arrivalTime = new Date(`${flight.arrivalTime}Z`);
         const passenger = {
             flightId: flight._id,
             ticketId: flight._id.substring(flight._id.length - 3) + flight.flightNumber + "111",
             passengerName: fullname,
-            passengerEmail: email,
+            passengerEmail: email.trim(),
             passengerPhone: phone,
             flightNumber: flight.flightNumber,
             departureTime: departureTime,
