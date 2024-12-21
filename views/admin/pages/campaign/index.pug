@@ -17,15 +17,17 @@ block main
                 +sort(keyword)
         .toolbar-right
             +search(keyword)
-            button(style="margin-left: 5px;").btn-add-promo + Add Promo
+            a(
+                href=`/${prefixAdmin}/campaign/create`
+            ).btn-add-promo + Thêm mới 
 
     main.promo-container
         each info in infos 
             .promo-card
-                if info.image
-                    img.promo-image(src=`/admin/image/${info.image}` alt=info.title)
+                if info.thumbnail
+                    img.promo-image(src=`${info.thumbnail}` alt=info.title)
                 else
-                    img.promo-image(src='/admin/image/default.jpg' alt='No Image')
+                    img.promo-image(src='/admin/image/campaign.jpeg' alt='No Image')
                 .promo-content
                     h2= info.title
                     p
@@ -36,12 +38,24 @@ block main
                         span(style="color: green; font-weight: bold;") (Promotion)
                     else if info.type === "announcement"
                         span(style="color: blue; font-weight: bold;") (Announcement)
-                    else if info.type === "news"
+                    else if info.type === "news" 
                         span(style="color: orange; font-weight: bold;") (News)
                     else if info.type === "introduction"
                         span(style="color: purple; font-weight: bold;") (Introduction)
                 .promo-footer
-                    button.btn.edit Edit
-                    button.btn.delete Delete
-
+                    a(
+                        href=`/${prefixAdmin}/campaign/edit/${info._id}`
+                        class="btn btn-warning btn-sm"
+                    ) Sửa
+                    button( 
+                        class="btn btn-danger btn-sm ml-1"
+                        button-delete
+                        data-id=info._id
+                    ) Delete
+    form(
+        id="form-delete-item"
+        method="POST"
+        action=""
+        data-path=`/${prefixAdmin}/campaign/delete`
+    ) 
     script(src="/admin/script/scriptInfoAirplane.js") 

@@ -1,0 +1,127 @@
+extends ../../layouts/defaultNotRight.pug
+include ../../mixins/alert.pug
+include ../../mixins/pagination.pug
+include ../../mixins/filter-status.pug
+include ../../mixins/search.pug
+include ../../mixins/sort.pug
+include ../../mixins/moment.pug
+
+block main
+  +alert-success(5000)
+  h1(class="mb-4 mt-4") Danh sách sân bay
+  .card.mb-3
+    .card-header Bộ lọc và Tìm kiếm
+    .card-body
+      .row
+        .col-6
+          +filter-status(filterStatus)
+        .col-6
+          +search(keyword)
+  .card.mb-3
+    .card-header Sắp xếp
+    .card-body
+      .row
+        .col-5
+          +sort()
+
+  .card.mb-3
+    .card-header Danh sách
+    .card-body
+      .row
+        .col-8
+        .col-4
+          .container
+            .text-right
+              a(
+                href=`/${prefixAdmin}/airports/create`
+                class="btn btn-outline-success"
+              ) + Thêm mới
+    table.table.table-hover.table-sm
+    table(
+      class="table table-hover table-sm"
+    )
+      style
+        | th.action-header {
+        |   text-align: left;
+        |   padding-left: 60px;
+        | }
+      thead
+        tr
+          th STT
+          th Tên sân bay
+          th Tỉnh/Thành phố
+          th Mã sân bay
+          th Trạng thái
+          th Ngày tạo
+          th Ngày cập nhật
+          th.action-header Hành động
+
+      tbody
+        if(airports.length > 0)
+          each item, index in airports
+            tr
+              td #{(index + 1) + (pagination.limitItems * (pagination.currentPage - 1))}
+              td #{item.name}
+              td #{item.province}
+              td #{item.code}
+              td
+                if(item.status == "active")
+                  button(
+                    class="badge badge-success"
+                    button-change-status
+                    data-status=item.status
+                    data-id=item._id
+                  ) Hoạt động
+                else
+                  button(
+                    class="badge badge-danger"
+                    button-change-status
+                    data-status=item.status
+                    data-id=item._id
+                  ) Dừng hoạt động
+              td 
+                if(item.createdAt)
+                  div 
+                    +formatDate(item.createdAt)                  
+              td
+                if(item.updatedAt)
+                  div 
+                    +formatDate(item.updatedAt)             
+              td(class="inner-action")
+                a(
+                  href=`/${prefixAdmin}/airports/detail/${item._id}`
+                  class="btn btn-secondary btn-sm"
+                  style="margin-right: 5px"
+                ) Xem chi tiết
+                a(
+                  href=`/${prefixAdmin}/airports/edit/${item._id}`
+                  class="btn btn-warning btn-sm"
+                ) Sửa
+                button(
+                  class="btn btn-danger btn-sm ml-1"
+                  button-delete
+                  data-id=item._id
+                ) Xóa
+
+        else
+          tr
+            td(
+              colspan="8"
+              class="text-center"
+            ) Không tìm thấy sân bay nào
+  form(
+    id="form-change-status"
+    method="POST"
+    action=""
+    data-path=`/${prefixAdmin}/airports/change-status`
+  )
+  form(
+    id="form-delete-item"
+    method="POST"
+    action=""
+    data-path=`/${prefixAdmin}/airports/delete`
+  ) 
+  if(airports.length > 0)
+    +initPagination(pagination)
+
+  script(src="/admin/script/scriptPlane.js") 

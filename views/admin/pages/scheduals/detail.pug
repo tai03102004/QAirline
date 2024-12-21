@@ -1,6 +1,6 @@
 extends ../../layouts/defaultNotRight.pug
 include ../../mixins/alert.pug
-
+include ../../mixins/moment.pug
 block main
     +alert-success(5000)
     h1(class="mb-4 mt-4") Danh sách chuyến bay
@@ -9,38 +9,41 @@ block main
             .flight-detail__airline
                 //- img.flight-detail__logo(src='airline-logo.png', alt='Airline Logo')
                 div
-                    h2 SkyHigh Airlines
+                    h2 #{schedule.flightNumber}
                     p.flight-detail__code
                     | SH-ZY6789 
                     span.flight-detail__status On Time
             .flight-detail__info
                 p
                     | Date: 
-                    span July 1, 2028
+                    span  
+                        +formatDate(schedule.departureTime)
                 p
-                    | Passenger: 
-                    span +207
+                    | Còn: 
+                    span #{schedule.economySeats.available} ghế trống
                 p.flight-detail__price
-                    | $350 
-                    span /pax
-                button.flight-detail__edit-btn Edit
+                    | #{schedule.economySeats.price.toLocaleString('vi-VN')} VND
+                a(href=`/admin/scheduals/edit/${schedule._id}`).flight-detail__edit-btn Edit
         .flight-detail__one
             .flight-detail__timeline
                 .flight-detail__timeline-item
-                    p.flight-detail__time 6:00 AM
+                    p.flight-detail__time  
+                        +formatTime(schedule.departureTime)
+
                 .flight-detail__line
                     span.material-symbols-sharp(style="color:#EAC452; font-size: 40px") flight_land
                 .flight-detail__timeline-item
-                    p.flight-detail__time 9:00 PM
+                    p.flight-detail__time 
+                        +formatTime(schedule.arrivalTime)
             .flight-detail__very_body
                 .flight-detail__location_before 
-                    div(style="font-weight: 600; font-size:15px") Los Angeles
+                    div(style="font-weight: 600; font-size:15px") #{schedule.departureLocation}
                     p(style="margin-top: 10px")
                         | Los Angeles International Airport (LAX)
                         br
                         | Terminal B
                 .flight-detail__body
-                    h3 SkyHigh Airlines
+                    h3 #{schedule.flightNumber}
                     .flight-detail__description
                         .model
                             | Model: 
@@ -76,7 +79,7 @@ block main
                                     p Refund: 
                                 p.flight-detail__refund_sub 10% cancellation fee if cancelled 48 hours before departure
                 .flight-detail__location_after
-                    div(style="font-weight: 600; font-size:15px") New York
+                    div(style="font-weight: 600; font-size:15px") #{schedule.arrivalLocation}
                     p(style="margin-top: 10px")
                         | John F. Kennedy International Airport (JFK)
                         br

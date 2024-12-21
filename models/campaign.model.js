@@ -14,9 +14,8 @@ const airlineInfoSchema = new mongoose.Schema({
         type: String,
         required: true, // Nội dung chi tiết của thông báo
     },
-    image: {
+    thumbnail: {
         type: String, // URL hoặc tên file hình ảnh đại diện (nếu có)
-        default: null,
     },
     startDate: {
         type: Date, // Ngày bắt đầu hiệu lực (đối với khuyến mãi hoặc thông báo)
@@ -45,7 +44,7 @@ const airlineInfoSchema = new mongoose.Schema({
         default: false, // Đánh dấu thông tin đã bị xóa
     },
     deletedAt: {
-        type: Date, // Ngày xóa thông tin
+        type: Date, // Ngày xóa thông tin 
     }
 }, {
     timestamps: true, // Tự động tạo createdAt và updatedAt

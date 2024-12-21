@@ -1,0 +1,55 @@
+extends ../layouts/default.pug
+
+block styles
+  link(rel="stylesheet", href="/client/css/profile.css")
+
+block main
+    .container.profile-container  
+      
+      h2 Hồ sơ người dùng
+
+      form#profileForm
+        .form-group
+          label(for="name") Họ và tên: 
+          div(class="info-display", id="name-display")= user && user.name ? user.name : 'Chưa cập nhật'
+
+        .form-group
+          label(for="gender") Giới tính: 
+          div(id="gender-display", class="info-display")= user && user.gender ? user.gender : 'Chưa cập nhật'
+
+        .form-group
+          label(for="dob") Ngày sinh: 
+          div(id="dob-display", class="info-display")= user && user.dob ? user.dob : 'Chưa cập nhật'
+
+        .form-group
+          label(for="nationality") Quốc tịch: 
+          div(id="nationality-display", class="info-display")= user && user.nationality ? user.nationality : 'Chưa cập nhật'
+
+        .form-group
+          label(for="address") Địa chỉ: 
+          div(id="address-display", class="info-display")= user && user.address ? user.address : 'Chưa cập nhật'
+
+        .form-group
+          label(for="province") Tỉnh/Thành phố: 
+          div(id="province-display", class="info-display")= user && user.province ? user.province : 'Chưa cập nhật'
+
+        .form-group
+          label(for="city") Quận/Huyện: 
+          div(id="city-display", class="info-display")= user && user.city ? user.city : 'Chưa cập nhật'
+
+        .form-group
+          label(for="phone") Số điện thoại: 
+          div(id="phone-display", class="info-display")= user && user.phone ? user.phone : 'Chưa cập nhật'
+
+        .form-group
+          label(for="email") Email: 
+          div(id="email-display", class="info-display")= user && user.email ? user.email : 'Chưa cập nhật'
+
+        .form-group
+          label(for="passport") Số hộ chiếu: 
+          div(id="passport-display", class="info-display")= user && user.passport ? user.passport : 'Chưa cập nhật'
+
+        button#editBtn Chỉnh sửa
+
+    script(src="/client/js/login/profile.js")
+    
