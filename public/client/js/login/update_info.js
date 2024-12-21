@@ -41,6 +41,7 @@ document.getElementById('profileForm').addEventListener('submit', function (e) {
     .then((data) => {
       if (data.success) {
         alert('Thông tin đã được cập nhật!');
+        window.location.href = '/';
       } else {
         alert('Cập nhật không thành công: ' + data.message);
       }
