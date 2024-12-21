@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/flight-information', (req, res) => {
-    res.render('client/pages/flightinfo/flight_list'); 
-});
+const controller = require("../../controllers/client/flight_list.controller.js");
+
+router.get('/', controller.index);
 
 module.exports = router;

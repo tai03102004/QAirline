@@ -12,4 +12,8 @@ router.get("/detail/:id", controller.detail);
 router.get("/create", controller.create);
 router.post("/create", controller.createPost);
 
+// Sửa 1 chuyến bay
+router.get("/edit/:id", controller.edit);
+router.patch("/edit/:id", controller.editPost);
+
 module.exports = router;

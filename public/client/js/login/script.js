@@ -34,12 +34,13 @@ document.querySelectorAll('form').forEach((form) => {
         if (response.status !== 200) {
           throw new Error(data.message || 'Đã xảy ra lỗi!');
         } else {
+          localStorage.setItem('authToken', data.token);
           if (url.includes('loginaccount')) {
             alert("Đăng nhập thành công!");
             window.location.href = '/';  
           } else if (url.includes('signupaccount')) {
             alert("Đăng ký thành công!");
-            window.location.href = '/profile';  
+            window.location.href = '/update-profile';  
           }
         }
       } else {

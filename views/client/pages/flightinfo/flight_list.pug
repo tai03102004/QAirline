@@ -4,254 +4,37 @@ block styles
   link(rel="stylesheet", href="/client/css/flightinfo/flight_list.css")
 
 block main
-    .text-container
-        .content-box(style="background: #f9fafb")
-          .title THÔNG TIN CHUYẾN BAY
+  .text-container
+    .content-box(style="background: #f9fafb")
+      .title THÔNG TIN CHUYẾN BAY
 
-          // Route 1: Hà Nội - Hồ Chí Minh
-          .subtitle#1
-            | HÀ NỘI (HAN) - TP. HỒ CHÍ MINH (SGN)
-          .content
-            div(style="overflow: hidden; overflow-x: auto")
-              table.table(border="1", cellpadding="1", cellspacing="1", style="font-size: 1rem; text-align: inherit; width: 100%")
-                thead
+      each route, flights in groupedFlights
+        .subtitle #{flights}
+        .content
+          div(style="overflow: hidden; overflow-x: auto")
+            table.table(border="1", cellpadding="1", cellspacing="1", style="font-size: 1rem; text-align: inherit; width: 100%")
+              thead
+                tr
+                  th(nowrap, scope="row")
+                    p(style="text-align: center")
+                      strong Chặng bay
+                  th(nowrap, scope="col")
+                    p(style="text-align: center")
+                      strong Số hiệu
+                  th(nowrap, scope="col")
+                    p(style="text-align: center")
+                      strong Thời gian cất cánh
+                  th(nowrap, scope="col")
+                    p(style="text-align: center")
+                      strong Thời gian hạ cánh
+                  th(nowrap, scope="col")
+                    p(style="text-align: center")
+                      strong Tần suất
+              tbody
+                each flight in route
                   tr
-                    th(nowrap, scope="row")
-                      p(style="text-align: center")
-                        strong Chặng bay
-                    th(nowrap, scope="col")
-                      p(style="text-align: center")
-                        strong Số hiệu
-                    th(nowrap, scope="col")
-                      p(style="text-align: center")
-                        strong Thời gian cất cánh
-                    th(nowrap, scope="col")
-                      p(style="text-align: center")
-                        strong Thời gian hạ cánh
-                    th(nowrap, scope="col")
-                      p(style="text-align: center")
-                        strong Tần suất
-                tbody
-                  tr
-                    td(scope="row", style="text-align: center") HANSGN
-                    td(style="text-align: center") VN207
-                    td(style="text-align: center") 08:05
-                    td(style="text-align: center") 10:15
-                    td(style="text-align: center") Hằng ngày
-                  tr
-                    td(scope="row", style="text-align: center") HANSGN
-                    td(style="text-align: center") VN255
-                    td(style="text-align: center") 16:20
-                    td(style="text-align: center") 18:30
-                    td(style="text-align: center") Hằng ngày 
-                  tr
-                    td(scope="row", style="text-align: center") SGNHAN
-                    td(style="text-align: center") VN202
-                    td(style="text-align: center") 05:10
-                    td(style="text-align: center") 07:20
-                    td(style="text-align: center") Hằng ngày
-                  tr
-                    td(scope="row", style="text-align: center") SGNHAN
-                    td(style="text-align: center") VN254
-                    td(style="text-align: center") 15:10
-                    td(style="text-align: center") 17:20
-                    td(style="text-align: center") Hằng ngày
-                  tr
-                    td(scope="row", style="text-align: center") SGNHAN
-                    td(style="text-align: center") VN288
-                    td(style="text-align: center") 23:20
-                    td(style="text-align: center") 01:25
-                    td(style="text-align: center") Hằng ngày
-
-          #txtp251accordion0
-            .d-flex
-              .col-3.txtp25_nonpadding
-              .col-9.txtp25_nonpadding.bg-white
-
-          .d-block.navMenu(style="background-color: #f2f4f7")
-            .col-12.col-lg-8.p-0.mx-auto
-              ul#dropdownList.w-100.nav.nav-pills.nav-fill.justify-content-center.ulTab(style="z-index: 1")
-
-          #txtp25accordion00
-            #txtp25lv00.collapse.show
-              .d-md-flex.d-none.justify-content-start
-              .dropdown.d-block.d-md-none
-                .dropdown-menu(aria-labelledby="dropdownMenuButton")
-              .content
-
-          // Route 2: Hà Nội - Đà Nẵng
-          .subtitle#2
-            | HÀ NỘI (HAN) - ĐÀ NẴNG (DAD)
-          .content
-            div(style="overflow: hidden; overflow-x: auto")
-              table.table(border="1", cellpadding="1", cellspacing="1", style="font-size: 1rem; text-align: inherit; width: 100%")
-                thead
-                  tr
-                    th(nowrap, scope="row")
-                      p(style="text-align: center")
-                        strong Chặng bay
-                    th(nowrap, scope="col")
-                      p(style="text-align: center")
-                        strong Số hiệu
-                    th(nowrap, scope="col")
-                      p(style="text-align: center")
-                        strong Thời gian cất cánh
-                    th(nowrap, scope="col")
-                      p(style="text-align: center")
-                        strong Thời gian hạ cánh
-                    th(nowrap, scope="col")
-                      p(style="text-align: center")
-                        strong Tần suất
-                tbody
-                  tr
-                    td(scope="row", style="text-align: center") HANDAD
-                    td(style="text-align: center") VN102
-                    td(style="text-align: center") 07:55
-                    td(style="text-align: center") 09:20
-                    td(style="text-align: center") Thứ 4, 6, chủ nhật
-                  tr
-                    td(scope="row", style="text-align: center") HANDAD
-                    td(style="text-align: center") VN116
-                    td(style="text-align: center") 13:40
-                    td(style="text-align: center") 15:05
-                    td(style="text-align: center") Thứ 2, 3, 5, 7
-                  tr
-                    td(scope="row", style="text-align: center") DADHAN
-                    td(style="text-align: center") VN124
-                    td(style="text-align: center") 18:25
-                    td(style="text-align: center") 19:50
-                    td(style="text-align: center") Thứ 4, 6, chủ nhật
-                  tr
-                    td(scope="row", style="text-align: center") DADHAN
-                    td(style="text-align: center") VN103
-                    td(style="text-align: center") 07:40
-                    td(style="text-align: center") 09:05
-                    td(style="text-align: center") Thứ 2, 3, 5, 7
-
-          #txtp251accordion1
-            .d-flex
-              .col-3.txtp25_nonpadding
-              .col-9.txtp25_nonpadding.bg-white
-
-          .d-block.navMenu(style="background-color: #f2f4f7")
-            .col-12.col-lg-8.p-0.mx-auto
-              ul#dropdownList.w-100.nav.nav-pills.nav-fill.justify-content-center.ulTab(style="z-index: 1")
-
-          #txtp25accordion10
-            #txtp25lv10.collapse.show
-              .d-md-flex.d-none.justify-content-start
-              .dropdown.d-block.d-md-none
-                .dropdown-menu(aria-labelledby="dropdownMenuButton")
-              .content
-
-          // Route 3: Hồ Chí Minh - Đà Nẵng
-          .subtitle#3
-            | TP. HỒ CHÍ MINH (SGN) - ĐÀ NẴNG (DAD)
-          .content
-            div(style="overflow: hidden; overflow-x: auto")
-              table.table(border="1", cellpadding="1", cellspacing="1", style="font-size: 1rem; text-align: inherit; width: 100%")
-                thead
-                  tr
-                    th(nowrap, scope="row")
-                      p(style="text-align: center")
-                        strong Chặng bay
-                    th(nowrap, scope="col")
-                      p(style="text-align: center")
-                        strong Số hiệu
-                    th(nowrap, scope="col")
-                      p(style="text-align: center")
-                        strong Thời gian cất cánh
-                    th(nowrap, scope="col")
-                      p(style="text-align: center")
-                        strong Thời gian hạ cánh
-                    th(nowrap, scope="col")
-                      p(style="text-align: center")
-                        strong Tần suất
-                tbody
-                  tr
-                    td(scope="row", style="text-align: center") DADSGN
-                    td(style="text-align: center") VN165
-                    td(style="text-align: center") 11:50
-                    td(style="text-align: center") 13:25
-                    td(style="text-align: center") Hằng ngày
-                  tr
-                    td(scope="row", style="text-align: center") DADSGN
-                    td(style="text-align: center") VN173
-                    td(style="text-align: center") 16:00
-                    td(style="text-align: center") 17:30
-                    td(style="text-align: center") Thứ 2
-                  tr
-                    td(scope="row", style="text-align: center") SGNDAD
-                    td(style="text-align: center") VN170
-                    td(style="text-align: center") 14:05
-                    td(style="text-align: center") 15:30
-                    td(style="text-align: center") Hằng ngày
-
-          #txtp251accordion2
-            .d-flex
-              .col-3.txtp25_nonpadding
-              .col-9.txtp25_nonpadding.bg-white
-
-          .d-block.navMenu(style="background-color: #f2f4f7")
-            .col-12.col-lg-8.p-0.mx-auto
-              ul#dropdownList.w-100.nav.nav-pills.nav-fill.justify-content-center.ulTab(style="z-index: 1")
-
-          #txtp25accordion20
-            #txtp25lv20.collapse.show
-              .d-md-flex.d-none.justify-content-start
-              .dropdown.d-block.d-md-none
-                .dropdown-menu(aria-labelledby="dropdownMenuButton")
-              .content
-
-          // Route 4: Hà Nội - Nha Trang
-          .subtitle#4 
-            | HÀ NỘI (HAN) - NHA TRANG (CXR)
-          .content
-            div(style="overflow: hidden; overflow-x: auto")
-              table.table(border="1", cellpadding="1", cellspacing="1", style="font-size: 1rem; text-align: inherit; width: 100%")
-                thead
-                  tr
-                    th(nowrap, scope="row")
-                      p(style="text-align: center")
-                        strong Chặng bay
-                    th(nowrap, scope="col")
-                      p(style="text-align: center")
-                        strong Số hiệu
-                    th(nowrap, scope="col")
-                      p(style="text-align: center")
-                        strong Thời gian cất cánh
-                    th(nowrap, scope="col")
-                      p(style="text-align: center")
-                        strong Thời gian hạ cánh
-                    th(nowrap, scope="col")
-                      p(style="text-align: center")
-                        strong Tần suất
-                tbody
-                  tr
-                    td(scope="row", style="text-align: center") CXRHAN
-                    td(style="text-align: center") VN1416
-                    td(style="text-align: center") 15:55
-                    td(style="text-align: center") 17:55
-                    td(style="text-align: center") Hằng ngày
-                  tr
-                    td(scope="row", style="text-align: center") HANCXR
-                    td(style="text-align: center") VN1415
-                    td(style="text-align: center") 13:25
-                    td(style="text-align: center") 15:25
-                    td(style="text-align: center") Hằng ngày
-                  
-          #txtp251accordion3
-            .d-flex
-              .col-3.txtp25_nonpadding
-              .col-9.txtp25_nonpadding.bg-white
-
-          .d-block.navMenu(style="background-color: #f2f4f7")
-            .col-12.col-lg-8.p-0.mx-auto
-              ul#dropdownList.w-100.nav.nav-pills.nav-fill.justify-content-center.ulTab(style="z-index: 1")
-
-          #txtp25accordion30
-            #txtp25lv30.collapse.show
-              .d-md-flex.d-none.justify-content-start
-              .dropdown.d-block.d-md-none
-                .dropdown-menu(aria-labelledby="dropdownMenuButton")
-              .content
+                    td(scope="row", style="text-align: center") #{flight.departureLocation + flight.arrivalLocation}
+                    td(style="text-align: center") #{flight.flightNumber}
+                    td(style="text-align: center") #{flight.departureTime}
+                    td(style="text-align: center") #{flight.arrivalTime}
+                    td(style="text-align: center") #{flight.frequency}

@@ -43,7 +43,7 @@
                 </div>
                 .legend
                     if(scheduals.length > 0)
-                        each item,index in scheduals
+                        each item, index in scheduals.slice(0, 5)
                             .item
                                 span.color.gold
                                 |  #{item.flightNumber} - #{(1 * 100 / scheduals.length).toFixed(2)}%

@@ -12,6 +12,9 @@ const myAccountRoutes = require("./my-auth.route");
 const accountRoutes = require("./account-client.route");
 const roleRoutes = require("./roles.route");
 
+const airportRoutes = require("./airport.route");
+const flightInfoRoutes = require("./flightInfo.route");
+
 const authMiddleware = require("../../middlewares/admin/auth.middlewares");
 
 
@@ -28,6 +31,9 @@ module.exports = (app) => {
 
     app.use(PATH_ADMIN + "/my-account", authMiddleware.requireAuth, myAccountRoutes);
     app.use(PATH_ADMIN + "/roles", authMiddleware.requireAuth, roleRoutes);
+
+    app.use(PATH_ADMIN + "/airports", authMiddleware.requireAuth, airportRoutes);
+    app.use(PATH_ADMIN + "/flight_info", authMiddleware.requireAuth, flightInfoRoutes);
 
     app.use(PATH_ADMIN + "/auth", authRoutes);
 };

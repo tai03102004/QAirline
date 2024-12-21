@@ -1,0 +1,131 @@
+extends ../../layouts/defaultNotRight.pug
+include ../../mixins/alert.pug
+include ../../mixins/pagination.pug
+include ../../mixins/filter-status.pug
+include ../../mixins/search.pug
+include ../../mixins/sort.pug
+
+block main
+  +alert-success(5000)
+  h1(class="mb-4 mt-4") Danh sách chuyến bay trong ngày
+  .card.mb-3
+    .card-header Bộ lọc và Tìm kiếm
+    .card-body
+      .row
+        .col-6
+          +filter-status(filterStatus)
+        .col-6
+          +search(keyword)
+  .card.mb-3
+    .card-header Sắp xếp
+    .card-body
+      .row
+        .col-5
+          +sort()
+
+  .card.mb-3
+    .card-header Danh sách chuyến bay
+    .card-body
+      .row
+        .col-8
+        .col-4
+          .container
+            .text-right
+              a(
+                href=`/${prefixAdmin}/flights/create`
+                class="btn btn-outline-success"
+              ) + Thêm mới
+    table.table.table-hover.table-sm
+    table(
+      class="table table-hover table-sm"
+    )
+      style
+        | th.action-header {
+        |   text-align: left;
+        |   padding-left: 60px;
+        | }
+      thead
+        tr
+          th STT
+          th Số hiệu chuyến bay
+          th Chặng bay
+          th Địa điểm đi
+          th Địa điểm đến
+          th Giờ cất cánh
+          th Giờ hạ cánh
+          th Tần suất
+          th Trạng thái
+          th.action-header Hành động
+
+      tbody
+        if(flightInfo.length > 0)
+          each item, index in flightInfo
+            tr
+              td #{(index + 1) + (pagination.limitItems * (pagination.currentPage - 1))}
+              td #{item.flightNumber}
+              td #{item.flightRoute}
+              td #{item.departureLocation}
+              td #{item.arrivalLocation}
+              td #{item.departureTime}
+              td #{item.arrivalTime}
+              td #{item.frequency}
+              td
+                if(item.status == "Scheduled")
+                  button(
+                    class="badge badge-success"
+                    button-change-status
+                    data-status=item.status
+                    data-id=item._id
+                  ) Đang lên lịch
+                else if(item.status == "Cancelled")
+                  button(
+                    class="badge badge-danger"
+                    button-change-status
+                    data-status=item.status
+                    data-id=item._id
+                  ) Đã hủy
+                else if(item.status == "Delayed")
+                  button(
+                    class="badge badge-warning"
+                    button-change-status
+                    data-status=item.status
+                    data-id=item._id
+                  ) Bị hoãn
+              td(class="inner-action")
+                a(
+                  href=`/${prefixAdmin}/flights/detail/${item._id}`
+                  class="btn btn-secondary btn-sm"
+                  style="margin-right: 5px"
+                ) Xem chi tiết
+                a(
+                  href=`/${prefixAdmin}/flights/edit/${item._id}`
+                  class="btn btn-warning btn-sm"
+                ) Sửa
+                button(
+                  class="btn btn-danger btn-sm ml-1"
+                  button-delete
+                  data-id=item._id
+                ) Xóa
+
+        else
+          tr
+            td(
+              colspan="10"
+              class="text-center"
+            ) Không tìm thấy chuyến bay nào
+  form(
+    id="form-change-status"
+    method="POST"
+    action=""
+    data-path=`/${prefixAdmin}/flights/change-status`
+  )
+  form(
+    id="form-delete-item"
+    method="POST"
+    action=""
+    data-path=`/${prefixAdmin}/flights/delete`
+  ) 
+  if(flightInfo.length > 0)
+    +initPagination(pagination)
+
+  script(src="/admin/script/scriptPlane.js") 

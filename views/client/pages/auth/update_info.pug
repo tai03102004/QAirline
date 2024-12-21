@@ -15,57 +15,57 @@ html(lang="vi")
       form#profileForm
         .form-group
           label(for="name") Họ và tên *
-          input(type="text", id="name", name="name", )
+          input(type="text", id="name", name="name", value= user && user.name ? user.name : '', required)
         
         .form-group
           label(for="gender") Giới tính *
-          select(id="gender", name="gender", )
+          select(id="gender", name="gender", required)
             option(value="") Chọn giới tính
-            option(value="Nam") Nam
-            option(value="Nữ") Nữ
-            option(value="Khác") Khác
+            option(value="Nam", selected= user && user.gender === 'Nam' ? 'selected' : '') Nam
+            option(value="Nữ", selected= user && user.gender === 'Nữ' ? 'selected' : '') Nữ
+            option(value="Khác", selected= user && user.gender === 'Khác' ? 'selected' : '') Khác
         
         .form-group
           label(for="dob") Ngày sinh *
-          input(type="date", id="dob", name="dob", )
+          input(type="date", id="dob", name="dob", value= user && user.dob ? user.dob : '', required)
         
         .form-group
           label(for="nationality") Quốc tịch *
-          select(id="nationality", name="nationality", )
-            option(value="") Chọn quốc tịch
-            option(value="VN") Việt Nam
-            option(value="US") Hoa Kỳ
-            option(value="UK") Vương quốc Anh
-            option(value="FR") Pháp
-            option(value="JP") Nhật Bản
-            option(value="KR") Hàn Quốc
+          select(id="nationality", name="nationality", required)
+            option(value="VN", selected= user && user.nationality === 'VN' ? 'selected' : '') Việt Nam
+            option(value="US", selected= user && user.nationality === 'US' ? 'selected' : '') Hoa Kỳ
+            option(value="UK", selected= user && user.nationality === 'UK' ? 'selected' : '') Anh
+            option(value="FR", selected= user && user.nationality === 'FR' ? 'selected' : '') Pháp
+            option(value="JP", selected= user && user.nationality === 'JP' ? 'selected' : '') Nhật Bản
+            option(value="KR", selected= user && user.nationality === 'KR' ? 'selected' : '') Hàn Quốc
+            option(value="", selected= user && user.nationality === '' ? 'selected' : '') Chọn quốc tịch
         
         .form-group
           label(for="address") Địa chỉ *
-          textarea(id="address", name="address", rows="4", )
+          textarea(id="address", name="address", rows="4", required)= user && user.address ? user.address : ''
         
         .form-group
           label(for="province") Tỉnh/Thành phố *
-          input(type="text", id="province", name="province", )
+          input(type="text", id="province", name="province", value= user && user.province ? user.province : '', required)
         
         .form-group
           label(for="city") Quận/Huyện *
-          input(type="text", id="city", name="city", )
+          input(type="text", id="city", name="city", value= user && user.city ? user.city : '', required)
         
         .form-group
           label(for="phone") Số điện thoại *
-          input(type="tel", id="phone", name="phone", )
+          input(type="tel", id="phone", name="phone", value= user && user.phone ? user.phone : '', required)
         
         .form-group
           label(for="email") Email *
-          input(type="email", id="email", name="email", )
+          input(type="email", id="email", name="email", value= user && user.email ? user.email : '', required)
         
         .form-group
           label(for="passport") Số hộ chiếu
-          input(type="text", id="passport", name="passport")
+          input(type="text", id="passport", name="passport", value= user && user.passport ? user.passport : '')
         
         .form-group
           input.input-submit(type="submit", value="Cập nhật")
           a.btn-skip(href="/") Bỏ qua
 
-    script(src="/client/js/update_info.js")
+    script(src="/client/js/login/update_info.js")
