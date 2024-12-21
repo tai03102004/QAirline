@@ -6,20 +6,20 @@ module.exports.requireUserAuth = async (req, res, next) => {
   const token = req.cookies.token;
 
   if (!token) {
-    return res.redirect('/login');  
+    return res.redirect('/login');
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);  
-    const user = await Account.findById(decoded.id);  
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await Account.findById(decoded.id);
 
     if (!user) {
-      return res.redirect('/login'); 
+      return res.redirect('/login');
     }
 
-    res.locals.user = user; 
-    next();  
+    res.locals.user = user;
+    next();
   } catch (err) {
-    return res.redirect('/login');  
+    return res.redirect('/login');
   }
 };
