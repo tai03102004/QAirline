@@ -1,0 +1,32 @@
+h1.promo-title Ưu đãi và Thông báo Nổi bật
+
+section.main.promo-container
+    .swiper
+        .swiper-wrapper
+            each info in infos 
+                .swiper-slide
+                    .promo-card
+                        if info.thumbnail
+                            img.promo-image(src=`${info.thumbnail}` alt=info.title)
+                        else
+                            img.promo-image(src='/admin/image/campaign.jpeg' alt='No Image')
+                        .promo-content
+                            h2= info.title
+                            p
+                                | #{info.content}
+                            if info.startDate && info.endDate
+                                span Promo Period: #{new Date(info.startDate).toLocaleDateString()} - #{new Date(info.endDate).toLocaleDateString()}
+                            if info.type === "promotion"
+                                span(style="color: green; font-weight: bold;") (Promotion)
+                            else if info.type === "announcement"
+                                span(style="color: blue; font-weight: bold;") (Announcement)
+                            else if info.type === "news" 
+                                span(style="color: orange; font-weight: bold;") (News)
+                            else if info.type === "introduction"
+                                span(style="color: purple; font-weight: bold;") (Introduction)
+
+    .swiper-button-next
+    .swiper-button-prev
+
+    .swiper-pagination
+    script(src="/client/js/campaign.js")

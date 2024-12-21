@@ -622,6 +622,130 @@ img {
     background-color: rgb(32, 239, 32);
 }
 
+/* Campaign */
+
+/* Section Title */
+.promo-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    color: #444;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Campaign Section */
+.promo-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px 10px;
+    background-color: #f9fafa; /* Light background to make cards stand out */
+    border-radius: 10px;
+}
+
+/* Promo Card */
+.promo-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    width: 320px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    text-align: center;
+}
+
+.promo-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Promo Image */
+.promo-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 3px solid #e8ecef;
+}
+
+/* Promo Content */
+.promo-content {
+    padding: 20px;
+}
+
+.promo-content h2 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 12px;
+}
+
+.promo-content p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.promo-content span {
+    display: block;
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.promo-content span[style="color: green;"] {
+    color: #28a745; /* Use a more vibrant green */
+}
+
+.promo-content span[style="color: blue;"] {
+    color: #007bff; /* Use a bold blue */
+}
+
+.promo-content span[style="color: orange;"] {
+    color: #fd7e14; /* Use an attractive orange */
+}
+
+.promo-content span[style="color: purple;"] {
+    color: #6f42c1; /* Use a softer purple */
+}
+
+.swiper {
+    width: 100%;
+    height: auto;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.promo-card {
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: #000; /* Màu sắc nút điều hướng */
+}
+
+.swiper-pagination-bullet {
+    background: #000; /* Màu sắc các dấu tròn pagination */
+}
+
+
+
 /* Responsive */
 
 @media (width < 1200px) {
@@ -689,6 +813,26 @@ img {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .promo-container {
+        gap: 15px;
+    }
+
+    .promo-card {
+        width: 90%;
+    }
+
+    .promo-content h2 {
+        font-size: 1.3rem;
+    }
+
+    .promo-content p {
+        font-size: 0.95rem;
+    }
+
+    .promo-content span {
+        font-size: 0.85rem;
+    }
+
 }
 @media (width < 600px) {
     .nav__links {
@@ -722,6 +866,20 @@ img {
     .places__slick-slider-item-content {
         display: none;
     }
+    .promo-title {
+        font-size: 1.6rem;
+    }
 
+    .promo-container {
+        padding: 10px;
+    }
+
+    .promo-content h2 {
+        font-size: 1.2rem;
+    }
+
+    .promo-content p {
+        font-size: 0.9rem;
+    }
 }
 

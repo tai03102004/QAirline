@@ -96,5 +96,39 @@ if (sort) {
 
 // End Sort
 
-const filterInfo = document.querySelector(".btn-toolbar");
-console.log(filterInfo);
+// Change Status (Delete)
+
+const buttonsDelete = document.querySelectorAll("[button-delete]");
+if (buttonsDelete.length > 0) {
+    const formDeleteItem = document.querySelector("#form-delete-item");
+    const path = formDeleteItem.getAttribute("data-path"); // admin/products/delete
+    buttonsDelete.forEach(button => {
+        button.addEventListener("click", () => {
+            const confirmDelete = confirm("Bạn có chắc muốn xóa bản ghi này?");
+            if (confirmDelete) {
+                const id = button.getAttribute("data-id");
+                const action = path + `/${id}?_method=DELETE`;
+                formDeleteItem.action = action;
+                formDeleteItem.submit();
+            }
+        });
+    });
+}
+
+// End Change Status (Delete)
+
+// Upload Image
+const uploadImage = document.querySelector("[upload-image]");
+if (uploadImage) {
+    const uploadImageInput = uploadImage.querySelector("[upload-image-input]");
+    const uploadImagePreview = uploadImage.querySelector("[upload-image-preview]");
+
+    uploadImageInput.addEventListener("change", (e) => {
+        if (e.target.files.length) {
+            const image = URL.createObjectURL(e.target.files[0]);
+
+            uploadImagePreview.src = image;
+        }
+    });
+}
+// End Upload Image

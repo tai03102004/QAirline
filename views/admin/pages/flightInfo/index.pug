@@ -5,18 +5,15 @@ include ../../mixins/filter-status.pug
 include ../../mixins/search.pug
 include ../../mixins/sort.pug
 
-
 block main
-  //- if(role.permissions.includes("products_view"))
   +alert-success(5000)
-  h1(class="mb-4 mt-4") Danh sách tàu bay
+  h1(class="mb-4 mt-4") Danh sách chuyến bay trong ngày
   .card.mb-3
     .card-header Bộ lọc và Tìm kiếm
     .card-body
       .row
         .col-6
           +filter-status(filterStatus)
-
         .col-6
           +search(keyword)
   .card.mb-3
@@ -26,25 +23,21 @@ block main
         .col-5
           +sort()
 
-  //- if(role.permissions.includes("products-category_create"))
-
   .card.mb-3
-    .card-header Danh sách
+    .card-header Danh sách chuyến bay
     .card-body
       .row
         .col-8
-          //- +change-multi(`/${prefixAdmin}/products/change-multi?_method=PATCH`)
         .col-4
           .container
             .text-right
               a(
-                href=`/${prefixAdmin}/products/create`
+                href=`/${prefixAdmin}/flights/create`
                 class="btn btn-outline-success"
               ) + Thêm mới
     table.table.table-hover.table-sm
     table(
       class="table table-hover table-sm"
-      checkbox-multi
     )
       style
         | th.action-header {
@@ -54,75 +47,60 @@ block main
       thead
         tr
           th STT
-          th Hình ảnh
-          th Tiêu đề
-          th Giá ($)
-          th Vị trí
+          th Số hiệu chuyến bay
+          th Chặng bay
+          th Địa điểm đi
+          th Địa điểm đến
+          th Giờ cất cánh
+          th Giờ hạ cánh
+          th Tần suất
           th Trạng thái
-          th Ngày tạo
-          th Ngày cập nhật
           th.action-header Hành động
 
       tbody
-        if(plane.length > 0)
-          each item, index in plane
+        if(flightInfo.length > 0)
+          each item, index in flightInfo
             tr
               td #{(index + 1) + (pagination.limitItems * (pagination.currentPage - 1))}
+              td #{item.flightNumber}
+              td #{item.flightRoute}
+              td #{item.departureLocation}
+              td #{item.arrivalLocation}
+              td #{item.departureTime}
+              td #{item.arrivalTime}
+              td #{item.frequency}
               td
-                img(
-                  src=item.thumbnail || '/admin/image/boing_737.jpg' 
-                  alt=item.title
-                  width="100px"
-                  height="auto"
-                )
-              td #{item.title}
-              td #{item.price}$
-              td
-                input(
-                  type="number"
-                  value=item.position
-                  style="width: 60px"
-                  min="1"
-                  name="position" 
-                ) 
-              td
-                if(item.status == "active")
+                if(item.status == "Scheduled")
                   button(
                     class="badge badge-success"
                     button-change-status
                     data-status=item.status
                     data-id=item._id
-                  ) Hoạt động
-                else
+                  ) Đang lên lịch
+                else if(item.status == "Cancelled")
                   button(
                     class="badge badge-danger"
                     button-change-status
                     data-status=item.status
                     data-id=item._id
-                  ) Dừng hoạt động
-              td 
-                if(item.createBy && item.createBy.createAt)
-                  div #{item.createBy.accountFullName || 'Không rõ'}
-                  div 
-                    //- +formatDate(item.createBy.createAt.$date)
-              td
-                if(item.updateBy && item.updateBy.length > 0)
-                  div #{item.updateBy.slice(-1)[0].accountFullName || 'Không rõ'}
-                  div 
-                    //- +formatDate(item.updateBy.slice(-1)[0].updateAt.$date)
+                  ) Đã hủy
+                else if(item.status == "Delayed")
+                  button(
+                    class="badge badge-warning"
+                    button-change-status
+                    data-status=item.status
+                    data-id=item._id
+                  ) Bị hoãn
               td(class="inner-action")
-                //- div #{item._id}
                 a(
-                  href=`/${prefixAdmin}/products/detail/${item._id}`
+                  href=`/${prefixAdmin}/flights/detail/${item._id}`
                   class="btn btn-secondary btn-sm"
                   style="margin-right: 5px"
                 ) Xem chi tiết
-                //- if(role.permissions.includes("products-category_edit"))
                 a(
-                  href=`/${prefixAdmin}/products/edit/${item._id}`
+                  href=`/${prefixAdmin}/flights/edit/${item._id}`
                   class="btn btn-warning btn-sm"
                 ) Sửa
-                //- if(role.permissions.includes("products-category_delete"))
                 button(
                   class="btn btn-danger btn-sm ml-1"
                   button-delete
@@ -134,21 +112,20 @@ block main
             td(
               colspan="10"
               class="text-center"
-            ) Không tìm thấy tàu bay nào
+            ) Không tìm thấy chuyến bay nào
   form(
     id="form-change-status"
     method="POST"
     action=""
-    data-path=`/${prefixAdmin}/products/change-status`
+    data-path=`/${prefixAdmin}/flights/change-status`
   )
   form(
     id="form-delete-item"
     method="POST"
     action=""
-    data-path=`/${prefixAdmin}/products/delete`
+    data-path=`/${prefixAdmin}/flights/delete`
   ) 
-  if(plane.length > 0)
+  if(flightInfo.length > 0)
     +initPagination(pagination)
 
-    
   script(src="/admin/script/scriptPlane.js") 
