@@ -74,6 +74,9 @@ app.use("/", routeFlightInfo);
 const profileRouter = require('./routes/client/update_info.route.js'); 
 app.use('/', profileRouter);
 
+const reouteSearchFlight = require("./routes/client/search.route.js");
+app.use("/", reouteSearchFlight);
+
 // /admin
 const systemConfig = require("./config/system");
 app.locals.prefixAdmin = systemConfig.prefixAdmin;

@@ -53,26 +53,28 @@ window.addEventListener("click", function (event) {
   }
 });
 
-const totalpassengers = document.querySelector('#totalpassengers')
-totalpassengers.value = parseInt(passengersTotal)
+if (passengersTotal && searchInfo) {
+  const totalpassengers = document.querySelector('#totalpassengers')
+  totalpassengers.value = parseInt(passengersTotal)
 
-const departureLocation = document.querySelector('#departureLocation')
-const arrivalLocation = document.querySelector('#arrivalLocation')
-const departDate = document.querySelector('#departDate')
-departureLocation.value = searchInfo.departureLocation
-arrivalLocation.value = searchInfo.arrivalLocation
+  const departureLocation = document.querySelector('#departureLocation')
+  const arrivalLocation = document.querySelector('#arrivalLocation')
+  const departDate = document.querySelector('#departDate')
+  departureLocation.value = searchInfo.departureLocation
+  arrivalLocation.value = searchInfo.arrivalLocation
 
-departDate.value = searchInfo.departDate
+  departDate.value = searchInfo.departDate
 
-const economybtn = document.querySelector('#economyclass')
-const businessbtn = document.querySelector('#businessclass')
-const classchosen = document.querySelector('#classchosen')
+  const economybtn = document.querySelector('#economyclass')
+  const businessbtn = document.querySelector('#businessclass')
+  const classchosen = document.querySelector('#classchosen')
 
-classchosen.value = searchInfo.classchosen
-if (classchosen.value === 'economyclass') {
-  economybtn.classList.add('class-button-choose')
-} else if (classchosen.value === 'businessclass') {
-  businessbtn.classList.add('class-button-choose')
+  classchosen.value = searchInfo.classchosen
+  if (classchosen.value === 'economyclass') {
+    economybtn.classList.add('class-button-choose')
+  } else if (classchosen.value === 'businessclass') {
+    businessbtn.classList.add('class-button-choose')
+  }
 }
 
 const sort = document.querySelector(".sort");
