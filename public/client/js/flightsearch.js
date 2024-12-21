@@ -18,6 +18,7 @@ async function fetchAllAirports() {
 
 const airportData = await fetchAllAirports()
 
+//Thêm dữ liệu sân bay vào dropdown
 locationDropdown.forEach(dropdown => {
   dropdown.innerHTML = ''
   airportData.forEach(airport => {
@@ -27,11 +28,11 @@ locationDropdown.forEach(dropdown => {
   }) 
 })
 
+//Xử lí sự kiện dropdown
 const departInput = document.querySelector('.depart-dropdown .dropdown-input');
 const departContent = document.querySelector('.depart-dropdown .dropdown-content');
 const departItems = departContent.querySelectorAll('ul li');
 
-// Xử lý cho dropdown depart
 departInput.addEventListener('click', () => {
   departContent.style.display = 'block';
 });
@@ -43,10 +44,10 @@ departInput.addEventListener('input', () => {
   departItems.forEach((item) => {
     const text = item.textContent.toLowerCase();
     if (text.includes(filter)) {
-      item.style.display = ''; // Hiển thị
+      item.style.display = '';
       hasResults = true;
     } else {
-      item.style.display = 'none'; // Ẩn
+      item.style.display = 'none';
     }
   });
 
@@ -55,12 +56,11 @@ departInput.addEventListener('input', () => {
 
 departItems.forEach((item) => {
   item.addEventListener('click', () => {
-    departInput.value = item.textContent.trim(); // Đặt giá trị vào input
-    departContent.style.display = 'none'; // Ẩn dropdown
+    departInput.value = item.textContent.trim();
+    departContent.style.display = 'none';
   });
 });
 
-// Xử lý cho dropdown arrive
 const arriveInput = document.querySelector('.arrive-dropdown .dropdown-input');
 const arriveContent = document.querySelector('.arrive-dropdown .dropdown-content');
 const arriveItems = arriveContent.querySelectorAll('ul li');
@@ -76,10 +76,10 @@ arriveInput.addEventListener('input', () => {
   arriveItems.forEach((item) => {
     const text = item.textContent.toLowerCase();
     if (text.includes(filter)) {
-      item.style.display = ''; // Hiển thị
+      item.style.display = '';
       hasResults = true;
     } else {
-      item.style.display = 'none'; // Ẩn
+      item.style.display = 'none';
     }
   });
 
@@ -88,12 +88,11 @@ arriveInput.addEventListener('input', () => {
 
 arriveItems.forEach((item) => {
   item.addEventListener('click', () => {
-    arriveInput.value = item.textContent; // Đặt giá trị vào input
-    arriveContent.style.display = 'none'; // Ẩn dropdown
+    arriveInput.value = item.textContent;
+    arriveContent.style.display = 'none';
   });
 });
 
-// Ẩn cả hai dropdown khi nhấn ra ngoài
 document.addEventListener('click', (event) => {
   if (!departInput.contains(event.target) && !departContent.contains(event.target)) {
     departContent.style.display = 'none';
@@ -103,24 +102,22 @@ document.addEventListener('click', (event) => {
   }
 });
 
+//Xử lí sự kiện thêm hành khách
 document.addEventListener('DOMContentLoaded', () => {
   const maxPassengers = 9; // Giới hạn tổng số hành khách
-  const totalCountElement = document.querySelector('.total-count'); // Phần tử hiển thị tổng số hành khách
+  const totalCountElement = document.querySelector('.total-count');
 
-  // Hàm tính tổng số hành khách
   const calculateTotalPassengers = () => {
       const counts = document.querySelectorAll('.passenger-row .count');
       return Array.from(counts).reduce((total, span) => total + parseInt(span.textContent, 10), 0);
   };
 
-  // Hàm cập nhật số lượng hành khách
   const updatePassengerCount = (button, increment) => {
       const countSpan = button.parentElement.querySelector('.count');
       let currentCount = parseInt(countSpan.textContent, 10);
 
       const totalPassengers = calculateTotalPassengers();
 
-      // Kiểm tra giới hạn
       if (increment > 0 && totalPassengers >= maxPassengers) {
           alert(`You can only book a maximum of ${maxPassengers} passengers.`);
           return;
@@ -129,27 +126,24 @@ document.addEventListener('DOMContentLoaded', () => {
       if (currentCount + increment >= 0 && currentCount + increment <= maxPassengers) {
           countSpan.textContent = currentCount + increment;
 
-          // Cập nhật tổng số hành khách
           const updatedTotal = calculateTotalPassengers();
           totalCountElement.value = updatedTotal;
       }
   };
 
-  // Lấy tất cả các nút tăng và giảm
   const incrementButtons = document.querySelectorAll('.btn-increment');
   const decrementButtons = document.querySelectorAll('.btn-decrement');
 
-  // Gắn sự kiện click cho nút tăng
   incrementButtons.forEach(button => {
       button.addEventListener('click', () => updatePassengerCount(button, 1));
   });
 
-  // Gắn sự kiện click cho nút giảm
   decrementButtons.forEach(button => {
       button.addEventListener('click', () => updatePassengerCount(button, -1));
   });
 });
 
+//Xử lí sự kiện chọn hạng bay
 const economybtn = document.querySelector('#economyclass')
 const businessbtn = document.querySelector('#businessclass')
 const classchosen = document.querySelector('#classchosen')

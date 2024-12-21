@@ -1,10 +1,10 @@
-// Giả lập dữ liệu chuyến bay
 const Data = require("../../../public/client/js/flightinfo/data");
 const Flight = require('../../../models/Flights');
 const Booking = require('../../../models/booking.model')
 const sendMail = require('../../../config/sendEmail')
 const Airport = require('../../../models/airport.model')
 
+//Lấy dữ liệu sân bay
 module.exports.getAllAirports = async (req, res) => {
   try {
     const airports = await Airport.find();
@@ -31,12 +31,14 @@ function calculateTimeDifference(startTime, endTime) {
   return time;
 }
 
+//Trang tìm kiếm
 module.exports.index = (req, res) => {
     res.render('client/pages/flightsearch/index.pug', {
         pageTitle: "Tim kiem"
     });
 }
 
+//Tìm kiếm chuyến bay
 module.exports.searchFlights = async (req, res) => {
     const { departureLocation, arrivalLocation, departDate, totalpassengers, classchosen } = req.query;
     try {
@@ -116,6 +118,7 @@ module.exports.searchFlights = async (req, res) => {
     }
   }
 
+//Đến trang cung cấp thông tin
 module.exports.provideinfo = async (req, res) => {
     const { passengerNumber, flightNumber, seatClassChosen } = req.query;
     console.log(seatClassChosen)
@@ -138,6 +141,7 @@ module.exports.provideinfo = async (req, res) => {
     }
 }
 
+//Hành khách lưu thông tin
 module.exports.savebooking = async (req, res) => {
   try {
       const flight = req.body.flight;

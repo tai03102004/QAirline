@@ -42,6 +42,7 @@ passengers.value = passengersNumber
 //   content.appendChild(document.createElement("br"));
 // });
 
+//Xử lí sự kiện popup chi tiết chuyến bay
 closePopup.addEventListener("click", function () {
   popup.classList.remove("showPopup");
   popupText.innerHTML = "";
@@ -53,6 +54,7 @@ window.addEventListener("click", function (event) {
   }
 });
 
+//Kiểm tra thông tin tìm kiếm trước đó
 if (passengersTotal && searchInfo) {
   const totalpassengers = document.querySelector('#totalpassengers')
   totalpassengers.value = parseInt(passengersTotal)
@@ -77,6 +79,7 @@ if (passengersTotal && searchInfo) {
   }
 }
 
+//Sắp xếp các chuyến bay
 const sort = document.querySelector(".sort");
 if (sort) {
     let url = new URL(window.location.href);
@@ -91,7 +94,6 @@ if (sort) {
 
         window.location.href = url.href;
     })
-    // Click vào clear để xoá sắp xếp : Xoá href ?sortKey=position&sortValue=asc
     const sortClear = sort.querySelector("[sort-clear]");
     if (sortClear) {
         sortClear.addEventListener("click", (e) => {
@@ -100,7 +102,6 @@ if (sort) {
             window.location.href = url.href;
         })
     }
-    // Khi lựa chọn thì nó sẽ không bị load lại cái mặc định
     const sortKey = url.searchParams.get("sortKey");
     const sortValue = url.searchParams.get("sortValue");
     if (sortKey && sortValue) {
@@ -110,6 +111,7 @@ if (sort) {
     }
 }
 
+//Chuyển hạng vé khi sang trang đặt chỗ
 window.changeToSaveBooking = function(isEconomy) {
   const seatClassChosen = document.querySelector('#seatClassChosen')
   if (isEconomy) {
@@ -119,6 +121,7 @@ window.changeToSaveBooking = function(isEconomy) {
   }
 }
 
+//Popup chi tiết
 const detailFlightNumber = document.querySelector('#detailFlightNumber')
 const detailDepartDate = document.querySelector('#detailDepartDate')
 const detailDuration = document.querySelector('#detailDuration')
