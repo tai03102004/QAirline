@@ -4,12 +4,16 @@ const generate = require("../helper/generate");
 const accountSchema = new mongoose.Schema({
     name: String,
     name_id: String,
-    avatar: String,
     email: String,
     phone: String,
-    address: String,
-    gender: String,
     password: String,
+    nationality: String,
+    gender: String,
+    dob: String,
+    address: String,
+    city: String,
+    province: String,
+    passport: String,
 
     tokenUser: {
         type: String,

@@ -11,5 +11,6 @@ router.get('/', flightController.index);
 router.get('/search-flights', flightController.searchFlights);
 router.get('/passengerinfo', flightController.provideinfo)
 router.post('/save-passenger', flightController.savebooking)
+router.get('/getairports', flightController.getAllAirports)
 
 module.exports = router;

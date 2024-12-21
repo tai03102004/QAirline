@@ -19,11 +19,25 @@ aside
         a(href=`/${prefixAdmin}/products`)
             span.material-symbols-sharp rocket_launch
             h3 Tàu bay
+        
+        a(href=`/${prefixAdmin}/airports`)
+            span.material-symbols-sharp airlines
+            h3 Sân bay
+        
+        a(href=`/${prefixAdmin}/flight_info`)
+            span.material-symbols-sharp multiple_airports
+            h3 Danh sách chuyến bay
+        
         //- if(role.permissions.includes("products-category_view"))
     
         a(href=`/${prefixAdmin}/bookings`) 
             span.material-symbols-sharp check_box
             h3  Danh sách đặt vé
+
+        //- if(role.permissions.includes("accounts_view"))
+        a(href=`/${prefixAdmin}/scheduals`) 
+            span.material-symbols-sharp calendar_today
+            h3 Lịch trình
         //- if(role.permissions.includes("roles_view"))
         
         a(href=`/${prefixAdmin}/roles`) 
@@ -35,11 +49,6 @@ aside
         a(href=`/${prefixAdmin}/roles/permissions`) 
             span.material-symbols-sharp group_add
             h3 Phân quyền
-
-        //- if(role.permissions.includes("accounts_view"))
-        a(href=`/${prefixAdmin}/scheduals`) 
-            span.material-symbols-sharp calendar_today
-            h3 Lịch trình
 
         a(href=`/${prefixAdmin}/accounts`) 
             span.material-symbols-sharp person_outline 

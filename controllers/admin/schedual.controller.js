@@ -161,46 +161,68 @@ module.exports.create = async (req, res) => {
 }
 
 // [POST] /admin/scheduals/create
+const mongoose = require('mongoose');
+
 module.exports.createPost = async (req, res) => {
-    // try {
-    // Chuyển đổi thời gian sang Date object
-    req.body.departureTime = new Date(req.body.departureTime);
-    req.body.arrivalTime = new Date(req.body.arrivalTime);
+    try {
+        const {
+            flightNumber,
+            departureLocation,
+            arrivalLocation,
+            plane
+        } = req.body;
 
-    // Chuyển đổi số ghế và giá sang kiểu số
-    const economyTotal = parseInt(req.body.economyTotal, 10);
-    const economyPrice = parseFloat(req.body.economyPrice);
-    const businessTotal = parseInt(req.body.businessTotal, 10);
-    const businessPrice = parseFloat(req.body.businessPrice);
+        // Kiểm tra các trường bắt buộc
+        if (!flightNumber || !departureLocation || !arrivalLocation || !plane) {
+            throw new Error('Missing required fields: flightNumber, departureLocation, arrivalLocation, or plane.');
+        }
 
-    // Tạo cấu trúc seats
-    req.body.economySeats = {
-        total: economyTotal,
-        price: economyPrice
-    };
+        // Kiểm tra và chuyển đổi `plane` sang ObjectId
+        console.log(req.body.plane);
+        // if (!mongoose.Types.ObjectId.isValid(plane)) {
+        //     throw new Error('Invalid plane ID format.');
+        // }
+        // req.body.plane = mongoose.Types.ObjectId(plane);
 
-    req.body.businessSeats = {
-        total: businessTotal,
-        price: businessPrice
-    };
+        // Xử lý thời gian
+        const departureTime = new Date(req.body.departureTime);
+        const arrivalTime = new Date(req.body.arrivalTime);
+        if (isNaN(departureTime) || isNaN(arrivalTime)) {
+            throw new Error('Invalid Date: departureTime or arrivalTime is not valid.');
+        }
 
-    // Xóa các trường không cần thiết nếu có
-    delete req.body.economyTotal;
-    delete req.body.economyPrice;
-    delete req.body.businessTotal;
-    delete req.body.businessPrice;
+        // Tạo cấu trúc ghế
+        req.body.economySeats = {
+            total: parseInt(req.body.economyTotal, 10) || 0,
+            available: parseInt(req.body.economyAvailable, 10) || 0,
+            price: parseFloat(req.body.economyPrice) || 0,
+        };
+        req.body.businessSeats = {
+            total: parseInt(req.body.businessTotal, 10) || 0,
+            available: parseInt(req.body.businessAvailable, 10) || 0,
+            price: parseFloat(req.body.businessPrice) || 0,
+        };
 
-    // Tạo mới một lịch bay
-    const scheduals = new Scheduals(req.body);
-    await scheduals.save();
+        // Xóa các trường không cần thiết
+        delete req.body.economyTotal;
+        delete req.body.economyPrice;
+        delete req.body.economyAvailable;
+        delete req.body.businessTotal;
+        delete req.body.businessPrice;
+        delete req.body.businessAvailable;
 
-    // Chuyển hướng về trang danh sách lịch bay
-    res.redirect(`/${systemConfig.prefixAdmin}/scheduals`);
-    // } catch (err) {
-    //     console.error(err);
-    //     res.redirect("back");
-    // }
+        // Tạo mới lịch bay
+        const scheduals = new Scheduals(req.body);
+        await scheduals.save();
+
+        res.redirect(`/${systemConfig.prefixAdmin}/scheduals`);
+    } catch (err) {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
 };
+
+
 
 // [GET] /admin/scheduals/edit/:id
 module.exports.edit = async (req, res) => {
@@ -230,21 +252,32 @@ module.exports.edit = async (req, res) => {
     }
 };
 
-// [PATCH] /admin/scheduals/edit/:id
+/// [PATCH] /admin/scheduals/edit/:id
 module.exports.editPost = async (req, res) => {
     try {
         const id = req.params.id;
 
+        // Kiểm tra sự tồn tại của ID
+        if (!id) {
+            req.flash("error", "Không tìm thấy ID lịch bay");
+            return res.redirect(`/${systemConfig.prefixAdmin}/scheduals`);
+        }
+
         // Chuyển đổi dữ liệu nhận từ form và chuẩn bị dữ liệu cập nhật
         const updatedData = {
+            flightNumber: req.body.flightNumber,
+            departureLocation: req.body.departureLocation,
+            arrivalLocation: req.body.arrivalLocation,
             departureTime: req.body.departureTime ? new Date(req.body.departureTime) : undefined,
             arrivalTime: req.body.arrivalTime ? new Date(req.body.arrivalTime) : undefined,
             economySeats: {
                 total: parseInt(req.body.economyTotal, 10) || 0,
+                available: parseInt(req.body.economyAvailable, 10) || 0,
                 price: parseFloat(req.body.economyPrice) || 0,
             },
             businessSeats: {
                 total: parseInt(req.body.businessTotal, 10) || 0,
+                available: parseInt(req.body.businessAvailable, 10) || 0,
                 price: parseFloat(req.body.businessPrice) || 0,
             },
             status: req.body.status,
@@ -253,16 +286,17 @@ module.exports.editPost = async (req, res) => {
 
         // Xóa các trường undefined để tránh ghi đè sai trong CSDL
         Object.keys(updatedData).forEach(key => {
-            if (updatedData[key] === undefined) delete updatedData[key];
+            if (updatedData[key] === undefined || updatedData[key] === null) delete updatedData[key];
         });
 
         // Cập nhật lịch bay
         const result = await Scheduals.findByIdAndUpdate(id, updatedData, {
             new: true,
+            runValidators: true, // Kiểm tra ràng buộc dữ liệu
         });
 
         if (!result) {
-            req.flash("error", "Lỗi khi cập nhật lịch bay");
+            req.flash("error", "Không tìm thấy lịch bay cần cập nhật");
             return res.redirect(`/${systemConfig.prefixAdmin}/scheduals`);
         }
 
@@ -270,7 +304,7 @@ module.exports.editPost = async (req, res) => {
         res.redirect(`/${systemConfig.prefixAdmin}/scheduals`);
     } catch (err) {
         console.error("Lỗi khi cập nhật lịch bay:", err);
-        req.flash("error", "Có lỗi xảy ra trong quá trình cập nhật");
+        req.flash("error", `Có lỗi xảy ra: ${err.message}`);
         res.redirect("back");
     }
 };

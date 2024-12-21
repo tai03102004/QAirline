@@ -1026,6 +1026,49 @@ button[type="submit"]:hover {
 }
 /* End Create Sheduals */
 
+/* Shedual Eidt */
+.schedual_edit-form-container {
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.schedual_edit-form-container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+.schedual_edit-form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+.schedual_edit-form-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+.schedual_edit-form-container button {
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.schedual_edit-form-container button:hover {
+    background-color: #218838;
+}
+
 /* ****************
 MEDIA 
 ************************/
@@ -1078,5 +1121,11 @@ MEDIA
     }
 }
 
-
-
+@media screen and (max-width:568px) { 
+    h1 {
+        display: none;
+    }
+    .card,.toolbar,.form_setting {
+        margin-top: 60px;
+    }
+}

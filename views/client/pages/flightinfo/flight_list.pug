@@ -1,0 +1,40 @@
+extends ../../layouts/default.pug
+
+block styles
+  link(rel="stylesheet", href="/client/css/flightinfo/flight_list.css")
+
+block main
+  .text-container
+    .content-box(style="background: #f9fafb")
+      .title THÔNG TIN CHUYẾN BAY
+
+      each route, flights in groupedFlights
+        .subtitle #{flights}
+        .content
+          div(style="overflow: hidden; overflow-x: auto")
+            table.table(border="1", cellpadding="1", cellspacing="1", style="font-size: 1rem; text-align: inherit; width: 100%")
+              thead
+                tr
+                  th(nowrap, scope="row")
+                    p(style="text-align: center")
+                      strong Chặng bay
+                  th(nowrap, scope="col")
+                    p(style="text-align: center")
+                      strong Số hiệu
+                  th(nowrap, scope="col")
+                    p(style="text-align: center")
+                      strong Thời gian cất cánh
+                  th(nowrap, scope="col")
+                    p(style="text-align: center")
+                      strong Thời gian hạ cánh
+                  th(nowrap, scope="col")
+                    p(style="text-align: center")
+                      strong Tần suất
+              tbody
+                each flight in route
+                  tr
+                    td(scope="row", style="text-align: center") #{flight.departureLocation + flight.arrivalLocation}
+                    td(style="text-align: center") #{flight.flightNumber}
+                    td(style="text-align: center") #{flight.departureTime}
+                    td(style="text-align: center") #{flight.arrivalTime}
+                    td(style="text-align: center") #{flight.frequency}

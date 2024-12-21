@@ -8,34 +8,107 @@ block main
     form(
         action=`/${prefixAdmin}/scheduals/create`
         method="POST"
-        enctype="multipart/form-data"
     )
         .container_create
             #createForm.form-container_create_schedual
-                h2 Create New Flight
+                h2 Thêm Lịch Bay Mới
                 .input-group_create_schedual
-                    label(for='flightNumber') Flight Number
-                    input#flightNumber(type='text' name='flightNumber' placeholder='Enter flight number' required)
+                    label(for='flightNumber') Số hiệu chuyến bay
+                    input#flightNumber(
+                        type='text' 
+                        name='flightNumber' 
+                        placeholder='Nhập số hiệu chuyến bay' 
+                        required
+                    )
                 .input-group_create_schedual
-                    label(for='departure') Departure Location
-                    input#departure(type='text' name='departureLocation' placeholder='Enter departure location' required)
+                    label(for='departure') Điểm khởi hành
+                    input#departure(
+                        type='text' 
+                        name='departureLocation' 
+                        placeholder='Nhập điểm khởi hành' 
+                        required
+                    )
                 .input-group_create_schedual
-                    label(for='arrival') Arrival Location
-                    input#arrival(type='text' name='arrivalLocation' placeholder='Enter arrival location' required)
+                    label(for='arrival') Điểm đến
+                    input#arrival(
+                        type='text' 
+                        name='arrivalLocation' 
+                        placeholder='Nhập điểm đến' 
+                        required
+                    )
                 .input-group_create_schedual
-                    label(for='departureTime') Departure Time
-                    input#departureTime(type='datetime-local' name='departureTime' required)
+                    label(for='departureTime') Thời gian khởi hành
+                    input#departureTime(
+                        type='datetime-local' 
+                        name='departureTime' 
+                        required
+                    )
                 .input-group_create_schedual
-                    label(for='arrivalTime') Arrival Time
-                    input#arrivalTime(type='datetime-local' name='arrivalTime' required)
+                    label(for='arrivalTime') Thời gian hạ cánh
+                    input#arrivalTime(
+                        type='datetime-local' 
+                        name='arrivalTime' 
+                        required
+                    )
                 .input-group_create_schedual
-                    label(for='economySeats') Economy Seats (Total / Price)
-                    input#economySeats(type='number' name='economyTotal' placeholder='Total seats' required)
-                    input#economyPrice(type='number' name='economyPrice' placeholder='Price per seat' required)
+                    label(for='plane') Chọn máy bay
+                    select#plane(name='plane' required)
+                        option(value='') -- Chọn máy bay --
+                        option(value='672a52829e89e3359beec92f') Boeing 737
+                        option(value='672a52829e89e3359beec930') Airbus A320
+
                 .input-group_create_schedual
-                    label(for='businessSeats') Business Seats (Total / Price)
-                    input#businessSeats(type='number' name='businessTotal' placeholder='Total seats' required)
-                    input#businessPrice(type='number' name='businessPrice' placeholder='Price per seat' required)
+                    label(for='economySeats') Ghế hạng phổ thông (Tổng / Giá / Còn lại)
+                    input#economySeats(
+                        type='number' 
+                        name='economyTotal' 
+                        placeholder='Tổng số ghế' 
+                        min='0' 
+                        step='1' 
+                        required
+                    )
+                    input#economyPrice(
+                        type='number' 
+                        name='economyPrice' 
+                        placeholder='Giá mỗi ghế' 
+                        min='0' 
+                        step='1000' 
+                        required
+                    )
+                    input#economyAvailable(
+                        type='number' 
+                        name='economyAvailable' 
+                        placeholder='Số ghế còn lại' 
+                        min='0' 
+                        step='1' 
+                        required
+                    )
+                .input-group_create_schedual
+                    label(for='businessSeats') Ghế hạng thương gia (Tổng / Giá / Còn lại)
+                    input#businessSeats(
+                        type='number' 
+                        name='businessTotal' 
+                        placeholder='Tổng số ghế' 
+                        min='0' 
+                        step='1' 
+                        required
+                    )
+                    input#businessPrice(
+                        type='number' 
+                        name='businessPrice' 
+                        placeholder='Giá mỗi ghế' 
+                        min='0' 
+                        step='1000' 
+                        required
+                    )
+                    input#businessAvailable(
+                        type='number' 
+                        name='businessAvailable' 
+                        placeholder='Số ghế còn lại' 
+                        min='0' 
+                        step='1' 
+                        required
+                    )
                 .form-button-group_create_schedual
-                    button.btn-submit(type='submit') Submit
-                    button.btn-cancel(type='reset') Cancel
+                    button.btn-submit(type='submit') Xác nhận
+                    button.btn-cancel(type='reset') Hủy bỏ

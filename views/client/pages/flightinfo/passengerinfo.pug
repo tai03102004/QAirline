@@ -13,7 +13,7 @@ block main
             label(for='contact-email') Email*
             input.contact-email(type='email', name='contact-email', required='')
             label(for='contact-phone') Số điện thoại*
-            input.contact-phone(type='number', name='contact-phone', required='')
+            input.contact-phone(type='text', name='contact-phone', required='', minlength='10', maxlength='10')
         button#submitForm.btn(type='button') Xác nhận
     script.
         const passengerNumData = !{JSON.stringify(passengerNumber)};

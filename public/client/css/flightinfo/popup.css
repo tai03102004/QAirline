@@ -95,13 +95,13 @@
 }
 
 .popup-content strong {
-  font-size: larger;
+  font-size: large;
 }
 
 .popup-content .detail-timeline {
   border-left: 2px solid #0056b3;
   padding-left: 10px;
-  margin-left: 50px;
+  margin-left: 10px;
 }
 
 .popup-content .business {
