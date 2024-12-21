@@ -65,8 +65,8 @@ async function checkTicket() {
             const booking = result.booking
             const departAirport = result.departAirport
             const arriveAirport = result.arriveAirport
-            const departdate = new Date(booking.departureTime);
-            const arrivedate = new Date(booking.arrivalTime);
+            const departdate = new Date(booking.departureTime.replace('Z', ''));
+            const arrivedate = new Date(booking.arrivalTime.replace('Z', ''));
             console.log(departdate.toLocaleString().substr(9))
             const date = departdate.toLocaleString().substr(9);
             bookingId.innerHTML = `<strong>Mã Đặt Chỗ:</strong> ${ticketId}`;
@@ -75,8 +75,8 @@ async function checkTicket() {
             flightDuration.innerHTML = `<strong>Thời Gian Bay:</strong> ${calculateTimeDifference(booking.departureTime, booking.arrivalTime)}`;
             seatclass.innerHTML = `<strong>Hạng:</strong> ${booking.seatClass}`;
             departLocation.innerHTML = `<strong>Khởi hành từ:</strong> ${departAirport.name} (${departAirport.province})`;
-            const departtime = departdate.toLocaleString().substr(0, 9);
-            const arrivetime = arrivedate.toLocaleString().substr(0, 9);
+            const departtime = departdate.toLocaleTimeString('vi-VN');
+            const arrivetime = arrivedate.toLocaleTimeString('vi-VN');
             departTime.innerHTML = `<strong>Giờ Khởi Hành:</strong> ${departtime}`;
             arriveLocation.innerHTML = `<strong>Điểm đến:</strong> ${arriveAirport.name} (${arriveAirport.province})`;
             arriveTime.innerHTML = `<strong>Giờ Đến:</strong> ${arrivetime}`;
