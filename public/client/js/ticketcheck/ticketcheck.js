@@ -1,23 +1,20 @@
-
 checkbtn.onclick = checkTicket;
 
+//Xóa vé
 deletebtn.onclick = async function() {
     const ticketId = document.getElementById('ticketIdInput').value;
 
-    // Kiểm tra xem người dùng đã nhập mã vé chưa
     if (!ticketId) {
         alert('Vui lòng nhập mã số vé để xóa!');
         return;
     }
 
-    // Xác nhận trước khi xóa
     const confirmDelete = confirm(`Bạn có chắc chắn muốn xóa vé với mã số: ${ticketId}?`);
     if (!confirmDelete) {
         return;
     }
 
     try {
-        // Gửi yêu cầu DELETE đến server
         const response = await fetch(`/ticketcheck/delete-ticket/${ticketId}`, {
             method: 'DELETE',
             headers: {
@@ -31,7 +28,6 @@ deletebtn.onclick = async function() {
 
         const result = await response.json();
 
-        // Thông báo thành công
         if (result.success) {
             alert('Vé đã được xóa thành công!');
             document.getElementById('ticketIdInput').value = '';
@@ -45,6 +41,7 @@ deletebtn.onclick = async function() {
     }
 }
 
+//Kiểm tra vé
 async function checkTicket() {
     const ticketId = document.getElementById('ticketIdInput').value;
     if (!ticketId) {

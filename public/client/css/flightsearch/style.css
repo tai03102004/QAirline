@@ -122,7 +122,6 @@
 
 h2 {
   color: rgb(34, 74, 128);
-  /* font-size: 18px; */
   margin-bottom: 10px;
 }
 
@@ -273,10 +272,6 @@ h2 {
 .dropdown-content ul li:hover {
   background-color: #f1f1f1;
 }
-
-/* .dropdown-input:focus + .dropdown-content {
-  display: block;
-} */
 
 @media screen and (min-width: 1200px) {
   .search-container {

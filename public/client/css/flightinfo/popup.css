@@ -26,9 +26,9 @@
 }
 
 .popup-content {
-  background: linear-gradient(135deg, #f8f9fa, #e9ecef); /* Gradient background */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng */
-  color: #333; /* Màu chữ */
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  color: #333;
 }
 
 .popup-content button {
@@ -77,8 +77,8 @@
 
 .popup-container {
   display: flex;
-  flex-direction: row; /* Hiển thị theo hàng */
-  gap: 10px; /* Khoảng cách giữa các cột */
+  flex-direction: row;
+  gap: 10px;
 }
 .class-container {
   display: flex;
