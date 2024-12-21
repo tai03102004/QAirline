@@ -31,3 +31,8 @@
       
     .catch(error => console.error('Error:', error));
   });
+  document.getElementById('editBtn').addEventListener('click', function(event) {
+    event.preventDefault(); 
+    window.location.href = "/update-profile"; 
+  });
+  
